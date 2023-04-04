@@ -1,0 +1,31 @@
+.bg-linear-brand{
+    background: linear-gradient(to right,#02a1db89,#a8cf459c) !important;
+
+}
+.bg-linear-brand:hover{
+    background: linear-gradient(to right,#02a1dbda,#a8cf45ce) !important;
+    
+}
+.text-linear-brand{
+    background: -webkit-linear-gradient(#02a1db9e, #a8cf45a8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.text-linear-brand:hover{
+    background: -webkit-linear-gradient(#02a1dbda, #a8cf45d4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.logo-color{
+    background: -webkit-linear-gradient(#02a1dbda, #a8cf45d4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; 
+}
+.hover-text:hover{
+    background: -webkit-linear-gradient(#02a1dbda, #a8cf45d4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.scrol::webkit-scrollbar-track {
+    background-color: #f1f1f1;
+  }
