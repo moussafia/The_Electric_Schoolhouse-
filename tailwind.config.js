@@ -8,8 +8,8 @@ module.exports = {
   theme: {
     extend: {},
     colors:{
-      mygreen: '#02a1db9e',
-      myblue: '#a8cf45a8',
+      mygreen: '#a8cf45a8',
+      myblue: '#02a1db9e',
     }
   },
   plugins: [],

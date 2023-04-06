@@ -15,4 +15,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
+
+Route::get('/signUP',function(){
+return view('authPages.signUP');
+})->name('authPages.signUP');
+
+Route::get('/logIN',function(){
+return view('authPages.logIn');
+})->name('authPages.logIN');
+Route::get('/forgetPassword',function(){
+    return view('authPages.forgetPassword');
+})->name('authPages.forgetPassword');
