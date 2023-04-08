@@ -24,7 +24,7 @@
                                     dark:hover:border-gray-600 
                                     dark:focus:ring-gray-700">
          Sign UP</a>
-         <button type="button" class="text-white
+         <a href="{{route('authPages.logIN')}}" class="text-white
          bg-linear-brand
          focus:outline-none 
          focus:ring-4 
@@ -40,7 +40,7 @@
          dark:hover:bg-gray-700 
          dark:hover:border-gray-600 
          dark:focus:ring-gray-700">
-        Log IN</button>
+        Log IN</a>
 
         <button data-collapse-toggle="navbar-sticky" type="button" class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-sticky" aria-expanded="false">
             <span class="sr-only">Open main menu</span>

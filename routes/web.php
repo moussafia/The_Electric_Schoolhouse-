@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserAuthController\UserAuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,3 +28,8 @@ return view('authPages.logIn');
 Route::get('/forgetPassword',function(){
     return view('authPages.forgetPassword');
 })->name('authPages.forgetPassword');
+Route::post('/signup',[UserAuthController::class,'registrer'])->name('signUP');
+Route::post('/logIN',[UserAuthController::class,'logIn'])->name('logIn');
+Route::post('/forgetpassword',[UserAuthController::class,'ForgetPassword'])->name('forgetpassword');
+Route::get('/password/reset/{token}', 'UserAuthController\UserAuthController@showResetForm')->name('password.reset');
+Route::post('/password/reset', 'UserAuthController\UserAuthController@reset')->name('password.update');
