@@ -1,8 +1,8 @@
 @component('mail::message')
-    #Reset password
-    hello,
+    #Reset password<br>
+    hello,<br>
     You are receiving this email because we received a password reset request for your account.
-@component('mail::button',['url' => $link, 'color' => 'linear-gradient(to right,#02a1db89,#a8cf459c)'])
+@component('mail::button',['url' => $link, 'color' => 'blue'])
 Reset Password
 @endcomponent
 

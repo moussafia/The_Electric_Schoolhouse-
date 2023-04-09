@@ -1,10 +1,15 @@
+@extends('layout.header')
+@section('title','Dashboard')
+@extends('layout-auth.sidebar')
+@extends('layout-auth.navbar')
+
 <!---cards articles-->
 <div class="calander" style="margin: 30px;display:flex;justify-content:space-around;align-items:center">
     <span style="font-family: 'Courier New', Courier, monospace;font-size:30px">👋Welcome back
         <strong>Mohammed</strong>!</span>
     <div class="hidden md:inline">
         @php
-        $calanderHtml=(new App\Http\Controllers\CalenderController())->calendar();
+        $calanderHtml=(new App\Http\Controllers\CalenderController\CalenderController())->calendar();
         echo $calanderHtml;
         @endphp
     </div>
@@ -51,4 +56,5 @@
     </div>
  </div>
  
- 
+ @extends('layout-auth.footer')
+ @extends('layout.footer')

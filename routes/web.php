@@ -31,5 +31,6 @@ Route::get('/forgetPassword',function(){
 Route::post('/signup',[UserAuthController::class,'registrer'])->name('signUP');
 Route::post('/logIN',[UserAuthController::class,'logIn'])->name('logIn');
 Route::post('/forgetpassword',[UserAuthController::class,'ForgetPassword'])->name('forgetpassword');
-Route::get('/password/reset/{token}', 'UserAuthController\UserAuthController@showResetForm')->name('password.reset');
-Route::post('/password/reset', 'UserAuthController\UserAuthController@reset')->name('password.update');
+Route::get('/password/reset/{token}', [UserAuthController::class,'showResetForm'])->name('password.reset');
+Route::post('/password/reset', [UserAuthController::class,'reset'])->name('password.update');
+

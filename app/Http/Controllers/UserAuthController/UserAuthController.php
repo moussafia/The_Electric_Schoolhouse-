@@ -2,23 +2,23 @@
 
 namespace App\Http\Controllers\UserAuthController;
 
-use stdClass;
-use Mailgun\Mailgun;
+use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Mail\ResetPasswordEmail;
 use Illuminate\Support\Facades\DB;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\URL;
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\Mail;
 use Tymon\JWTAuth\Exceptions\JWTException;
-use Mailgun\HttpClient\HttpClientConfigurator;
 
 class UserAuthController extends Controller
 {
+    
     public function registrer(Request $request){
         $validateData=$request->validate([
             'first_name' => ['required','string','max:255', 'regex:/^[a-zA-Z]*$/'],
@@ -34,15 +34,16 @@ class UserAuthController extends Controller
         $user->first_name=$validateData['first_name'];
         $user->last_name=$validateData['last_name'];
         $user->email=$validateData['email'];
-        $user->password=$validateData['password'];
+        $user->password=Hash::make($validateData['password']);
         $user->save();
         try{
-            $token=JWTAuth::fromUser($user);
-            session()->put('jwt_token', $token);
+            $token=JWTAuth::attempt(['email' => $request->email, 'password' => $request->password]);
+            // $cookie = cookie('jwt_token', $token, config('jwt.ttl'), null, null, false, true);
         }catch(JWTException $e){
-            return response()->json(['error' => 'could_not_create_token'], 500);
+            return redirect()->back()->withErrors(['error' => 'could_not_create_token']);
         }
-        return redirect()->route('dashboard');
+        return view('dashboard.dashboard');
+        // ->withCookie($cookie)
     }
     public function logIn(Request $request){
             $credentials = $request->only('email', 'password');
@@ -51,8 +52,9 @@ class UserAuthController extends Controller
                     'email' => 'email or password not correct.',
                 ])->withInput();
             }
-            session(['jwt_token' => $token]);
-            return redirect()->route('dashboard');
+      // $cookie = cookie('jwt_token', $token, config('jwt.ttl'), null, null, false, true);
+            return view('dashboard.dashboard');
+                    // ->withCookie($cookie)
     }
 
     public function ForgetPassword(Request $request){
@@ -65,40 +67,29 @@ class UserAuthController extends Controller
             ]);
         }
         $token=Str::random(60);
-        DB::table('password_resets')->insert([
-            'email' => $user->email,
-            'token' => $token,
-            'created_at' => now()
-        ]);
-        $httpClientConfigurator = new HttpClientConfigurator();
-        $httpClientConfigurator->setApiKey(env('MAILGUN_SECRET'));   
-        $mgClient=new Mailgun($httpClientConfigurator);
-        $domain = env('MAILGUN_DOMAIN');
-        $link = URL::to('/password/reset', $token);
-        $message = new stdClass();//object message
-        $message->subject = 'Reset Password ElectricalSchoolHouse';
-        $message->from = env('MAIL_FROM_ADDRESS');
-        $message->to = $user->email;
-        $message->html = view('authPages.passwords.reset', compact('link'))->render();
-        try{
-            $mgClient->messages()->send($domain, [
-                'from' => $message->from,
-                'to' => $message->to,
-                'subject' => $message->subject,
-                'html' => $message->html,
+        $exestingRecords=DB::table('password_resets')->where('email',$request->email)->first();
+        if($exestingRecords){
+            DB::table('password_resets')->update([
+                'email' => $user->email,
+                'token' => $token,
+                'created_at' => now()
             ]);
-        return redirect()->route('forgetpassword')->with('status', 'Password reset email sent!');
-        }catch (\Exception $e) {
-            Log::error($e);
-            return redirect()->route('forgetpassword')->with('status', 'Error sending password reset email.');
+        }else{
+            DB::table('password_resets')->insert([
+                'email' => $user->email,
+                'token' => $token,
+                'created_at' => now()
+            ]);
         }
-        
+        $link = URL::to('/password/reset/'. $token.'?email='.urlencode($user->email));
+        // Log::info("Sending password reset email to {$user->email}");
+        Mail::to($user)->send(new ResetPasswordEmail($link));
+        return redirect()->back()->with('status', 'We have e-mailed your password reset link!');
     }
     public function showResetForm(Request $request, $token = null)
     {
-        return view('authPages.passwords.reset')->with(
-            ['token' => $token, 'email' => $request->email]
-        );
+        $email = $request->query('email');
+        return view('authPages.passwords.reset',compact('token', 'email'));
     }
 
     public function reset(Request $request)
@@ -109,21 +100,29 @@ class UserAuthController extends Controller
             'password' => 'required|confirmed',
         ]);
 
-        $credentials = $request->only(
-            'email', 'password', 'password_confirmation', 'token'
-        );
-
-        $response = Password::reset($credentials, function ($user, $password) {
-            $user->forceFill([
-                'password' => Hash::make($password)
-            ])->save();
-        });
-
-        if ($response == Password::PASSWORD_RESET) {
+            $checkTokens= DB::table('password_resets')
+             ->where([
+              'email' => request('email'), 
+              'token' => request('token')
+            ])
+                ->first();
+            if(!$checkTokens){
+                return back()->withErrors(['email' => 'invalid tokens please repeat request forget password']);
+            }
+    
+          User::where('email', request('email'))
+                        ->update(['password' => Hash::make(request('password'))]);
+    
+            DB::table('password_resets')->where(['email'=> request('email')])->delete();
+    
             return redirect()->route('logIn')->with('status', 'Password reset successfully!');
-        } else {
-            return back()->withErrors(['email' => [trans($response)]]);
-        }
     }
 
+    public function logout()
+    {
+        JWTAuth::invalidate(); 
+        $cookie = cookie('jwt_token', null, -1);
+        // ->withCookie($cookie);
+    }
+   
 }
