@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\UserAuthController\UserAuthController;
+use App\Http\Controllers\ViewController\ViewController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,4 +34,5 @@ Route::post('/logIN',[UserAuthController::class,'logIn'])->name('logIn');
 Route::post('/forgetpassword',[UserAuthController::class,'ForgetPassword'])->name('forgetpassword');
 Route::get('/password/reset/{token}', [UserAuthController::class,'showResetForm'])->name('password.reset');
 Route::post('/password/reset', [UserAuthController::class,'reset'])->name('password.update');
+Route::get('/dashboard', [ViewController::class,'dashboardView'])->name('dashboardView');
 

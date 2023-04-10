@@ -42,7 +42,7 @@ class UserAuthController extends Controller
         }catch(JWTException $e){
             return redirect()->back()->withErrors(['error' => 'could_not_create_token']);
         }
-        return view('dashboard.dashboard');
+        return redirect()->route('dashboardView');
         // ->withCookie($cookie)
     }
     public function logIn(Request $request){
