@@ -35,6 +35,8 @@ class UserAuthController extends Controller
         $user->last_name=$validateData['last_name'];
         $user->email=$validateData['email'];
         $user->password=Hash::make($validateData['password']);
+        $user->photo='anonymous.jpg';
+        $user->cover='coverture_anonyme.png';
         $user->save();
         try{
             $token=JWTAuth::attempt(['email' => $request->email, 'password' => $request->password]);

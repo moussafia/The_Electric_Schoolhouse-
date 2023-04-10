@@ -6,7 +6,9 @@
     <div class="rounded-full h-75" style="margin-right:40px;cursor:pointer" id="dropdownInformationButton"
         data-dropdown-toggle="dropdownInformation">
         <div style="height: 25px; width:25px; overflow:hidden; border-radius:50%;">
-            <img src="{{asset('assets/image/tec-solaire2.jpg')}}" style="width:100%;">
+            @auth
+            <img src="{{asset('assets/image/'.Auth::user()->photo)}}" style="width:100%;">
+            @endauth
         </div>
         <img src="{{asset('assets/image/dropDown.png')}}" class="ml-1.5" style="height:10px">
     </div>
