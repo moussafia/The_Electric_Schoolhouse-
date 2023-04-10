@@ -1,8 +1,8 @@
-@extends('layout.header')
+@extends('layout.layout')
 @section('title','Dashboard')
-@extends('layout-auth.sidebar')
-@extends('layout-auth.navbar')
-
+@section('content')
+@include('layoutAuth.sidebar')
+@include('layoutAuth.navbar')
 <!---cards articles-->
 <div class="calander" style="margin: 30px;display:flex;justify-content:space-around;align-items:center">
     <span style="font-family: 'Courier New', Courier, monospace;font-size:30px">👋Welcome back
@@ -55,6 +55,6 @@
         </main>
     </div>
  </div>
- 
- @extends('layout-auth.footer')
- @extends('layout.footer')
+ @include('layoutAuth.footer')
+
+ @endsection

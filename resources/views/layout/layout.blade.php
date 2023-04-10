@@ -9,3 +9,9 @@
 <link rel="stylesheet" href="{{asset('/assets/css/style.css')}}">
     <title>@yield('title')</title>
 </head>
+@yield('content')
+
+<script src="{{asset('/assets/js/app.js')}}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.4/flowbite.min.js"></script>
+</body>
+</html>

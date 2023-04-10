@@ -1,5 +1,6 @@
-@extends('layout.header')
+@extends('layout.layout')
 @section('title','Electrical SchoolHouse')  
+@section('content')
 <body id="welcome-page">  
     {{-- navBar --}}
     <nav class="bg-white dark:bg-gray-900 w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
@@ -219,7 +220,7 @@
     </div>
 </footer>
 
-@extends('layout.footer')
+@endsection
            
            
             

@@ -1,5 +1,6 @@
-@extends('layout.header')
+@extends('layout.layout')
 @section('title','forget password')
+@section('content')
 <style>
     body{
     font-family: 'Nunito', sans-serif;
@@ -62,4 +63,4 @@ body::before{
               @endif
         </form>
     
-@extends('layout.footer')
+@endsection

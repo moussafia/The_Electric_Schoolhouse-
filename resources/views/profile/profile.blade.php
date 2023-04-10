@@ -1,3 +1,8 @@
+@extends('layout.layout')
+@section('title','Dashboard')
+@section('content')
+@include('layoutAuth.sidebar')
+@include('layoutAuth.navbar')
 <div class="h-64 bg-white shadow-lg border-0 border-b-2 border-t-2 rounded-md p-3 m-5">
     <div class="profile">
         <div class="relative">
@@ -122,3 +127,6 @@
         </div>
     </main>
 </div>
+@include('layoutAuth.footer')
+
+@endsection
