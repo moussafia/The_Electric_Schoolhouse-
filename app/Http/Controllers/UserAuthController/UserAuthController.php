@@ -40,12 +40,11 @@ class UserAuthController extends Controller
         $user->save();
         try{
             $token=JWTAuth::attempt(['email' => $request->email, 'password' => $request->password]);
-            // $cookie = cookie('jwt_token', $token, config('jwt.ttl'), null, null, false, true);
+            $cookie = cookie('jwt_token', $token, config('jwt.ttl'), null, null, false, true);
         }catch(JWTException $e){
             return redirect()->back()->withErrors(['error' => 'could_not_create_token']);
         }
-        return redirect()->route('dashboardView');
-        // ->withCookie($cookie)
+        return redirect()->route('dashboardView')->withCookie($cookie);
     }
     public function logIn(Request $request){
             $credentials = $request->only('email', 'password');
@@ -54,9 +53,8 @@ class UserAuthController extends Controller
                     'email' => 'email or password not correct.',
                 ])->withInput();
             }
-      // $cookie = cookie('jwt_token', $token, config('jwt.ttl'), null, null, false, true);
-            return view('dashboard.dashboard');
-                    // ->withCookie($cookie)
+      $cookie = cookie('jwt_token', $token, config('jwt.ttl'), null, null, false, true);
+            return view('dashboard.dashboard')->withCookie($cookie);
     }
 
     public function ForgetPassword(Request $request){
@@ -124,7 +122,7 @@ class UserAuthController extends Controller
     {
         JWTAuth::invalidate(); 
         $cookie = cookie('jwt_token', null, -1);
-        // ->withCookie($cookie);
+// ->withCookie($cookie);
     }
    
 }

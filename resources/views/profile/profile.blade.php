@@ -7,40 +7,46 @@
     <div class="profile">
         <div class="relative">
             <div class="relative" style="height: 100px;width:auto;overflow:hidden">
-                <img src="{{asset('assets/image/pexels-george-becker-117609.jpg')}}"
+                <img src="{{asset('assets/image/user/'.$user->cover)}}"
                     style="width:100%;height:100%;object-fit: cover;">
             </div>
             <div class="absolute border-2"
                 style="height: 80px; width:80px; overflow:hidden; border-radius:50%;margin-left:20px;left:5%;bottom:-30%; transform: translateX(-50%);">
-                <img src="{{asset('assets/image/tec-solaire2.jpg')}}" style="width:100%;">
+                <img src="{{asset('assets/image/user/'.$user->photo)}}" style="width:100%;">
             </div>
-            <div class="absolute btn rounded-lg w-16  text-white" style="top: 5px; right: 20px;">
-                <button class="flex items-center gap-2 w-full"><span class="uppercase hidden md:inline">edit</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" 
-                    class="w-3 h-3 text-white ms-4"
-                    fill="currentColor"  
-                    viewBox="0 0 512 512"><path d="M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z"/></svg>
+            <div class="absolute btn rounded-lg w-16  text-white" style="top: 5px; right: 20px;"
+                data-modal-target="defaultModal" data-modal-toggle="defaultModal">
+                <button class="flex items-center gap-2 w-full" type="button"><span
+                        class="uppercase hidden md:inline">edit</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-white ms-4" fill="currentColor"
+                        viewBox="0 0 512 512">
+                        <path
+                            d="M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z" />
+                    </svg>
                 </button>
             </div>
         </div>
         <div class="mt-8 ml-2">
-            <span class="self-center text-lg font-semibold whitespace-nowrap py-3 text-gray-900 dark:text-white"><span class=" logo-color">@</span>Moussafia mohammed</span><br>
-            <span class="self-center text-sm font-semibold whitespace-nowrap px-5 py-3 text-gray-900 dark:text-white">email@email.com</span>
+            <span class="self-center text-lg font-semibold whitespace-nowrap py-3 text-gray-900 dark:text-white"><span
+                    class=" logo-color">@</span>{{$user->last_name.' '.$user->first_name}}</span><br>
+            <span
+                class="self-center text-sm font-semibold whitespace-nowrap px-5 py-3 text-gray-900 dark:text-white">{{$user->email}}</span>
         </div>
     </div>
 </div>
 <div class="h-auto bg-white shadow-lg border-0 border-b-2 border-t-2 rounded-md p-3 m-5">
     <div class="flex justify-between items-center px-10 mb-7 bg-white shadow-sm py-4">
-        <div class="ml-6 font-bold uppercase tracking-wide logo-color" 
-        style="font-size:20px;text-align:center"><span>My Blogs</span></div>
+        <div class="ml-6 font-bold uppercase tracking-wide logo-color" style="font-size:20px;text-align:center"><span>My
+                Blogs</span></div>
         <div class="btn rounded-lg text-white flex justify-end mr-6" style="width: 90px">
             <button class="flex items-center gap-2 w-full"><span class="uppercase hidden md:inline">Add</span>
-                <svg xmlns="http://www.w3.org/2000/svg" 
-                class="w-3 h-3 text-white"
-                fill="currentColor"  
-                viewBox="0 0 512 512"><path d="M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-white" fill="currentColor"
+                    viewBox="0 0 512 512">
+                    <path
+                        d="M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z" />
+                </svg>
             </button>
-        </div> 
+        </div>
     </div>
     <main class="page-content">
         <div class="card rounded-md"
@@ -80,16 +86,17 @@
 </div>
 <div class="h-auto bg-white shadow-lg border-0 border-b-2 border-t-2 rounded-md p-3 m-5">
     <div class="flex justify-between items-center px-10 mb-7 bg-white shadow-sm py-4">
-        <div class="ml-6 font-bold uppercase tracking-wide logo-color" 
-        style="font-size:20px;text-align:center"><span>My QUIZZ</span></div>
+        <div class="ml-6 font-bold uppercase tracking-wide logo-color" style="font-size:20px;text-align:center"><span>My
+                QUIZZ</span></div>
         <div class="btn rounded-lg text-white flex justify-end mr-6" style="width: 90px">
             <button class="flex items-center gap-2 w-full"><span class="uppercase hidden md:inline">Add</span>
-                <svg xmlns="http://www.w3.org/2000/svg" 
-                class="w-3 h-3 text-white"
-                fill="currentColor"  
-                viewBox="0 0 512 512"><path d="M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-white" fill="currentColor"
+                    viewBox="0 0 512 512">
+                    <path
+                        d="M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z" />
+                </svg>
             </button>
-        </div> 
+        </div>
     </div>
     <main class="page-content">
         <div class="card rounded-md"
@@ -127,6 +134,25 @@
         </div>
     </main>
 </div>
+@if(session('success'))
+<div id="success-message" class="p-4 mb-4 fixed bottom-2 right-2  text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+    <span class="font-medium">Success!</span>{{ session('success') }}
+  </div>
+@endif
+@include('Forms.user.formUpdateDelete')
+
 @include('layoutAuth.footer')
 
+@push('scripts')
+
+{{-- <script>
+    if ($('#success-message').length) {
+  $('#success-message').show();
+}
+setTimeout(function() {
+  $('#success-message').fadeOut();
+}, 3000);
+</script> --}}
+
+@endpush
 @endsection

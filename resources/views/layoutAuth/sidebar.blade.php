@@ -18,14 +18,14 @@ aria-label="Sidebar">
         class="pb-4 mb-4 flex flex-col items-center font-medium border-b border-gray-200 dark:border-gray-700">
         <div class="rounded-full h-75">
             <div style="height: 60px; width:60px; overflow:hidden; border-radius:50%;">
-                <img src="{{asset('assets/image/tec-solaire2.jpg')}}" style="width:100%;">
+                <img src="{{asset('assets/image/user/'.$user->photo)}}" style="width:100%;">
             </div>
         </div>
-        <span class="py-2 tracking-wide font-mono">Moussafia mohammed</span>
+        <span class="py-2 tracking-wide font-mono">{{$user->first_name.' '.$user->last_name}}</span>
     </div>
     <ul class="space-y-2 font-medium">
         <li>
-            <a href="#"
+            <a href="{{route('dashboardView')}}"
                 class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                 <svg aria-hidden="true"
                     class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
@@ -37,7 +37,7 @@ aria-label="Sidebar">
             </a>
         </li>
         <li>
-            <a href="#"
+            <a href="{{route('profileView')}}"
                 class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                 <svg xmlns="http://www.w3.org/2000/svg"
                     class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"

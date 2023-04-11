@@ -6,7 +6,7 @@
 <!---cards articles-->
 <div class="calander" style="margin: 30px;display:flex;justify-content:space-around;align-items:center">
     <span style="font-family: 'Courier New', Courier, monospace;font-size:30px">👋Welcome back
-        <strong>Mohammed</strong>!</span>
+        <strong>{{$user->last_name}}</strong>!</span>
     <div class="hidden md:inline">
         @php
         $calanderHtml=(new App\Http\Controllers\CalenderController\CalenderController())->calendar();

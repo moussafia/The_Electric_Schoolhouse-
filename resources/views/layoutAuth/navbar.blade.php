@@ -7,7 +7,7 @@
         data-dropdown-toggle="dropdownInformation">
         <div style="height: 25px; width:25px; overflow:hidden; border-radius:50%;">
             @auth
-            <img src="{{asset('assets/image/'.Auth::user()->photo)}}" style="width:100%;">
+            <img src="{{asset('assets/image/user/'.$user->photo)}}" style="width:100%;">
             @endauth
         </div>
         <img src="{{asset('assets/image/dropDown.png')}}" class="ml-1.5" style="height:10px">
@@ -17,8 +17,8 @@
     <div id="dropdownInformation"
         class="z-10 hidden bg-white my-3 divide-gray-100 rounded-lg shadow w-56 dark:bg-gray-700 dark:divide-gray-600">
         <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
-            <div>Bonnie Green</div>
-            <div class="font-medium truncate">name@flowbite.com</div>
+            <div>{{$user->first_name.' '.$user->last_name}}</div>
+            <div class="font-medium truncate">{{$user->email}}</div>
         </div>
         <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
             aria-labelledby="dropdownInformationButton">
