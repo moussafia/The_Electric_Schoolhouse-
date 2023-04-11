@@ -20,7 +20,8 @@ class UserController extends Controller
             'email',
             'max:255',
             Rule::unique('users')->ignore($request->userID)],
-        'old_password' => 'sometimes|nullable|string',
+         'old_password' => 'sometimes|nullable|string',
+        'password_email' => 'sometimes|nullable|string',
         'password' => 'sometimes|nullable|string|confirmed',
         'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         'cover' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -31,7 +32,12 @@ if ($validateData['first_name']) {
 }
 
 if ($validateData['last_name']) {
+    if (Hash::check($validateData['password_email'], $user->password)) {
     $user->last_name = $validateData['last_name'];
+    return redirect()->route('authPages.logIN')->withCookie(Cookie::forget('jwt_token'))->with('succes Email', 'Email updated successfully');
+    } else {
+        return redirect()->back()->with('errorPassword', 'Your old password is incorrect.');
+    }
 }
 
 if ($validateData['email']) {

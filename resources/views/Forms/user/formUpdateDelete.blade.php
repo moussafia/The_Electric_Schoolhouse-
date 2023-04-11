@@ -56,9 +56,19 @@
                     <input type="text" name="last_name" value="{{$user->last_name}}" style="width: 100%"
                         class="my-2 border-0 border-b-2 border-gray-300 focus:outline-none focus:ring-0 peer focus:border-green-500"
                         placeholder="Last name (Optionnel)">
-                    <input type="email" name="email" value="{{$user->email}}" style="width: 100%"
-                        class="my-2 border-0 border-b-2 border-gray-300 focus:outline-none focus:ring-0 peer focus:border-green-500"
-                        placeholder="Email (Optionnel)">
+                        <div class="flex items-center p-4 border-b rounded-t dark:border-gray-600">
+                            <input type="checkbox" id="CheckboxEmail" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"  />
+                            <label class="ml-2 block text-sm font-medium leading-6 text-gray-900">Email</label>
+                        </div>
+                        <div id="emailChange" style="display:none;">
+                            <input type="email" name="email" value="{{$user->email}}" style="width: 100%"
+                            class="my-2 border-0 border-b-2 border-gray-300 focus:outline-none focus:ring-0 peer focus:border-green-500"
+                            placeholder="Email">
+                            <input type="password" name="password_email"
+                            style="width: 100%"
+                            class="my-2 border-0 border-b-2 border-gray-300 focus:outline-none focus:ring-0 peer focus:border-green-500"
+                            placeholder="Password *">
+                        </div>
                         <div class="flex items-center p-4 border-b rounded-t dark:border-gray-600">
                             <input type="checkbox" id="CheckboxPassword" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"  />
                             <label class="ml-2 block text-sm font-medium leading-6 text-gray-900">Password</label>
@@ -66,7 +76,7 @@
                     <div id="input-password" style="display:none;">
                         <input type="password" name="old_password" style="width: 100%"
                         class="my-2 border-0 border-b-2 border-gray-300 focus:outline-none focus:ring-0 peer focus:border-green-500"
-                        placeholder="Old password">
+                        placeholder="Old password *">
                     <input type="password" name="password" style="width: 100%"
                         class="my-2 border-0 border-b-2 border-gray-300 focus:outline-none focus:ring-0 peer focus:border-green-500"
                         placeholder="password">
@@ -166,5 +176,17 @@
         }
 
     })
+
+const emailINP=document.getElementById('emailChange');
+const CheckboxEmail=document.getElementById('CheckboxEmail');
+CheckboxEmail.addEventListener('click',function(){
+        if(this.checked){
+            emailINP.style.display = "block";
+        }else{
+            emailINP.style.display = "none";
+        }
+
+    })
+
   </script>
 @endpush
