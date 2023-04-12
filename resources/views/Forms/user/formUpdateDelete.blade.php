@@ -61,9 +61,9 @@
                             <label class="ml-2 block text-sm font-medium leading-6 text-gray-900">Email</label>
                         </div>
                         <div id="emailChange" style="display:none;">
-                            <input type="email" name="email" value="{{$user->email}}" style="width: 100%"
+                            <input type="email" name="email" style="width: 100%"
                             class="my-2 border-0 border-b-2 border-gray-300 focus:outline-none focus:ring-0 peer focus:border-green-500"
-                            placeholder="Email">
+                            placeholder="New email">
                             <input type="password" name="password_email"
                             style="width: 100%"
                             class="my-2 border-0 border-b-2 border-gray-300 focus:outline-none focus:ring-0 peer focus:border-green-500"

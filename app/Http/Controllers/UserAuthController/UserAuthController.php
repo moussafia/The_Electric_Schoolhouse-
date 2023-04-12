@@ -15,10 +15,14 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Tymon\JWTAuth\Exceptions\JWTException;
+use Tymon\JWTAuth\Exceptions\TokenExpiredException;
+use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 
 class UserAuthController extends Controller
 {
-    
+    public function __construct(){
+        $this->middleware('authJWT')->only('logout');
+        }
     public function registrer(Request $request){
         $validateData=$request->validate([
             'first_name' => ['required','string','max:255', 'regex:/^[a-zA-Z]*$/'],
@@ -118,11 +122,15 @@ class UserAuthController extends Controller
             return redirect()->route('logIn')->with('status', 'Password reset successfully!');
     }
 
-    public function logout()
-    {
-        JWTAuth::invalidate(); 
-        $cookie = cookie('jwt_token', null, -1);
-// ->withCookie($cookie);
-    }
-   
+    public function logout(Request $request){
+try {
+    $token = $request->cookie('jwt_token');
+    JWTAuth::setToken($token)->invalidate();
+    cookie()->queue(cookie()->forget('jwt_token'));//coockie('jwt_token',-1)||queue()->sent with the response to client side.
+} catch (\Exception $e) {
+    return response()->json(['error'=>$e->getMessage()]);
 }
+return redirect()->route('welcome');
+}
+}     
+

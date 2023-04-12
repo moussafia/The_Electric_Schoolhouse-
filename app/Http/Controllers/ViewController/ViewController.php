@@ -9,6 +9,9 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class ViewController extends Controller
 {
+   public function __construct(){
+      $this->middleware('authJWT');
+   }
    public function dashboardView(Request $request){
       $token=$request->cookie('jwt_token');
       if($token){
