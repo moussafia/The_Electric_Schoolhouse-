@@ -16,9 +16,10 @@ class UserController extends Controller
     public function updateProfile(Request $request){      
    
         $validateData=$request->validate([
-        'first_name' => ['string','max:255', 'regex:/^[a-zA-Z]*$/'],
-        'last_name' => ['string','max:255', 'regex:/^[a-zA-Z]*$/'],
+        'first_name' => [ 'nullable','string','max:255', 'regex:/^[a-zA-Z]*$/'],
+        'last_name' => [ 'nullable','string','max:255', 'regex:/^[a-zA-Z]*$/'],
         'email' =>  [
+            'nullable',
             'string',
             'email',
             'max:255',
@@ -29,7 +30,6 @@ class UserController extends Controller
         'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         'cover' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
     ]); 
-     dd($validateData);
     $user = User::where('id',$request->userID)->first();
 if ($request->filled('first_name')) {
     $user->first_name = $validateData['first_name'];

@@ -6,11 +6,11 @@
 <div class="h-64 bg-white shadow-lg border-0 border-b-2 border-t-2 rounded-md p-3 m-5">
     <div class="profile">
         <div class="relative">
-            <div class="relative" style="height: 100px;width:auto;overflow:hidden">
+            <div class="relative " style="height: 100px;width:auto;overflow:hidden">
                 <img src="{{asset('assets/image/user/'.$user->cover)}}"
                     style="width:100%;height:100%;object-fit: cover;">
             </div>
-            <div class="absolute border-2"
+            <div class="absolute z-10 ml-3 border-2"
                 style="height: 80px; width:80px; overflow:hidden; border-radius:50%;margin-left:20px;left:5%;bottom:-30%; transform: translateX(-50%);">
                 <img src="{{asset('assets/image/user/'.$user->photo)}}" style="width:100%;">
             </div>
@@ -38,7 +38,8 @@
     <div class="flex justify-between items-center px-10 mb-7 bg-white shadow-sm py-4">
         <div class="ml-6 font-bold uppercase tracking-wide logo-color" style="font-size:20px;text-align:center"><span>My
                 Blogs</span></div>
-        <div class="btn rounded-lg text-white flex justify-end mr-6" style="width: 90px">
+        <div class="btn rounded-lg text-white flex justify-end mr-6" style="width: 90px"
+        data-modal-target="modalAddArticles" data-modal-toggle="modalAddArticles">
             <button class="flex items-center gap-2 w-full"><span class="uppercase hidden md:inline">Add</span>
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-white" fill="currentColor"
                     viewBox="0 0 512 512">
@@ -141,18 +142,17 @@
 @endif
 @include('Forms.user.formUpdateDelete')
 
+@include('Forms.blogs.blogsForm')
+
 @include('layoutAuth.footer')
 
 @push('scripts')
 
-{{-- <script>
-    if ($('#success-message').length) {
-  $('#success-message').show();
-}
+<script>
 setTimeout(function() {
   $('#success-message').fadeOut();
-}, 3000);
-</script> --}}
+}, 2000);
+</script>
 
 @endpush
 @endsection
