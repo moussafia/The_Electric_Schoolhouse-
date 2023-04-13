@@ -46,7 +46,10 @@ Route::get('/profile', [ViewController::class,'profileView'])->name('profileView
 Route::post('/updateUser',[UserController::class,'updateProfile'])->name('user.update');
 Route::post('/deleteUser',[UserController::class,'deleteProfile'])->name('user.delete');
 
-Route::post('/blogStore',[BlogsController::class,'store'])->name('blog.store')->middleware('authJWT');
+Route::group(['middleware' => 'auth.jwt'],function(){
+    Route::post('/blogStore',[BlogsController::class,'store'])->name('blog.store')->middleware('authJWT');
+
+});
 
 
 
