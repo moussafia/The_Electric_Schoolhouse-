@@ -31,7 +31,7 @@
         }
 ::-webkit-scrollbar-thumb{
     background: linear-gradient(to right,#02a1db89,#a8cf459c);
-    border-radius:10px;
+    border-radius:20px;
 }
 ::-webkit-scrollbar-thumb:hover{
     background: linear-gradient(to right,#02a1dbda,#a8cf45ce);

@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\UserAuthController\UserAuthController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController\UserController;
 use App\Http\Controllers\ViewController\ViewController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BlogsController\BlogsController;
+use App\Http\Controllers\UserAuthController\UserAuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +45,9 @@ Route::get('/profile', [ViewController::class,'profileView'])->name('profileView
 
 Route::post('/updateUser',[UserController::class,'updateProfile'])->name('user.update');
 Route::post('/deleteUser',[UserController::class,'deleteProfile'])->name('user.delete');
+
+Route::post('/blogStore',[BlogsController::class,'store'])->name('blog.store')->middleware('authJWT');
+
 
 
 

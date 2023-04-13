@@ -44,7 +44,7 @@ class UserAuthController extends Controller
         $user->save();
         try{
             $token=JWTAuth::attempt(['email' => $request->email, 'password' => $request->password]);
-            $cookie = cookie('jwt_token', $token, config('jwt.ttl'), null, null, false, true);
+            $cookie = cookie('jwt_token', $token, config('jwt.ttl'), null, null, false, false);
         }catch(JWTException $e){
             return redirect()->back()->withErrors(['error' => 'could_not_create_token']);
         }

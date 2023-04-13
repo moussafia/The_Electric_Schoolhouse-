@@ -23,16 +23,16 @@
             </div>
             <!-- Modal body -->
             <div class="p-6 space-y-6">
-                <form  id="my-form" method="POST" action="" enctype="multipart/form-data">
+                <form  id="formBlogs" method="POST" action="{{route('blog.store')}}" enctype="multipart/form-data">
                     @csrf
                     <div>
                         <label for="small-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>
-                        <input type="text" id="small-input" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <input type="text" name="title" id="small-input" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     </div>
                     <div class="py-6" id="pargraphForms">
                         <div id="row1">
                             <label for="small-input" class="block mb-3 mt-2 text-sm font-medium text-gray-900 dark:text-white">pargaraph 1</label>
-                           <textarea class="paragraphs w-full block rounded-lg h-56 overflow-x-hidden overflow-y-auto border border-gray-300 bg-gray-50">
+                           <textarea name="paragraph[]" class="paragraphs w-full block rounded-lg h-56 overflow-x-hidden overflow-y-auto border border-gray-300 bg-gray-50">
                             </textarea>
                         </div>
                     </div>
@@ -46,24 +46,24 @@
                     </div>
                     <div class="py-4">
                         <label class="block mb-2 font-medium text-gray-900 dark:text-white" style="font-size: 15px" for="multiple_files">Choisir un cover pour votre blogs</label>
-                        <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="multiple_files" type="file" multiple>
+                        <input name="image" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="multiple_files" type="file" multiple>
                     </div>
               <div class="py-2">
                 <label for="small-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
                 <select id="categorySelect" multiple="multiple" class="border border-gray-300 rounded-lg bg-gray-50"
                 style="width: 100%">
-                    <option selected="selected">orange</option>
+                    <option>orange</option>
                     <option>white</option>
-                    <option selected="selected">purple</option>
+                    <option>purple</option>
                   </select>
               </div>
                      <div class="py-2">
                         <label for="small-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tags</label>
                         <select id="tagSelect" multiple="multiple" class="border border-gray-300 rounded-lg bg-gray-50"
                         style="width: 100%">
-                            <option selected="selected">orange</option>
+                            <option>orange</option>
                             <option>white</option>
-                            <option selected="selected">purple</option>
+                            <option>purple</option>
                           </select>
                      </div>
                   <div
@@ -132,17 +132,19 @@
 </style>
 @endpush
 @push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.0/dist/js.cookie.min.js"></script>
 <script>
     $("#categorySelect").select2({
       width: 'resolve' ,
       tags:true,
-    tokenSeparators:[',',' ']
+    tokenSeparators:[',']
 })
       $("#tagSelect").select2({
       width: 'resolve' ,
       tags:true,
-        tokenSeparators:[',',' ']
+        tokenSeparators:[',']
 })
+
 function add_parag(){
     $inp=$('#pargraphForms div').length;
     $inp++;
@@ -159,13 +161,37 @@ function add_parag(){
            <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
             </svg>                                      
          </button></u>
-        <textarea class="paragraphs w-full block rounded-lg h-56 overflow-x-hidden overflow-y-auto
-         border border-gray-300 bg-gray-50"></textarea>`
-
+        <textarea name="paragraph[]" class="paragraphs w-full block rounded-lg h-56 overflow-x-hidden
+         overflow-y-auto order border-gray-300 bg-gray-50"></textarea>`
     $lastInput.after($sectionParagraph)
 }
+
 function delete_parag(idPragraph){
-$('#'+idPragraph).remove();
+        $('#'+idPragraph).remove();
 }
+$(document).ready(function(){
+    $('#formBlogs').on('submit',function(e){
+        e.preventDefault();
+        var formData = new FormData(this);
+        var jwt_token=Cookies.get('jwt_token');console.log(jwt_token)
+        $.ajax({
+            method: 'POST',
+            url: '/blogStore',
+            data: formData,
+            headers: {
+                'Authorization': 'Bearer ' + jwt_token
+            },
+            contentType: false, //application/x-www-form-urlencoded URL-encoded form.
+            processData: false,
+            success: function(response) {
+                console.log('succes'+response)
+            },
+            error: function(xhr) {
+                console.log('error',xhr)
+            }
+        })
+        e.target.submit()
+    })
+})
   </script>
 @endpush
