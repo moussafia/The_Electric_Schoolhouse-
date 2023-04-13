@@ -52,18 +52,18 @@
                 <label for="small-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
                 <select id="categorySelect" multiple="multiple" class="border border-gray-300 rounded-lg bg-gray-50"
                 style="width: 100%">
-                    <option>orange</option>
-                    <option>white</option>
-                    <option>purple</option>
+                @foreach ($categories as $id=>$value)
+                     <option value="{{$id}}">{{$value}}</option>
+                @endforeach
                   </select>
               </div>
                      <div class="py-2">
                         <label for="small-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tags</label>
                         <select id="tagSelect" multiple="multiple" class="border border-gray-300 rounded-lg bg-gray-50"
                         style="width: 100%">
-                            <option>orange</option>
-                            <option>white</option>
-                            <option>purple</option>
+                        @foreach ($tags as $id=>$value)
+                             <option value="{{$id}}">{{$value}}</option>
+                         @endforeach
                           </select>
                      </div>
                   <div
@@ -137,7 +137,8 @@
     $("#categorySelect").select2({
       width: 'resolve' ,
       tags:true,
-    tokenSeparators:[',']
+    tokenSeparators:[','],
+
 })
       $("#tagSelect").select2({
       width: 'resolve' ,
@@ -150,7 +151,7 @@ function add_parag(){
     $inp++;
     console.log($inp);
     $lastInput=$('#pargraphForms div:last')
-//    $sectionParagraph='<div id="row'+$inp+'"> <label for="small-input" class="block mb-3 mt-2 text-sm font-medium text-gray-900 dark:text-white">pargaraph'+$inp+'</label><textarea class="paragraphs w-full block rounded-lg h-56 overflow-x-hidden overflow-y-auto border border-gray-300 bg-gray-50"></textarea>'
+
     $sectionParagraph=`<div id="row`+$inp+`"> 
         <u class="flex justify-between items-center py-4 no-underline font-medium text-gray-900"
          <span for="small-input" class=" mb-3 mt-2 text-sm font-medium text-gray-900 dark:text-white">pargaraph `
@@ -163,6 +164,7 @@ function add_parag(){
          </button></u>
         <textarea name="paragraph[]" class="paragraphs w-full block rounded-lg h-56 overflow-x-hidden
          overflow-y-auto order border-gray-300 bg-gray-50"></textarea>`
+         
     $lastInput.after($sectionParagraph)
 }
 

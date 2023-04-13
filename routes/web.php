@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController\CategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController\UserController;
 use App\Http\Controllers\ViewController\ViewController;
@@ -48,6 +49,9 @@ Route::post('/deleteUser',[UserController::class,'deleteProfile'])->name('user.d
 
 Route::group(['middleware' => 'auth.jwt'],function(){
     Route::post('/blogStore',[BlogsController::class,'store'])->name('blog.store')->middleware('authJWT');
+
+Route::resource('category',CategoryController::class);
+// Route::post('/createCategory','CategoryController@create');
 
 });
 
