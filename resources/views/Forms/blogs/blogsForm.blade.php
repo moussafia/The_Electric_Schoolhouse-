@@ -158,7 +158,18 @@
 $("#tagSelect").select2({
       width: 'resolve' ,
       tags:true,
-    tokenSeparators:[',']
+    tokenSeparators:[','],
+    createTag: function(params) {
+        var term = $.trim(params.term);
+        if (term === '') {
+            return null;
+        }
+        return {
+            id: 'new:' + term,
+            text: term + ' (new tag)',
+            newOption: true
+        }
+    }
 })
 function add_parag(){
     $inp=$('#pargraphForms div').length;
