@@ -17,9 +17,10 @@ class BlogsController extends Controller
         //     'paragraphs.*' => 'required|string|max:2000',
         // ];
         // $validateData=$request->validate($rules);
+        dd($request->header('Authorization'));
         $user = auth()->id();
         $paragraph=$request->input('paragraph');
-
+$category=$request->input('categories');dd($category);
         return response()->json([
             "data" => $paragraph, 
             "user"=>$user

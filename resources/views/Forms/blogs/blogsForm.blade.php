@@ -50,7 +50,7 @@
                     </div>
               <div class="py-2">
                 <label for="small-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
-                <select id="categorySelect" multiple="multiple" class="border border-gray-300 rounded-lg bg-gray-50"
+                <select id="categorySelect" name="categories[]" multiple="multiple" class="border border-gray-300 rounded-lg bg-gray-50"
                 style="width: 100%">
                 @foreach ($categories as $id=>$value)
                      <option value="{{$id}}">{{$value}}</option>
@@ -138,14 +138,25 @@
       width: 'resolve' ,
       tags:true,
     tokenSeparators:[','],
-
+    createTag: function(params) {
+        var term = $.trim(params.term);
+        if (term === '') {
+            return null;
+        }
+        return {
+            id: 'new:' + term,
+            text: term + ' (new category)',
+            newOption: true
+        }
+    }
 })
-      $("#tagSelect").select2({
+
+
+$("#tagSelect").select2({
       width: 'resolve' ,
       tags:true,
-        tokenSeparators:[',']
+    tokenSeparators:[',']
 })
-
 function add_parag(){
     $inp=$('#pargraphForms div').length;
     $inp++;
@@ -164,7 +175,7 @@ function add_parag(){
          </button></u>
         <textarea name="paragraph[]" class="paragraphs w-full block rounded-lg h-56 overflow-x-hidden
          overflow-y-auto order border-gray-300 bg-gray-50"></textarea>`
-         
+
     $lastInput.after($sectionParagraph)
 }
 
@@ -172,28 +183,55 @@ function delete_parag(idPragraph){
         $('#'+idPragraph).remove();
 }
 $(document).ready(function(){
-    $('#formBlogs').on('submit',function(e){
+    $('#formBlogs').on('submit',function(e){        
         e.preventDefault();
         var formData = new FormData(this);
-        var jwt_token=Cookies.get('jwt_token');console.log(jwt_token)
+        var jwt_token=Cookies.get('jwt_token');
+        // var csrf_token=$('meta[name="csrf-token"]').attr('content');
         $.ajax({
             method: 'POST',
             url: '/blogStore',
             data: formData,
             headers: {
-                'Authorization': 'Bearer ' + jwt_token
+                'Authorization': 'Bearer ' + jwt_token,
+                // 'X-CSRF-TOKEN':csrf_token,
             },
             contentType: false, //application/x-www-form-urlencoded URL-encoded form.
             processData: false,
             success: function(response) {
-                console.log('succes'+response)
+                console.log('succes'+response);
+                // $('#formBlogs')[0].reset();
             },
-            error: function(xhr) {
-                console.log('error',xhr)
+            error: function(xhr,sta,txt) {
+                console.log(xhr,sta,txt)
             }
         })
-        e.target.submit()
     })
 })
+
+//submit form add blog
+// $(function(){
+//     $('#formBlogs').submit(function(event){      
+//         event.preventDefault();
+//         var formData=$(this).serialize();
+//         $.ajax({
+//             url:$(this).attr('action'),
+//             type: 'POST',
+//             data:'formData',
+//             dataType:'json',
+//             succes: function(response){
+//                 console.log(response.data);
+//                 console.log($('#formBlogs')[0]);
+//                 $('#formBlogs')[0].reset();
+//                 //update page with data
+//             },
+//             error: function(xhr,status,error){
+//                 console.log(xhr.responseText);
+//             }
+//         })
+        
+//     })
+// })
+
   </script>
 @endpush

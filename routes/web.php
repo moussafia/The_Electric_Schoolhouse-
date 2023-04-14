@@ -47,11 +47,11 @@ Route::get('/profile', [ViewController::class,'profileView'])->name('profileView
 Route::post('/updateUser',[UserController::class,'updateProfile'])->name('user.update');
 Route::post('/deleteUser',[UserController::class,'deleteProfile'])->name('user.delete');
 
-Route::group(['middleware' => 'auth.jwt'],function(){
+Route::group(['middleware' => 'authJWT'],function(){
     Route::post('/blogStore',[BlogsController::class,'store'])->name('blog.store')->middleware('authJWT');
 
-Route::resource('category',CategoryController::class);
-// Route::post('/createCategory','CategoryController@create');
+// Route::resource('category',CategoryController::class);
+Route::post('/createCategory','CategoryController@store');
 
 });
 
