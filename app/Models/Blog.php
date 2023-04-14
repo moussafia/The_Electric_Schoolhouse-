@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Tags;
 use App\Models\Category;
 use App\Models\Paragraph;
 use Illuminate\Database\Eloquent\Model;
@@ -17,5 +18,8 @@ class Blog extends Model
     }
     public function paragraph(){
         return $this->belongsToMany(Paragraph::class);
+    }
+    public function tag(){
+        return $this->belongsToMany(Tags::class,'blog_tag','blog_id','tag_id');
     }
 }
