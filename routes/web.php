@@ -48,7 +48,7 @@ Route::post('/updateUser',[UserController::class,'updateProfile'])->name('user.u
 Route::post('/deleteUser',[UserController::class,'deleteProfile'])->name('user.delete');
 
 Route::group(['middleware' => 'authJWT'],function(){
-    Route::post('/blogStore',[BlogsController::class,'store'])->name('blog.store')->middleware('authJWT');
+    Route::post('/blogStore',[BlogsController::class,'store'])->name('blog.store');
 
 // Route::resource('category',CategoryController::class);
 Route::post('/createCategory','CategoryController@store');

@@ -1,3 +1,6 @@
+@push('header')
+<meta name="csrf-token" content="{{ csrf_token() }}" />
+@endpush
 <!-- Blog modal -->
 <div id="modalAddArticles" tabindex="-1" aria-hidden="true"
     class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
@@ -24,10 +27,10 @@
             <!-- Modal body -->
             <div class="p-6 space-y-6">
                 <form  id="formBlogs" method="POST" action="{{route('blog.store')}}" enctype="multipart/form-data">
-                    @csrf
+                    <input type = "hidden" name = "_token" value = '<?php echo csrf_token(); ?>'>
                     <div>
                         <label for="small-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>
-                        <input type="text" name="title" id="small-input" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <input type="text" name="title" id="title" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     </div>
                     <div class="py-6" id="pargraphForms">
                         <div id="row1">
@@ -46,7 +49,7 @@
                     </div>
                     <div class="py-4">
                         <label class="block mb-2 font-medium text-gray-900 dark:text-white" style="font-size: 15px" for="multiple_files">Choisir un cover pour votre blogs</label>
-                        <input name="image" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="multiple_files" type="file" multiple>
+                        <input name="image" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="image" type="file">
                     </div>
               <div class="py-2">
                 <label for="small-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
@@ -59,7 +62,7 @@
               </div>
                      <div class="py-2">
                         <label for="small-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tags</label>
-                        <select id="tagSelect" multiple="multiple" class="border border-gray-300 rounded-lg bg-gray-50"
+                        <select id="tagSelect" name="tag" multiple="multiple" class="border border-gray-300 rounded-lg bg-gray-50"
                         style="width: 100%">
                         @foreach ($tags as $id=>$value)
                              <option value="{{$id}}">{{$value}}</option>
@@ -160,7 +163,6 @@ $("#tagSelect").select2({
 function add_parag(){
     $inp=$('#pargraphForms div').length;
     $inp++;
-    console.log($inp);
     $lastInput=$('#pargraphForms div:last')
 
     $sectionParagraph=`<div id="row`+$inp+`"> 
@@ -182,56 +184,50 @@ function add_parag(){
 function delete_parag(idPragraph){
         $('#'+idPragraph).remove();
 }
-$(document).ready(function(){
-    $('#formBlogs').on('submit',function(e){        
-        e.preventDefault();
-        var formData = new FormData(this);
+
+
+// submit form add blog
+$(function(){
+    $('#formBlogs').submit(function(event){      
+        event.preventDefault();
+        var formData = new FormData();
+        formData.append('title', $('#title').val());
+    formData.append("image", document.getElementById("image").files[0]);
+
+      $('textarea[name="paragraph[]"]').map(function(){
+            formData.append('paragraph[]',$(this).val().trim());
+        })
+     formData.append('categories',$('#categorySelect').val()); 
+     formData.append('tag',$('#tagSelect').val());   
+ 
         var jwt_token=Cookies.get('jwt_token');
-        // var csrf_token=$('meta[name="csrf-token"]').attr('content');
+        var csrf_token = $('meta[name="csrf-token"]').attr('content');
         $.ajax({
-            method: 'POST',
-            url: '/blogStore',
+            url: $(this).attr('action'),
+            type: 'POST',
+            dataType:'json',
+            contentType: false,
+            cache: false,
+            processData: false,
             data: formData,
             headers: {
+                'X-CSRF-TOKEN': csrf_token,
                 'Authorization': 'Bearer ' + jwt_token,
-                // 'X-CSRF-TOKEN':csrf_token,
+                Accept: 'application/json'
             },
-            contentType: false, //application/x-www-form-urlencoded URL-encoded form.
-            processData: false,
-            success: function(response) {
-                console.log('succes'+response);
-                // $('#formBlogs')[0].reset();
+            succes: function(response){
+                console.log(response.data);
+                console.log($('#formBlogs')[0]);
+                $('#formBlogs')[0].reset();
+                //update page with data
             },
-            error: function(xhr,sta,txt) {
-                console.log(xhr,sta,txt)
+            error: function(xhr,status,error){
+                console.log(xhr.responseText);
             }
         })
+        
     })
 })
-
-//submit form add blog
-// $(function(){
-//     $('#formBlogs').submit(function(event){      
-//         event.preventDefault();
-//         var formData=$(this).serialize();
-//         $.ajax({
-//             url:$(this).attr('action'),
-//             type: 'POST',
-//             data:'formData',
-//             dataType:'json',
-//             succes: function(response){
-//                 console.log(response.data);
-//                 console.log($('#formBlogs')[0]);
-//                 $('#formBlogs')[0].reset();
-//                 //update page with data
-//             },
-//             error: function(xhr,status,error){
-//                 console.log(xhr.responseText);
-//             }
-//         })
-        
-//     })
-// })
 
   </script>
 @endpush
