@@ -76,4 +76,13 @@ class BlogsController extends Controller
             return redirect()->back()->with('error', 'Failed to create blog.');
         }
     }
+    public function showMyBlogs(){
+        $userId=auth()->id();
+        $blogs=Blog::where('user_id',$userId)->with('Category','Paragraph','Tag','user')->get();
+        // return response()->json([
+        //     'html'=>$blogs
+        // ]);
+// $blogs=3;
+        return view('profile.profile',compact('blogs'));
+    }
 }
