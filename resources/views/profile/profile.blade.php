@@ -50,15 +50,8 @@
         </div>
     </div>
     <main class="page-content" id="cardBlogs" data-url="{{route('showBlogs')}}">
-        <div class="card rounded-md"
-            style="background-image: url(https://images.unsplash.com/photo-1517021897933-0e0319cfbc28?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ);">
-            <div class="content">
-                <h2 class="title">{{$blogs}}</h2>
-                <p class="copy">Check out all of these gorgeous mountain trips with beautiful views of, you guessed
-                    it, the mountains</p>
-                <button class="btn">View Trips</button>
-            </div>
-        </div>
+        
+          
     </main>
 </div>
 <div class="h-auto bg-white shadow-lg border-0 border-b-2 border-t-2 rounded-md p-3 m-5">

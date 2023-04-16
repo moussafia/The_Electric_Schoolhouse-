@@ -87,11 +87,20 @@ $(function(){
               'Authorization': 'Bearer ' + jwt_token,
               Accept: 'application/json'
           },
-          succes: function(response){
-              console.log(response.data);
-              console.log($('#formBlogs')[0]);
+          success: function(response){
+            var blog=response.blog;
+              console.log(blog);
               $('#formBlogs')[0].reset();
               //update page with data
+              html=`<div class="card rounded-md"
+              style="background-image: url('assets/image/Blogs/${blog.image}');
+              background-size: cover; background-position: center;">
+                <div class="content">
+               <h2 class="title">${blog.title}</h2>
+             <p class="copy">${blog.paragraphs[0].paragraph.slice(0,100)+'...'}</p>
+             <button class="btn rounded-lg">Edit</button>
+             </div> </div>`;
+             $('#cardBlogs').prepend(html);
           },
           error: function(xhr,status,error){
               console.log(xhr.responseText);

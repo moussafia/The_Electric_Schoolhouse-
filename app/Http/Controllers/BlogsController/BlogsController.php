@@ -17,7 +17,7 @@ class BlogsController extends Controller
     {
         $rules=[
             'title' => 'required|string|max:255',
-            'image' => 'required|image|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
            'categories' => 'required|string|max:255',
             'tag' => 'required|string|max:255',
             'paragraph.*' => 'required|string|max:2000',
@@ -70,19 +70,88 @@ class BlogsController extends Controller
             }
         }
         
-        if($blog){
-            return redirect()->back()->with('succes','Blog created successfully.');
-        }else{
-            return redirect()->back()->with('error', 'Failed to create blog.');
+        $lastBlog=$blog->load('tag', 'category', 'paragraph');
+        $categories=array();
+        $tags=array();
+        $paragraphs=array();
+        foreach($lastBlog->category as $category){
+            $categories[]=array(
+            "categoryId"=>$category->id,
+            "category"=>$category->type);
         }
+        foreach($lastBlog->tag as $tag){
+            $tags[]=array(
+                "tagId"=>$tag->id,
+                "tag"=>$tag->tag);
+        }
+        foreach($lastBlog->paragraph as $paragraph){
+            $paragraphs[]=array(
+                "paragraphId"=>$paragraph->id,
+                "paragraph"=>$paragraph->paragraph
+            );
+        }
+        $blogsFinal=array(
+            "blogId"=>$blog->id,
+            "dateAjoute"=>$lastBlog->dateAjoute,
+            "title"=>$lastBlog->title,
+            "image"=>$lastBlog->image,
+            "user"=>array(
+                $lastBlog->user->id,
+                $lastBlog->user->first_name,
+                $lastBlog->user->last_name,
+                $lastBlog->user->email
+            ),
+            "categories"=>$categories,
+            "tags"=>$tags,
+            "paragraphs"=>$paragraphs,
+        );
+        return response()->json([
+            'blog'=>$blogsFinal,
+            'success'=>'Blog created successfully.'
+        ]);
     }
     public function showMyBlogs(){
         $userId=auth()->id();
-        $blogs=Blog::where('user_id',$userId)->with('Category','Paragraph','Tag','user')->get();
-        // return response()->json([
-        //     'html'=>$blogs
-        // ]);
-// $blogs=3;
-        return view('profile.profile',compact('blogs'));
+        $blogs=Blog::where('user_id',$userId)->with('Category','Paragraph','Tag','user')->orderBy('created_at','desc')->get();
+        $blogsArray=array();
+        foreach($blogs as $blog){
+            $categories=array();
+            $tags=array();
+            $paragraphs=array();
+            foreach($blog->category as $category){
+                $categories[]=array(
+                "categoryId"=>$category->id,
+                "category"=>$category->type);
+            }
+            foreach($blog->tag as $tag){
+                $tags[]=array(
+                    "tagId"=>$tag->id,
+                    "tag"=>$tag->tag);
+            }
+            foreach($blog->paragraph as $paragraph){
+                $paragraphs[]=array(
+                    "paragraphId"=>$paragraph->id,
+                    "paragraph"=>$paragraph->paragraph);
+            }
+            $blogsArray[]=array(
+                    "blogId"=>$blog->id,
+                    "dateAjoute"=>$blog->dateAjoute,
+                    "title"=>$blog->title,
+                    "image"=>$blog->image,
+                    "user"=>array(
+                        $blog->user->id,
+                        $blog->user->first_name,
+                        $blog->user->last_name,
+                        $blog->user->email
+                    ),
+                    "categories"=>$categories,
+                    "tags"=>$tags,
+                    "paragraphs"=>$paragraphs,
+                );
+        }
+        return response()->json([
+            'blogs'=>$blogsArray
+        ]);
+
     }
 }
