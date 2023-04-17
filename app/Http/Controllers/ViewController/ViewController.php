@@ -32,4 +32,28 @@ public function profileView(Request $request){
       }
    return redirect()->route('logIn');
 }
+public function ArticlesView(Request $request){
+   $token=$request->cookie('jwt_token');
+   if($token){
+      $user=JWTAuth::setToken($token)->authenticate();
+   return view('Articles.allArticles',['user' => $user]);
+   }
+   return redirect()->route('logIn');
+}
+public function readArticle(Request $request){
+   $token=$request->cookie('jwt_token');
+   if($token){
+      $user=JWTAuth::setToken($token)->authenticate();
+   return view('Articles.readArticle',['user' => $user]);
+   }
+   return redirect()->route('logIn');
+}
+public function usersView(Request $request){
+   $token=$request->cookie('jwt_token');
+   if($token){
+      $user=JWTAuth::setToken($token)->authenticate();
+   return view('users.users',['user' => $user]);
+   }
+   return redirect()->route('logIn');
+}
 }

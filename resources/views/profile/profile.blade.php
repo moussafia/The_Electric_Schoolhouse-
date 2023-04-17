@@ -49,9 +49,8 @@
             </button>
         </div>
     </div>
-    <main class="page-content" id="cardBlogs" data-url="{{route('showBlogs')}}">
-        
-          
+    <main class="page-content" id="cardBlogs" data-url="{{route('showBlogs')}}"> 
+          <!-- cars blogs -->
     </main>
 </div>
 <div class="h-auto bg-white shadow-lg border-0 border-b-2 border-t-2 rounded-md p-3 m-5">
@@ -109,6 +108,9 @@
     <span class="font-medium">Success!</span>{{ session('success') }}
   </div>
 @endif
+
+@include('Forms.blogs.blogsEditRemove')
+
 @include('Forms.user.formUpdateDelete')
 
 @include('Forms.blogs.blogsForm')
@@ -116,8 +118,8 @@
 @include('layoutAuth.footer')
 
 @push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.0/dist/js.cookie.min.js"></script>
 <script src="{{asset('assets/js/profile/profile.js')}}"></script>
-
-
 @endpush
+
 @endsection

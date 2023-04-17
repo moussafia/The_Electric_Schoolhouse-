@@ -1,6 +1,6 @@
 <button data-drawer-target="separator-sidebar" data-drawer-toggle="separator-sidebar"
 aria-controls="separator-sidebar" type="button"
-class="inline-flex items-center p-2 mt-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
+class="inline-flex items-center p-2 mt-2 ml-3 text-sm text-gray-500 md:hidden rounded-lg  hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
 <span class="sr-only">Open sidebar</span>
 <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
     xmlns="http://www.w3.org/2000/svg">
@@ -9,7 +9,6 @@ class="inline-flex items-center p-2 mt-2 ml-3 text-sm text-gray-500 rounded-lg m
     </path>
 </svg>
 </button>
-
 <aside id="separator-sidebar"
 class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
 aria-label="Sidebar">
@@ -49,7 +48,7 @@ aria-label="Sidebar">
             </a>
         </li>
         <li>
-            <a href="#"
+            <a href="{{route('ArticlesView')}}"
                 class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                 <svg xmlns="http://www.w3.org/2000/svg"
                     class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
@@ -75,7 +74,7 @@ aria-label="Sidebar">
             </a>
         </li>
         <li>
-            <a href="#"
+            <a href="{{route('users.view')}}"
                 class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                 <svg xmlns="http://www.w3.org/2000/svg"
                     class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"

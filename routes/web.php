@@ -43,6 +43,9 @@ Route::post('/logout', [UserAuthController::class,'logout'])->name('user.logout'
 
 Route::get('/dashboard', [ViewController::class,'dashboardView'])->name('dashboardView');
 Route::get('/profile', [ViewController::class,'profileView'])->name('profileView');
+Route::get('/articles', [ViewController::class,'ArticlesView'])->name('ArticlesView');
+Route::get('/readArticle', [ViewController::class,'readArticle'])->name('readArticle');
+Route::get('/users', [ViewController::class,'usersView'])->name('users.view');
 
 Route::post('/updateUser',[UserController::class,'updateProfile'])->name('user.update');
 Route::post('/deleteUser',[UserController::class,'deleteProfile'])->name('user.delete');

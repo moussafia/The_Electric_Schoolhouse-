@@ -134,8 +134,6 @@
 }
 </style>
 @endpush
-
 @push('scripts')
-<script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.0/dist/js.cookie.min.js"></script>
 <script src="{{asset('assets/js/profile/formStoreBlog.js')}}"></script>
 @endpush

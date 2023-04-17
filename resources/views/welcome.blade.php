@@ -219,6 +219,9 @@
       </div>
     </div>
 </footer>
+@push('scripts')
+<script src="{{asset('/assets/js/app.js')}}"></script>
+@endpush
 
 @endsection
            

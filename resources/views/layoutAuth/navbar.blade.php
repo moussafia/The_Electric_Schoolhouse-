@@ -1,4 +1,4 @@
-<nav class="bg-white shadow-md w-screen h-12 px-2 flex justify-between items-center">
+<nav class="bg-white shadow-md w-screen h-12 px-2  flex justify-between items-center">
     <div style="height: 60px; width:60px; overflow:hidden;">
         <img src="{{asset('assets/image/esh-logo.png')}}" class="" style="height:100%;width:100%">
     </div>

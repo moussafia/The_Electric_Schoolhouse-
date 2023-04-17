@@ -1,37 +1,20 @@
-$("#categorySelect").select2({
-    width: 'resolve' ,
-    tags:true,
+$("#categorySelect").select2({ 
+  width: 'resolve' ,
+  tags:true,
   tokenSeparators:[','],
   createTag: function(params) {
-      var term = $.trim(params.term);
-      if (term === '') {
-          return null;
-      }
-      return {
-          id: 'new:' + term,
-          text: term + ' (new category)',
-          newOption: true
-      }
+    var term = $.trim(params.term);
+    if (term === '') {
+        return null;
+    }
+    return {
+        id: 'new:' + term,
+        text: term + ' (new category)',
+        newOption: true
+    }
   }
-})
-
-
-$("#tagSelect").select2({
-    width: 'resolve' ,
-    tags:true,
-  tokenSeparators:[','],
-  createTag: function(params) {
-      var term = $.trim(params.term);
-      if (term === '') {
-          return null;
-      }
-      return {
-          id: 'new:' + term,
-          text: term + ' (new tag)',
-          newOption: true
-      }
-  }
-})
+  })
+  
 function add_parag(){
   $inp=$('#pargraphForms div').length;
   $inp++;
@@ -92,13 +75,15 @@ $(function(){
               console.log(blog);
               $('#formBlogs')[0].reset();
               //update page with data
-              html=`<div class="card rounded-md"
+              html=`<div class="card rounded-md" 
               style="background-image: url('assets/image/Blogs/${blog.image}');
               background-size: cover; background-position: center;">
                 <div class="content">
-               <h2 class="title">${blog.title}</h2>
+               <h2 class="title">${blog.title.slice(0,20)}</h2>
              <p class="copy">${blog.paragraphs[0].paragraph.slice(0,100)+'...'}</p>
-             <button class="btn rounded-lg">Edit</button>
+             <button class="btn rounded-lg" 
+             data-modal-target='modalEditDeleteBlogs'
+               data-modal-toggle='modalEditDeleteBlogs'>Edit</button>
              </div> </div>`;
              $('#cardBlogs').prepend(html);
           },
