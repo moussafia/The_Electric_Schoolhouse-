@@ -15,8 +15,25 @@ $("#categorySelect").select2({
   }
   })
   
+$("#tagSelect").select2({
+  width: 'resolve' ,
+  tags:true,
+  tokenSeparators:[','],
+  createTag: function(params) {
+    var term = $.trim(params.term);
+    if (term === '') {
+        return null;
+    }
+    return {
+        id: 'new:' + term,
+        text: term + ' (new tag)',
+        newOption: true
+    }
+  }
+  })
 function add_parag(){
   $inp=$('#pargraphForms div').length;
+  
   $inp++;
   $lastInput=$('#pargraphForms div:last')
 
@@ -32,7 +49,7 @@ function add_parag(){
        </button></u>
       <textarea name="paragraph[]" class="paragraphs w-full block rounded-lg h-56 overflow-x-hidden
        overflow-y-auto order border-gray-300 bg-gray-50"></textarea>`
-
+console.log($lastInput.val());
   $lastInput.after($sectionParagraph)
 }
 
@@ -73,6 +90,9 @@ $(function(){
           success: function(response){
             var blog=response.blog;
               console.log(blog);
+              // function hi(){
+              //   console.log('fkbdkf');
+              // }
               $('#formBlogs')[0].reset();
               //update page with data
               html=`<div class="card rounded-md" 
@@ -81,15 +101,16 @@ $(function(){
                 <div class="content">
                <h2 class="title">${blog.title.slice(0,20)}</h2>
              <p class="copy">${blog.paragraphs[0].paragraph.slice(0,100)+'...'}</p>
-             <button class="btn rounded-lg" 
+             <button type="submit" class="btn rounded-lg" 
              data-modal-target='modalEditDeleteBlogs'
                data-modal-toggle='modalEditDeleteBlogs'>Edit</button>
              </div> </div>`;
              $('#cardBlogs').prepend(html);
+      
           },
           error: function(xhr,status,error){
               console.log(xhr.responseText);
-          }
+          },
       })
       
   })

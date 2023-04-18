@@ -109,7 +109,7 @@
   </div>
 @endif
 
-@include('Forms.blogs.blogsEditRemove')
+{{-- @include('Forms.blogs.blogsEditRemove') --}}
 
 @include('Forms.user.formUpdateDelete')
 

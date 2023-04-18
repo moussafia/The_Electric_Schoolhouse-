@@ -1,25 +1,8 @@
-
-
-$("#tagSelect").select2({
-width: 'resolve' ,
-tags:true,
-tokenSeparators:[','],
-createTag: function(params) {
-  var term = $.trim(params.term);
-  if (term === '') {
-      return null;
-  }
-  return {
-      id: 'new:' + term,
-      text: term + ' (new tag)',
-      newOption: true
-  }
-}
-})
 setTimeout(function() {
     $('#success-message').fadeOut();
   }, 2000);
 
+  
 //get Blogs
 
 $(document).ready(function(){
