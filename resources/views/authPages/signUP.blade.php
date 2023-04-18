@@ -7,7 +7,6 @@
     background-image:url('{{ asset("assets/image/pexels-pixabay-236089.jpg") }}');
     background-size: cover;
     background-position: center;
-    position: relative;
 }
 body::before{
     content: '';
