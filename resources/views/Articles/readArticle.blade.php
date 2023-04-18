@@ -22,7 +22,7 @@
                 text-center col-span-3 sm:col-span-1" style="font-family: Cursive"><span>#</span> Lorem ipsum.</span>
             </div>  
         </div>
-        <div class="category flex justify-end items-end mt-3 gap-4">
+        <div class="category flex justify-end items-end text-end mt-3 gap-4">
             <div class="grid grid-cols-7 gap-1"> 
                 <span class="shadow-md bg-gray-400 text-white rounded-md py-0.5 px-2 font-medium
                 text-center col-span-3 sm:col-span-1" style="font-family: Cursive">Lorem.</span>
@@ -97,7 +97,10 @@
                     <div style="height: 40px; width:40px; overflow:hidden; border-radius:50%;">
                         <img src="{{asset('assets/image/user/'.$user->photo)}}" style="width:100%;">
                     </div>
-                    <span class="font-medium ">Mohammed moussafia</span>
+                    <span>
+                        <span class="font-medium ">Mohammed moussafia</span><br>
+                        <span class="text-end pl-3" style="font-family: cursive;font-size:10px">2020-02-13</span>
+                    </span>
                 </div>
                 <p class="p-4 indent-4" style="font-family: sans-serif;font-size:15px">Lorem ipsum dolor sit amet
                     consectetur adipisicing elit. Ipsa, reprehenderit.</p>
@@ -116,20 +119,26 @@
             <div class="rep overflow-y-scroll" style="height: 28vh">
                 <div class="repondre border-t-2" style="padding-left:80px;padding-top:20px">
                     <div class="flex items-center gap-4 border-b-2 p-3" style="width: 300px">
-                        <div style="height: 30px; width:30px; overflow:hidden; border-radius:50%;">
+                        <div style="height: 35px; width:35px; overflow:hidden; border-radius:50%;">
                             <img src="{{asset('assets/image/user/'.$user->photo)}}" style="width:100%;">
                         </div>
-                        <span class="font-medium">Mohammed moussafia</span>
+                        <span>
+                            <span class="font-medium ">Mohammed moussafia</span><br>
+                            <span class="text-end pl-3" style="font-family: cursive;font-size:10px">2020-02-13</span>
+                        </span>
                     </div>
                     <p class="p-4 indent-4" style="font-family: sans-serif;font-size:15px">Lorem ipsum dolor sit amet
                         consectetur adipisicing elit. Ipsa, reprehenderit.</p>
                 </div>
                 <div class="repondre border-t-2" style="padding-left:80px;padding-top:20px">
                     <div class="flex items-center gap-4 border-b-2 p-3" style="width: 300px">
-                        <div style="height: 30px; width:30px; overflow:hidden; border-radius:50%;">
+                        <div style="height: 35px; width:35px; overflow:hidden; border-radius:50%;">
                             <img src="{{asset('assets/image/user/'.$user->photo)}}" style="width:100%;">
                         </div>
-                        <span class="font-medium">Mohammed moussafia</span>
+                        <span>
+                            <span class="font-medium ">Mohammed moussafia</span><br>
+                            <span class="text-end pl-3" style="font-family: cursive;font-size:10px">2020-02-13</span>
+                        </span>
                     </div>
                     <p class="p-4 indent-4" style="font-family: sans-serif;font-size:15px">Lorem ipsum dolor sit amet
                         consectetur adipisicing elit. Ipsa, reprehenderit.</p>

@@ -56,4 +56,20 @@ public function usersView(Request $request){
    }
    return redirect()->route('logIn');
 }
+public function helpView(Request $request){
+   $token=$request->cookie('jwt_token');
+   if($token){
+      $user=JWTAuth::setToken($token)->authenticate();
+   return view('Help.help',['user' => $user]);
+   }
+   return redirect()->route('logIn');
+}
+public function documentationView(Request $request){
+   $token=$request->cookie('jwt_token');
+   if($token){
+      $user=JWTAuth::setToken($token)->authenticate();
+   return view('Documentation.doc',['user' => $user]);
+   }
+   return redirect()->route('logIn');
+}
 }

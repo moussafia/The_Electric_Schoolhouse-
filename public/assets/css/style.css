@@ -295,3 +295,11 @@
     transition-duration: 0s;
   }
 }
+.navigation-decore{
+border-color: white !important;
+background-color: white;
+box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+border-radius: 0.125rem;
+text-decoration: none;
+color: inherit;
+}

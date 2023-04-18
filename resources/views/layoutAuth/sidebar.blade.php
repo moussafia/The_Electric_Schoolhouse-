@@ -12,7 +12,7 @@ class="inline-flex items-center p-2 mt-2 ml-3 text-sm text-gray-500 md:hidden ro
 <aside id="separator-sidebar"
 class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
 aria-label="Sidebar">
-<div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
+<div class="h-full py-4 overflow-y-auto shadow-sm bg-gray-100 dark:bg-gray-800">
     <div
         class="pb-4 mb-4 flex flex-col items-center font-medium border-b border-gray-200 dark:border-gray-700">
         <div class="rounded-full h-75">
@@ -23,9 +23,9 @@ aria-label="Sidebar">
         <span class="py-2 tracking-wide font-mono">{{$user->first_name.' '.$user->last_name}}</span>
     </div>
     <ul class="space-y-2 font-medium">
-        <li>
+        <li class="{{request()->is('dashboard')? 'navigation-decore' : ''}}">
             <a href="{{route('dashboardView')}}"
-                class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white dark:hover:bg-gray-700">
                 <svg aria-hidden="true"
                     class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
                     fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -35,9 +35,9 @@ aria-label="Sidebar">
                 <span class="ml-3">Dashboard</span>
             </a>
         </li>
-        <li>
+        <li class="{{request()->is('profile')? 'navigation-decore' : ''}}">
             <a href="{{route('profileView')}}"
-                class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white dark:hover:bg-gray-700">
                 <svg xmlns="http://www.w3.org/2000/svg"
                     class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
                     fill="currentColor" viewBox="0 0 448 512">
@@ -47,9 +47,9 @@ aria-label="Sidebar">
                 <span class="ml-3">Profile</span>
             </a>
         </li>
-        <li>
+        <li class="{{request()->is('articles')|| request()->is('readArticle') ? 'navigation-decore' : ''}}">
             <a href="{{route('ArticlesView')}}"
-                class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white dark:hover:bg-gray-700">
                 <svg xmlns="http://www.w3.org/2000/svg"
                     class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
                     fill="currentColor" viewBox="0 0 512 512">
@@ -59,9 +59,9 @@ aria-label="Sidebar">
                 <span class="flex-1 ml-3 whitespace-nowrap">Articles</span>
             </a>
         </li>
-        <li>
+        <li >
             <a href="#"
-                class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white dark:hover:bg-gray-700">
                 <svg xmlns="http://www.w3.org/2000/svg"
                     class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
                     fill="currentColor" viewBox="0 0 448 512">
@@ -73,9 +73,9 @@ aria-label="Sidebar">
                     class="inline-flex items-center justify-center w-3 h-3 p-3 ml-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">3</span>
             </a>
         </li>
-        <li>
+        <li class="{{request()->is('users')? 'navigation-decore' : ''}}">
             <a href="{{route('users.view')}}"
-                class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white dark:hover:bg-gray-700">
                 <svg xmlns="http://www.w3.org/2000/svg"
                     class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
                     fill="currentColor" viewBox="0 0 640 512">
@@ -85,9 +85,9 @@ aria-label="Sidebar">
                 <span class="flex-1 ml-3 whitespace-nowrap">Users</span>
             </a>
         </li>
-        <li>
+        <li class="{{request()->is('Quizz')? 'navigation-decore' : ''}}">
             <a href="#"
-                class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white dark:hover:bg-gray-700">
                 <svg xmlns="http://www.w3.org/2000/svg"
                     class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
                     fill="currentColor" viewBox="0 0 320 512">
@@ -99,23 +99,9 @@ aria-label="Sidebar">
         </li>
     </ul>
     <ul class="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-gray-700">
-        <li>
-            <a href="#"
-                class="flex items-center p-2 text-gray-900 transition duration-75 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white group">
-                <svg aria-hidden="true"
-                    class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                    fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path>
-                    <path fill-rule="evenodd"
-                        d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z"
-                        clip-rule="evenodd"></path>
-                </svg>
-                <span class="ml-3">Documentation</span>
-            </a>
-        </li>
-        <li>
-            <a href="#"
-                class="flex items-center p-2 text-gray-900 transition duration-75 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white group">
+        <li class="{{request()->is('help')? 'navigation-decore' : ''}}">
+            <a href="{{route('helpView')}}"
+                class="flex items-center p-2 text-gray-900 transition duration-75 rounded-lg dark:hover:bg-gray-700 dark:text-white group">
                 <svg aria-hidden="true"
                     class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
                     fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
