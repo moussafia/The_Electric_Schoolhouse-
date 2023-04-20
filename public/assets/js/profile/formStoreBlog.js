@@ -90,9 +90,6 @@ $(function(){
           success: function(response){
             var blog=response.blog;
               console.log(blog);
-              // function hi(){
-              //   console.log('fkbdkf');
-              // }
               $('#formBlogs')[0].reset();
               //update page with data
               html=`<div class="card rounded-md" 
@@ -101,9 +98,8 @@ $(function(){
                 <div class="content">
                <h2 class="title">${blog.title.slice(0,20)}</h2>
              <p class="copy">${blog.paragraphs[0].paragraph.slice(0,100)+'...'}</p>
-             <button type="submit" class="btn rounded-lg" 
-             data-modal-target='modalEditDeleteBlogs'
-               data-modal-toggle='modalEditDeleteBlogs'>Edit</button>
+             <button type="button" class="btn rounded-lg btnEditBlog"
+               onclick="document.getElementById('modalEditBlog').click()">Edit</button>
              </div> </div>`;
              $('#cardBlogs').prepend(html);
       

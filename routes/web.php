@@ -55,6 +55,7 @@ Route::group(['middleware' => 'authJWT'],function(){
 Route::post('/blogStore',[BlogsController::class,'store'])->name('blog.store');
 
 Route::get('/showBlogs',[BlogsController::class,'showMyBlogs'])->name('showBlogs');
+
 });
 
 

@@ -154,4 +154,5 @@ class BlogsController extends Controller
         ]);
 
     }
+
 }

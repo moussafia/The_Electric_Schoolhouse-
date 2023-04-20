@@ -4,7 +4,8 @@
 
 <!-- Blog modal -->
 <div id="modalEditDeleteBlogs" tabindex="-1" aria-hidden="true"
-    class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden
+     overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full" data-modal="modal">
     <div class="relative w-full max-w-2xl h-full max-h-full overflow-y-auto">
         <!-- Modal content -->
         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
@@ -29,20 +30,21 @@
             <div class="p-6 space-y-6">
                 <form  id="formBlogs" method="POST" action="{{route('blog.store')}}" enctype="multipart/form-data">
                     <input type = "hidden" name = "_token" value = '<?php echo csrf_token(); ?>'>
+                    <input type="hidden" id="blogId">
                     <div>
                         <label for="small-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>
-                        <input type="text" name="title" id="title" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <input type="text" name="title" id="titleEdit" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     </div>
-                    <div class="py-6" id="pargraphForms">
-                        <div id="row1">
+                    <div class="py-6" id="pargraphFormsEdit">
+                        {{-- <div id="rowEdit1">
                             <label for="small-input" class="block mb-3 mt-2 text-sm font-medium text-gray-900 dark:text-white">pargaraph 1</label>
                            <textarea name="paragraph[]" class="paragraphs w-full block rounded-lg h-56 overflow-x-hidden overflow-y-auto border border-gray-300 bg-gray-50">
                             </textarea>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="flex items-center gap-2">
                         <label class="font-medium text-sm text-gray-900 dark:text-white">Add paragraph</label>
-                        <button class="flex rounded-lg  text-white items-center justify-center addParagr" type="button" onclick="add_parag();">
+                        <button class="flex rounded-lg  text-white items-center justify-center addParagr" type="button" onclick="add_paragEdit();">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                               </svg>                              
@@ -54,7 +56,7 @@
                     </div>
               <div class="py-2">
                 <label for="small-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
-                <select id="categorySelect" name="categories[]" multiple="multiple" class="border border-gray-300 rounded-lg bg-gray-50"
+                <select id="categorySelectEdit" name="categories[]" multiple="multiple" class="border border-gray-300 rounded-lg bg-gray-50"
                 style="width: 100%">
                 @foreach ($categories as $id=>$value)
                      <option value="{{$id}}">{{$value}}</option>
@@ -63,7 +65,7 @@
               </div>
                      <div class="py-2">
                         <label for="small-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tags</label>
-                        <select id="tagSelect" name="tag" multiple="multiple" class="border border-gray-300 rounded-lg bg-gray-50"
+                        <select id="tagSelectEdit" name="tag" multiple="multiple" class="border border-gray-300 rounded-lg bg-gray-50"
                         style="width: 100%">
                         @foreach ($tags as $id=>$value)
                              <option value="{{$id}}">{{$value}}</option>
@@ -75,7 +77,7 @@
                         <button data-modal-hide="modalEditDeleteBlogs" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
                             Cancel</button>
                         <button data-modal-hide="modalEditDeleteBlogs" type="submit"
-                            class="flex justify-center bg-linear-brand my-2 px-6 w-fit text-white py-1.5 rounded-md" id="update-button">ADD</button>
+                            class="flex justify-center bg-linear-brand my-2 px-6 w-fit text-white py-1.5 rounded-md" id="update-button">Edit</button>
                 </form>
             </div>
         </div>
@@ -137,5 +139,5 @@
 
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.0/dist/js.cookie.min.js"></script>
-{{-- <script src="{{asset('assets/js/profile/formStoreBlog.js')}}"></script> --}}
+<script src="{{asset('assets/js/profile/blogsEditRemove.js')}}"></script>
 @endpush

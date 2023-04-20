@@ -12,6 +12,7 @@
     <title>@yield('title')</title>
      @stack('styles')
 </head>
+<body>
 
 @yield('content')
 

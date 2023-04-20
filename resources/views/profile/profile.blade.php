@@ -10,7 +10,7 @@
                 <img src="{{asset('assets/image/user/'.$user->cover)}}"
                     style="width:100%;height:100%;object-fit: cover;">
             </div>
-            <div class="absolute z-10 ml-3 border-2"
+            <div class="absolute z-5 ml-3 border-2"
                 style="height: 80px; width:80px; overflow:hidden; border-radius:50%;margin-left:20px;left:5%;bottom:-30%; transform: translateX(-50%);">
                 <img src="{{asset('assets/image/user/'.$user->photo)}}" style="width:100%;">
             </div>
@@ -108,8 +108,10 @@
     <span class="font-medium">Success!</span>{{ session('success') }}
   </div>
 @endif
+<button id="modalEditBlog" data-modal-target='modalEditDeleteBlogs' 
+type="button" data-modal-toggle='modalEditDeleteBlogs' onclick="RemplirForm()">krtlnle</button>
+@include('Forms.blogs.blogsEditRemove')
 
-{{-- @include('Forms.blogs.blogsEditRemove') --}}
 
 @include('Forms.user.formUpdateDelete')
 
@@ -120,6 +122,7 @@
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.0/dist/js.cookie.min.js"></script>
 <script src="{{asset('assets/js/profile/profile.js')}}"></script>
+
 @endpush
 
 @endsection
