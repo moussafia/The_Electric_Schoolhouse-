@@ -28,7 +28,8 @@
             </div>
             <!-- Modal body -->
             <div class="p-6 space-y-6">
-                <form  id="formBlogs" method="POST" action="{{route('blog.store')}}" enctype="multipart/form-data">
+                <form  id="formUpdateBlogs" method="POST" action="" enctype="multipart/form-data">
+                   @method('PUT')
                     <input type = "hidden" name = "_token" value = '<?php echo csrf_token(); ?>'>
                     <input type="hidden" id="blogId">
                     <div>
@@ -36,11 +37,7 @@
                         <input type="text" name="title" id="titleEdit" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     </div>
                     <div class="py-6" id="pargraphFormsEdit">
-                        {{-- <div id="rowEdit1">
-                            <label for="small-input" class="block mb-3 mt-2 text-sm font-medium text-gray-900 dark:text-white">pargaraph 1</label>
-                           <textarea name="paragraph[]" class="paragraphs w-full block rounded-lg h-56 overflow-x-hidden overflow-y-auto border border-gray-300 bg-gray-50">
-                            </textarea>
-                        </div> --}}
+                        {{-- textarea Here --}}
                     </div>
                     <div class="flex items-center gap-2">
                         <label class="font-medium text-sm text-gray-900 dark:text-white">Add paragraph</label>
@@ -52,7 +49,10 @@
                     </div>
                     <div class="py-4">
                         <label class="block mb-2 font-medium text-gray-900 dark:text-white" style="font-size: 15px" for="multiple_files">Choisir un cover pour votre blogs</label>
-                        <input name="image" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="image" type="file">
+                        <input name="image" id="imageUpdate" class="block w-full text-sm text-gray-900 border
+                         border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 
+                         focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" 
+                          type="file" accept="image/jpeg, image/png, image/gif">
                     </div>
               <div class="py-2">
                 <label for="small-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
@@ -76,8 +76,8 @@
                         class="flex items-center justify-between p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
                         <button data-modal-hide="modalEditDeleteBlogs" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
                             Cancel</button>
-                        <button data-modal-hide="modalEditDeleteBlogs" type="submit"
-                            class="flex justify-center bg-linear-brand my-2 px-6 w-fit text-white py-1.5 rounded-md" id="update-button">Edit</button>
+                        <button data-modal-hide="modalEditDeleteBlogs" type="submit" id="UpdateBlog"
+                            class="flex justify-center bg-linear-brand my-2 px-6 w-fit text-white py-1.5 rounded-md" id="update-button">Update</button>
                 </form>
             </div>
         </div>

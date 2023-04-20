@@ -154,5 +154,107 @@ class BlogsController extends Controller
         ]);
 
     }
+    public function updateBlog(Request $request,$id){
+        $rules=[
+            'title' => 'required|string|max:255',
+           'categories' => 'required|string|max:255',
+            'tag' => 'required|string|max:255',
+            'paragraphEdit.*' => 'required|string|max:2000',
+        ];
+        $validateData=$request->validate($rules);       
+        $paragraphs = $validateData['paragraphEdit'];
+        $category = $validateData['categories'];
+        $tag = $validateData['tag'];
+   
+        $blog = Blog::findOrFail($id);
+        $blog->title = $validateData['title'];
+        $blog->dateAjoute = Carbon::now();
+        $blog->user_id = auth()->id();
 
+        if ($request->hasFile('imageUpdate')) {
+            $image = $request->file('imageUpdate');
+            $destinationPath = 'assets/image/Blogs/';
+            $nameImage = date('YmdHis') .  $image->getClientOriginalName();
+            $image->move($destinationPath, $nameImage);
+            $blog->image = $nameImage;
+        }
+
+        $blog->save();
+
+        $blog->paragraph()->delete();
+
+        foreach($paragraphs as $paragraph){
+            $parag=new Paragraph;
+            $parag->blog_id=$blog->id;
+            $parag->paragraph=$paragraph;
+            $parag->save();
+        }
+
+        $blog->category()->detach();
+        $categoryArray=explode(',',$category);
+
+        foreach($categoryArray as $category){
+            if(substr($category,0,4)==='new:'){
+                $newCategory=new Category;
+                $newCategory->type=substr($category,4);
+                $newCategory->save();
+                $blog->category()->attach($newCategory->id);
+            }else{
+                $blog->category()->attach($category);
+            }
+    }
+
+        $blog->tag()->detach();
+        $tagArray=explode(',',$tag);
+
+        foreach($tagArray as $tag){
+            if(substr($tag,0,4)==='new:'){
+                $newTag=new Tags;
+                $newTag->tag=substr($tag,4);
+                $newTag->save();
+                $blog->tag()->attach($newTag->id);
+            }else{
+                $blog->tag()->attach($tag);
+            }
+        }
+    $lastBlog=$blog->load('tag', 'category', 'paragraph');
+    $categories=array();
+    $tags=array();
+    $paragraphs=array();
+    foreach($lastBlog->category as $category){
+        $categories[]=array(
+        "categoryId"=>$category->id,
+        "category"=>$category->type);
+    }
+    foreach($lastBlog->tag as $tag){
+        $tags[]=array(
+            "tagId"=>$tag->id,
+            "tag"=>$tag->tag);
+    }
+    foreach($lastBlog->paragraph as $paragraph){
+        $paragraphs[]=array(
+            "paragraphId"=>$paragraph->id,
+            "paragraph"=>$paragraph->paragraph
+        );
+    }
+    $blogsFinal=array(
+        "blogId"=>$blog->id,
+        "dateAjoute"=>$lastBlog->dateAjoute,
+        "title"=>$lastBlog->title,
+        "image"=>$lastBlog->image,
+        "user"=>array(
+            $lastBlog->user->id,
+            $lastBlog->user->first_name,
+            $lastBlog->user->last_name,
+            $lastBlog->user->email
+        ),
+        "categories"=>$categories,
+        "tags"=>$tags,
+        "paragraphs"=>$paragraphs,
+    );
+    return response()->json([
+        'blog'=>$blogsFinal,
+        'success'=>'Blog created successfully.'
+    ]);
+}
 }

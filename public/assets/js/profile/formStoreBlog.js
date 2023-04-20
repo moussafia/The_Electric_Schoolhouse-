@@ -91,6 +91,10 @@ $(function(){
             var blog=response.blog;
               console.log(blog);
               $('#formBlogs')[0].reset();
+              const categoryIds=blog.categories.map(cat=>cat.categoryId).join(',');
+              const TagsIds=blog.tags.map(tag=>tag.tagId).join(',');
+              const paragraphs=blog.paragraphs.map(para=>para.paragraph).join(',|-split-|,');
+              const para="`"+paragraphs+"`"
               //update page with data
               html=`<div class="card rounded-md" 
               style="background-image: url('assets/image/Blogs/${blog.image}');
@@ -99,8 +103,13 @@ $(function(){
                <h2 class="title">${blog.title.slice(0,20)}</h2>
              <p class="copy">${blog.paragraphs[0].paragraph.slice(0,100)+'...'}</p>
              <button type="button" class="btn rounded-lg btnEditBlog"
-               onclick="document.getElementById('modalEditBlog').click()">Edit</button>
-             </div> </div>`;
+               onclick="document.getElementById('modalEditBlog').setAttribute('data-blog-id', '${blog.blogId}');
+               document.getElementById('modalEditBlog').setAttribute('data-categories', '${categoryIds}');
+               document.getElementById('modalEditBlog').setAttribute('data-tags', '${TagsIds}');
+               document.getElementById('modalEditBlog').setAttribute('data-title', '${blog.title}');
+               document.getElementById('modalEditBlog').setAttribute('data-paragraphs',${para});
+               document.getElementById('modalEditBlog').click();">Edit</button>
+               </div> </div>`;
              $('#cardBlogs').prepend(html);
       
           },

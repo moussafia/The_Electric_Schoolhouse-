@@ -19,7 +19,7 @@ $(document).ready(function(){
               const TagsIds=blogs[i].tags.map(tag=>tag.tagId).join(',');
               const paragraphs=blogs[i].paragraphs.map(para=>para.paragraph).join(',|-split-|,');
               const para="`"+paragraphs+"`"
-                html+=`<div class="card rounded-md"
+                html+=`<div class="card rounded-md" data-blog-id='${blogs[i].blogId}'
                 style="background-image: url('assets/image/Blogs/${blogs[i].image}');
                 background-size: cover; background-position: center;">
                   <div class="content">
@@ -34,9 +34,9 @@ $(document).ready(function(){
                document.getElementById('modalEditBlog').setAttribute('data-paragraphs',${para});
                document.getElementById('modalEditBlog').click();">Edit</button>
                </div> </div>`; 
-              console.log(paragraphs);
             }
             $('#cardBlogs').html(html);  
         }
     })
 })
+

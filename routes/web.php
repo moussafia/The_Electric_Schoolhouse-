@@ -53,6 +53,7 @@ Route::post('/deleteUser',[UserController::class,'deleteProfile'])->name('user.d
 
 Route::group(['middleware' => 'authJWT'],function(){
 Route::post('/blogStore',[BlogsController::class,'store'])->name('blog.store');
+Route::post('/blogupdate/{id}',[BlogsController::class,'updateBlog'])->name('blog.update');
 
 Route::get('/showBlogs',[BlogsController::class,'showMyBlogs'])->name('showBlogs');
 
