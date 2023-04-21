@@ -70,8 +70,8 @@ $("#categorySelectEdit").select2({
     const paragraphs=btnEdit.attr('data-paragraphs').split(',|-split-|,');
     $('#blogId').val(blogId);
     $('#titleEdit').val(title);
-    $('#categorySelectEdit').val(categories).trigger('change.select2');
-    $('#tagSelectEdit').val(tags).trigger('change.select2');
+    $('#categorySelectEdit').val(categories).trigger('change');
+    $('#tagSelectEdit').val(tags).trigger('change');
     let textarea=$('#pargraphFormsEdit');
     textarea.empty();
     paragraphs.forEach(function(paragraph,index){
@@ -150,12 +150,61 @@ $("#categorySelectEdit").select2({
                document.getElementById('modalEditBlog').setAttribute('data-title', '${blog.title}');
                document.getElementById('modalEditBlog').setAttribute('data-paragraphs',${para});
                document.getElementById('modalEditBlog').click();">Edit</button>
+               <button  type="button" data-modal-target="popup-modal" data-modal-toggle="popup-modal"
+               class="flex justify-center bg-linear-delete my-2 px-3 text-white py-2 rounded-md"
+               onclick="document.getElementById('modalRemoveBlog').setAttribute('data-blog-id', '${blogs[i].blogId}');
+               document.getElementById('modalRemoveBlog').click();">delete</button>
+              </button>
                </div> </div>`;
 
                $('#cardBlogs').find(`[data-blog-id="${id}"]`).replaceWith(html);
             },
             error: function(xhr,status,error){
                 console.log(xhr.responseText);
+            },
+        })
+        
+    })
+  })
+
+  function remplirFormEdit(){
+ $('#formDeleteBlog')[0].reset()
+    var id=$('#modalRemoveBlog').attr('data-blog-id');
+    $('#idBlogRemoved').val(id);
+
+  }
+
+  $(function(){
+    $('#formDeleteBlog').submit(function(event){      
+        event.preventDefault();
+        var formData = new FormData();
+        formData.append('passwordBlog', $('#passwordBlog').val());
+        var jwt_token=Cookies.get('jwt_token');
+        var csrf_token = $('meta[name="csrf-token"]').attr('content');
+        var id=$('#idBlogRemoved').val();
+        var url='/blogDelete/'+id;
+        $(this).attr('action',url);
+        $.ajax({
+            url: url,
+            type: 'POST',
+            dataType:'json',
+            contentType: false,
+            cache: false,
+            processData: false,
+            data: formData,
+            headers: {
+                'X-CSRF-TOKEN': csrf_token,
+                'Authorization': 'Bearer ' + jwt_token,
+                Accept: 'application/json'
+            },
+            success: function(response){   
+              $('#formDeleteBlog')[0].reset();  
+              if(response.success){
+                $('#cardBlogs').find(`[data-blog-id="${id}"]`).remove();
+              } 
+            },
+            error: function(xhr,status,error){
+                console.log(status);
             },
         })
         

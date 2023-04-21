@@ -109,7 +109,10 @@
   </div>
 @endif
 <button id="modalEditBlog" data-modal-target='modalEditDeleteBlogs' 
-type="button" data-modal-toggle='modalEditDeleteBlogs' onclick="RemplirForm()">krtlnle</button>
+type="hidden" data-modal-toggle='modalEditDeleteBlogs' onclick="RemplirForm()"></button>
+<button id="modalRemoveBlog" data-modal-target='modalDeleteBlogs'
+type="hidden" data-modal-toggle='modalDeleteBlogs' onclick="remplirFormEdit()"></button>
+
 @include('Forms.blogs.blogsEditRemove')
 
 

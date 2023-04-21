@@ -44,7 +44,7 @@ Route::post('/logout', [UserAuthController::class,'logout'])->name('user.logout'
 Route::get('/dashboard', [ViewController::class,'dashboardView'])->name('dashboardView');
 Route::get('/profile', [ViewController::class,'profileView'])->name('profileView');
 Route::get('/articles', [ViewController::class,'ArticlesView'])->name('ArticlesView');
-Route::get('/readArticle', [ViewController::class,'readArticle'])->name('readArticle');
+Route::get('/readArticle/{id}', [ViewController::class,'readArticle'])->name('readArticle');
 Route::get('/users', [ViewController::class,'usersView'])->name('users.view');
 Route::get('/help', [ViewController::class,'helpView'])->name('helpView');
 
@@ -54,8 +54,12 @@ Route::post('/deleteUser',[UserController::class,'deleteProfile'])->name('user.d
 Route::group(['middleware' => 'authJWT'],function(){
 Route::post('/blogStore',[BlogsController::class,'store'])->name('blog.store');
 Route::post('/blogupdate/{id}',[BlogsController::class,'updateBlog'])->name('blog.update');
-
+Route::post('/blogDelete/{id}',[BlogsController::class,'deleteBlog'])->name('blog.delete');
 Route::get('/showBlogs',[BlogsController::class,'showMyBlogs'])->name('showBlogs');
+Route::get('/indexBlog',[BlogsController::class,'index'])->name('indexBlog');
+Route::get('/searchBlogs',[BlogsController::class,'searchBlogs'])->name('searchBlogs');
+Route::get('/barSearchBlogs',[BlogsController::class,'searchBlogs'])->name('barSearchBlogs');
+
 
 });
 

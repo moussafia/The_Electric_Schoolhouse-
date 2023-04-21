@@ -3,67 +3,53 @@
 @section('content')
 @include('layoutAuth.sidebar')
 @include('layoutAuth.navbar')
+@php
+$blogsObject = json_decode(json_encode($blogsArray[0]));
+@endphp
+<div class="bg-white shadow-sm border-0 border-b-2 border-gray-400 m-3 overflow-hidden">
+    <h2 class="title text-center p-6 font-extrabold" style="margin-top:30px;font-size:30px">{{$blogsObject->title}}</h2>
+    <div class="flex justify-center">
+        <div style="width:  800px;height:400px;margin:10px">
+            <img src="{{asset('assets/image/Blogs/'.$blogsObject->image)}}" class="rounded-lg mx-3" style="height: 100%;width:100%; object-fit: cover;
+                  object-position: center;">
+        </div>
+    </div>
+        <div class="tags flex justify-center m-3 text-end ">
+            <div class="responsible-tags-category">
+                <div class="w-full">
+                    @foreach ($blogsObject->tags as $tag)
+                    <span class="shadow-md bg-gray-400 text-white rounded-md py-0.5 px-2 font-medium
+                            text-center " style="font-family: Cursive"><span>#</span>{{$tag->tag}}</span>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+        <div class="paragraphs p-8">
+            @foreach ($blogsObject->paragraphs as $paragraph)
+            <p class="1" style="font-family:sans-serif;font-size:18px;font-weight:400;
+        text-indent: 3em; padding:15px">
+                {{$paragraph->paragraph}}</p>
+            @endforeach
+        </div>
+        <div class="category flex justify-start items-end text-end ml-4">
+            <div class="responsible-tags-category">
+                <div class="w-full">
+                    @foreach ($blogsObject->categories as $category)
+                    <span class="shadow-md bg-gray-400 text-white rounded-md py-0.5 px-2 font-medium 
+                text-center" style="font-family: Cursive;">{{$category->category}}</span>
+                    @endforeach
+                </div>
+            </div>
+        </div>
 
-<div class="bg-white shadow-sm border-0 border-b-2 border-gray-400 mt-3">
-    <h2 class="title text-center p-6 font-extrabold" style="margin-top:30px;font-size:30px">Lorem ipsum dolor sit amet
-        consectetur.</h2>
-    <div style="height:300px;margin:30px">
-        <img src="{{asset('assets/image/tec-solaire2.jpg')}}" class="rounded-lg"
-            style="height: 100%;width:100%; object-fit: cover;  object-position: center;">
-    </div>
-    <div>
-        <div class="tags flex justify-start pl-4 gap-4">
-            <div class="grid grid-cols-7 gap-1"> 
-                <span class="shadow-md bg-gray-400 text-white rounded-md py-0.5 px-2 font-medium
-                text-center col-span-3 sm:col-span-1" style="font-family: Cursive"><span>#</span> Lorem.</span>
-                <span class="shadow-md bg-gray-400 text-white rounded-md py-0.5 px-2 font-medium
-                text-center col-span-3 sm:col-span-1" style="font-family: Cursive"><span>#</span> Lorem ipsum</span>
-                <span class="shadow-md bg-gray-400 text-white rounded-md py-0.5 px-2 font-medium
-                text-center col-span-3 sm:col-span-1" style="font-family: Cursive"><span>#</span> Lorem ipsum.</span>
-            </div>  
-        </div>
-        <div class="category flex justify-end items-end text-end mt-3 gap-4">
-            <div class="grid grid-cols-7 gap-1"> 
-                <span class="shadow-md bg-gray-400 text-white rounded-md py-0.5 px-2 font-medium
-                text-center col-span-3 sm:col-span-1" style="font-family: Cursive">Lorem.</span>
-                <span class="shadow-md bg-gray-400 text-white rounded-md py-0.5 px-2 font-medium
-                text-center col-span-3 sm:col-span-1" style="font-family: Cursive">Lorem ipsum</span>
-                <span class="shadow-md bg-gray-400 text-white rounded-md py-0.5 px-2 font-medium
-                text-center col-span-3 sm:col-span-1" style="font-family: Cursive">Lorem ipsum.</span>
-            </div>  
-        </div>
-    </div>
-    <div class="paragraphs p-8">
-        <p class="1" style="font-family:sans-serif;font-size:18px;font-weight:400;
-        text-indent: 4em; padding:15px">Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum
-            reprehenderit dolore saepe aliquid consectetur, sed nihil deserunt perferendis
-            voluptate hic, laudantium incidunt, quisquam deleniti eius ducimus. Veritatis,
-            recusandae! Quos, ab.Magni maxime, vero doloremque laborum eius harum dolore dolor
-            quibusdam dolorem? Voluptates labore, aliquid temporibus laborum quidem, aspernatur
-            quod tempora, dolores voluptatum hic modi veritatis nemo cum? Culpa, dolorem dolor?</p>
-        <p class="2" style="font-family:sans-serif;font-size:18px;font-weight:400;
-        text-indent: 4em; padding:15px">Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum
-            reprehenderit dolore saepe aliquid consectetur, sed nihil deserunt perferendis
-            voluptate hic, laudantium incidunt, quisquam deleniti eius ducimus. Veritatis,
-            recusandae! Quos, ab.Magni maxime, vero doloremque laborum eius harum dolore dolor
-            quibusdam dolorem? Voluptates labore, aliquid temporibus laborum quidem, aspernatur
-            quod tempora, dolores voluptatum hic modi veritatis nemo cum? Culpa, dolorem dolor?</p>
-        <p class="3" style="font-family:sans-serif;font-size:18px;font-weight:400;
-        text-indent: 4em; padding:15px">Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum
-            reprehenderit dolore saepe aliquid consectetur, sed nihil deserunt perferendis
-            voluptate hic, laudantium incidunt, quisquam deleniti eius ducimus. Veritatis,
-            recusandae! Quos, ab.Magni maxime, vero doloremque laborum eius harum dolore dolor
-            quibusdam dolorem? Voluptates labore, aliquid temporibus laborum quidem, aspernatur
-            quod tempora, dolores voluptatum hic modi veritatis nemo cum? Culpa, dolorem dolor?</p>
-    </div>
     <div class="flex justify-center items-end  flex-col" style="margin: 30px;padding-right:10px">
         <p class="author" style="font-family: Arial, sans-serif;
-        font-size: 1rem;font-weight: bold;color: #333; margin-bottom: 0.5rem;">Lorem ipsum dolor.</p>
+        font-size: 1rem;font-weight: bold;color: #333; margin-bottom: 0.5rem;">
+            {{$blogsObject->user[1].' '.$blogsObject->user[2]}}</p>
         <p class="date text-center pr-4" style="font-family: Arial, sans-serif;
         font-size: 1rem;font-weight: bold;text-align: center;
-        padding-right: 1.5rem;">2014-05-14</p>
+        padding-right: 1.5rem;">{{$blogsObject->dateAjoute}}</p>
     </div>
-
 </div>
 <div class="comment border-t-2 bg-white p-4" style="border-top:20px;">
     <div class="p-5 m-5 ">
@@ -111,9 +97,9 @@
                  text-decoration: none;
                  padding: 0.5rem 1rem;
                  transition: all 0.3s ease;">Rependre</button>
-                 <div id="repondreComment">
-                    <!---repondre input here -->
-                 </div>
+                    <div id="repondreComment">
+                        <!---repondre input here -->
+                    </div>
                 </div>
             </div>
             <div class="rep overflow-y-scroll" style="height: 28vh">
@@ -144,7 +130,7 @@
                         consectetur adipisicing elit. Ipsa, reprehenderit.</p>
                 </div>
             </div>
-           
+
         </div>
     </div>
 </div>
@@ -154,13 +140,28 @@
 
 @push('styles')
 <style>
-@media screen(min-width:768px){
-    .comment-repondre{
-        margin: 20px;
-        padding:30px;
-        width:700px;}
+.responsible-tags-category {
+    display: grid;
+    grid-template-columns: 12fr;
+    grid-template-rows: auto;
+    grid-gap: 10px;
+    grid-row-gap: 20px;
 }
-  
+
+@media screen(min-width:768px) {
+    .comment-repondre {
+        margin: 20px;
+        padding: 30px;
+        width: 700px;
+    }
+
+    .responsible-tags-category {
+        display: grid;
+        grid-template-columns: 4fr 4fr 4fr;
+        grid-template-rows: auto;
+        grid-gap: 10px;
+    }
+}
 </style>
 
 @endpush

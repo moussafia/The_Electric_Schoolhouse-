@@ -2,17 +2,60 @@
 
 namespace App\Http\Controllers\BlogsController;
 
-use App\Models\Category;
-use App\Models\Tags;
 use Carbon\Carbon;
 use App\Models\Blog;
+use App\Models\Tags;
+use App\Models\User;
+use App\Models\Category;
 use App\Models\Paragraph;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 
 class BlogsController extends Controller
 {
-     
+    public function index(){
+        $blogs=Blog::with('Category','Paragraph','Tag','user')->orderBy('created_at','desc')->get();
+        $blogsArray=array();
+        foreach($blogs as $blog){
+            $categories=array();
+            $tags=array();
+            $paragraphs=array();
+            foreach($blog->category as $category){
+                $categories[]=array(
+                "categoryId"=>$category->id,
+                "category"=>$category->type);
+            }
+            foreach($blog->tag as $tag){
+                $tags[]=array(
+                    "tagId"=>$tag->id,
+                    "tag"=>$tag->tag);
+            }
+            foreach($blog->paragraph as $paragraph){
+                $paragraphs[]=array(
+                    "paragraphId"=>$paragraph->id,
+                    "paragraph"=>$paragraph->paragraph);
+            }
+            $blogsArray[]=array(
+                    "blogId"=>$blog->id,
+                    "dateAjoute"=>$blog->dateAjoute,
+                    "title"=>$blog->title,
+                    "image"=>$blog->image,
+                    "user"=>array(
+                        $blog->user->id,
+                        $blog->user->first_name,
+                        $blog->user->last_name,
+                        $blog->user->email
+                    ),
+                    "categories"=>$categories,
+                    "tags"=>$tags,
+                    "paragraphs"=>$paragraphs,
+                );
+        }
+        return response()->json([
+            'blogs'=>$blogsArray
+        ]);
+    }
     public function store(Request $request)
     {
         $rules=[
@@ -257,4 +300,29 @@ class BlogsController extends Controller
         'success'=>'Blog created successfully.'
     ]);
 }
+public function deleteBlog(Request $request,$id){
+    $validateData=$request->validate([
+        'passwordBlog' => 'required|nullable|string',
+   ]);  
+   $userId=auth()->id();
+   $blog=Blog::findOrFail($id);
+   $user = User::where('id',$userId)->first();
+   if(Hash::check($validateData['passwordBlog'], $user->password)){
+      $blog->destroy($id);
+      return response()->json(['success' => true, 'message' => 'Blog deleted successfully.']);
+    }else{
+      return redirect()->back();
+
+   }
+}
+public function searchBlogs(Request $request){
+    $query=$request->input('query');
+    $blog=Blog::where('title','like','%'.$query.'%')
+                    ->orWhereHas('user',function($q) use($query){
+                        $q->where('first_name','like','%'.$query.'%');
+                    })->orWhereHas('user',function($q) use($query){
+                        $q->where('last_name','like','%'.$query.'%');
+                    })->get();
+                    return response()->json(['blog' => $blog->load('user')]);}
+
 }

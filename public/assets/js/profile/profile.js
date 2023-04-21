@@ -33,6 +33,11 @@ $(document).ready(function(){
                document.getElementById('modalEditBlog').setAttribute('data-title', '${blogs[i].title}');
                document.getElementById('modalEditBlog').setAttribute('data-paragraphs',${para});
                document.getElementById('modalEditBlog').click();">Edit</button>
+               <button  type="button" data-modal-target="popup-modal" data-modal-toggle="popup-modal"
+               class="flex justify-center bg-linear-delete my-2 px-3 text-white py-2 rounded-md"
+               onclick="document.getElementById('modalRemoveBlog').setAttribute('data-blog-id', '${blogs[i].blogId}');
+               document.getElementById('modalRemoveBlog').click();">delete</button>
+              </button>
                </div> </div>`; 
             }
             $('#cardBlogs').html(html);  
