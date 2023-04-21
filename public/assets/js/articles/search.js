@@ -57,8 +57,7 @@ $('#searchBtn2').on('click',function(){
 $(document).ready(function() {
     $('#barSearchBlogs').on('submit',function(e){
         e.preventDefault();
-        $query=$('#default-search').val();
-        var query=$(this).val().trim();
+        var query=$('#default-search').val().trim();
         if(query===''){
             return;
         }
@@ -70,12 +69,21 @@ $(document).ready(function() {
             },
             dataType: "dataType",
             dataType:'json',
-            success: function (response) {console.log('fgg');
+            success: function (response) { $('#searchResults').empty();
                 var html="";
-                // $.each(response.blog, function (index, blogs) {
-                //     html+=` `;
-                //     //  $('#searchResults').html(html);
-                // });
+                var baseUrl = window.location.origin;
+                var readArticleRoute = baseUrl + '/readArticle/';
+                $.each(response.blog, function (index, blogs) {console.log(blogs);
+                    html+=`<div class="card rounded-md" data-blog-id='${blogs.id}'
+                    style="background-image: url('assets/image/Blogs/${blogs.image}');
+                    background-size: cover; background-position: center;">
+                      <div class="content">
+                     <h2 class="title">${blogs.title.slice(0,20)}</h2>
+                   <p class="copy">${blogs.paragraph[0].paragraph.slice(0,100)+'...'}</p>
+                   <a href="${readArticleRoute}${blogs.id}" class="btn rounded-lg">View Articels</a>
+                   </div> </div>`; 
+                });
+                $('#allBlogs').html(html); 
             },
     })
 })

@@ -5,7 +5,6 @@ $(document).ready(function(){
         type:"GET",
         success:function(response){
             var blogs=response.blogs;
-            console.log(blogs);
             var html="";
             var baseUrl = window.location.origin;
             var readArticleRoute = baseUrl + '/readArticle/';

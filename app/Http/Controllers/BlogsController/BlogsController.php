@@ -323,6 +323,6 @@ public function searchBlogs(Request $request){
                     })->orWhereHas('user',function($q) use($query){
                         $q->where('last_name','like','%'.$query.'%');
                     })->get();
-                    return response()->json(['blog' => $blog->load('user')]);}
+                    return response()->json(['blog' => $blog->load('user','paragraph')]);}
 
 }
