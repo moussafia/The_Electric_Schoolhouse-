@@ -56,8 +56,6 @@ console.log($lastInput.val());
 function delete_parag(idPragraph){
       $('#'+idPragraph).remove();
 }
-
-
 // submit form add blog
 $(function(){
   $('#formBlogs').submit(function(event){      

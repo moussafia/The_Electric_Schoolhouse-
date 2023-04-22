@@ -3,6 +3,9 @@
 @section('content')
 @include('layoutAuth.sidebar')
 @include('layoutAuth.navbar')
+@push('header')
+<meta name="csrf-token" content="{{ csrf_token() }}" />
+@endpush
 @php
 $blogsObject = json_decode(json_encode($blogsArray[0]));
 @endphp
@@ -53,17 +56,14 @@ $blogsObject = json_decode(json_encode($blogsArray[0]));
 </div>
 <div class="comment border-t-2 bg-white p-4" style="border-top:20px;">
     <div class="p-5 m-5 ">
-        <form>
+        <form id="CreateCommaintaire" method="post" action="{{route('commantaire.store')}}">
+            <input type = "hidden" name = "_token" value = '<?php echo csrf_token(); ?>'>
             <label for="chat" class="sr-only">Your message</label>
             <div class="flex items-center px-3 py-2 rounded-lg bg-gray-50 dark:bg-gray-700">
-                <button type="button"
-                    class="p-2 text-gray-500 rounded-lg cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
-                    <span class="sr-only">Add emoji</span>
-                </button>
-                <textarea id="chat" rows="1"
+                <textarea id="commantaireInp" rows="1" name="commantaireInp"
                     class="block mx-4 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Your comment..."></textarea>
-                <button type="button"
+                <button type="submit"
                     class="inline-flex justify-center p-2 text-green-500 rounded-full cursor-pointer hover:bg-blue-100 dark:text-blue-500 dark:hover:bg-gray-600">
                     <svg aria-hidden="true" class="w-6 h-6 rotate-90" fill="currentColor" viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg">
@@ -91,6 +91,12 @@ $blogsObject = json_decode(json_encode($blogsArray[0]));
                 <p class="p-4 indent-4" style="font-family: sans-serif;font-size:15px">Lorem ipsum dolor sit amet
                     consectetur adipisicing elit. Ipsa, reprehenderit.</p>
                 <div class="flex justify-end">
+                    <button type="button" class="hover:underline" style=" font-size: 0.9rem;
+                 font-weight: 500;
+                 color: #333;
+                 text-decoration: none;
+                 padding: 0.5rem 1rem;
+                 transition: all 0.3s ease;">suprimer</button>
                     <button type="button" style=" font-size: 0.9rem;
                  font-weight: 500;
                  color: #333;
@@ -166,7 +172,9 @@ $blogsObject = json_decode(json_encode($blogsArray[0]));
 
 @endpush
 
-
+@push('scripts')
+<script src="{{asset('assets/js/commantaire/commantaire.js')}}"></script>
+@endpush
 
 
 

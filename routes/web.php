@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController\CategoryController;
+use App\Http\Controllers\CommantaireController;
 use App\Http\Controllers\TagsController\TagsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController\UserController;
@@ -64,6 +65,9 @@ Route::get('/filterBlog',[BlogsController::class,'filterBlog'])->name('filterBlo
 
 Route::get('/getAllCategory',[CategoryController::class,'getAllCategory'])->name('getAllCategory');
 Route::get('/getAllTags',[TagsController::class,'getAllTags'])->name('getAllTags');
+
+Route::post('/commantaireStore',[CommantaireController::class,'store'])->name('commantaire.store');
+
 
 });
 

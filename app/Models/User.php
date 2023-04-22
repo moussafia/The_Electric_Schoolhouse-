@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Blog;
 use App\Models\Score;
+use App\Models\Commantaire;
 use Laravel\Sanctum\HasApiTokens;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
@@ -71,5 +72,8 @@ class User extends Authenticatable implements JWTSubject
     }
     public function score(){
         return $this->belongsTo(Score::class);
+    }
+    public function commantaire(){
+        return $this->belongsToMany(Commantaire::class);
     }
 }
