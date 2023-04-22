@@ -221,7 +221,7 @@
 											"top": 138,
 											"width": 158,
 											"height": 13,
-											"text": "+Attribute1",
+											"text": "+point",
 											"horizontalAlignment": 0
 										}
 									],
@@ -6104,8 +6104,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGHRwUyWKcKyRo="
 							},
-							"name": "Attribute1",
-							"type": ""
+							"name": "point"
 						}
 					]
 				},
@@ -6340,7 +6339,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGHRw8T/af4UDU="
 							},
-							"name": "date Ajoute"
+							"name": "date Ajoute",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
