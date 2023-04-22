@@ -67,6 +67,8 @@ Route::get('/getAllCategory',[CategoryController::class,'getAllCategory'])->name
 Route::get('/getAllTags',[TagsController::class,'getAllTags'])->name('getAllTags');
 
 Route::post('/commantaireStore',[CommantaireController::class,'store'])->name('commantaire.store');
+Route::get('/getAllCommantaires/{id}',[CommantaireController::class,'show'])->name('commantaire.show');
+
 
 
 });

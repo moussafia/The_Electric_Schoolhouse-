@@ -20,4 +20,11 @@ class CommantaireController extends Controller
         $commentCreated=$comment->load('user');
         return response()->json(["comment"=>$commentCreated]);
     }
+ 
+    public function show(Request $request,$id){
+        $comments=Commantaire::findOrFail($id)->get();
+        return response()->json([
+            'comments'=>$comments->load('user')
+        ]);
+    }
 }
