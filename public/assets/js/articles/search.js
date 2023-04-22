@@ -71,6 +71,7 @@ $(document).ready(function() {
             dataType:'json',
             success: function (response) { $('#searchResults').empty();
                 var html="";
+                if(response.blog.length>0){
                 var baseUrl = window.location.origin;
                 var readArticleRoute = baseUrl + '/readArticle/';
                 $.each(response.blog, function (index, blogs) {console.log(blogs);
@@ -83,6 +84,14 @@ $(document).ready(function() {
                    <a href="${readArticleRoute}${blogs.id}" class="btn rounded-lg">View Articels</a>
                    </div> </div>`; 
                 });
+                }else{
+                html+=`
+                <div class="h-80 rounded-lg w-full flex justify-center items-center">
+                <span style="font-family: Arial, Helvetica, sans-serif;
+                font-size:20px;font-weight:bold;
+                text-shadow: 0.8px 0.8px 0.8px #000000;">404 Not found...</span>
+                </div>`
+                }
                 $('#allBlogs').html(html); 
             },
     })

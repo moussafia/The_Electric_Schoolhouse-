@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Blog;
+use App\Models\Score;
 use Laravel\Sanctum\HasApiTokens;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
@@ -67,5 +68,8 @@ class User extends Authenticatable implements JWTSubject
     }
     public function blog(){
         return $this->belongsToMany(Blog::class);
+    }
+    public function score(){
+        return $this->belongsTo(Score::class);
     }
 }

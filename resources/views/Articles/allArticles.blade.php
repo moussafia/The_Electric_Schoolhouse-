@@ -18,7 +18,7 @@
             </div>
             <input type="search" id="default-search"
                 class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-green-400 focus:border-green-400 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="Search blogs, authors..." required>
+                placeholder="Search blogs by title, authors..." required>
             <button type="submit" class="text-white absolute right-2.5 bottom-2 btn rounded-lg">Sear<span
                     class="hidden md:inline">ch</span></button>
         </div>
@@ -48,7 +48,7 @@
                     <ul class="space-y-2 text-sm" aria-labelledby="categoryDropDownDefault">
                         @foreach ($categories as $id=>$value)
                         <li class="flex items-center">
-                            <input id="apple" type="checkbox" value="{{$id}}"
+                            <input id="categoryCheckBox" type="checkbox" value="{{$id}}" name="categoryCheck[]"
                                 class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
 
                             <label for="apple" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
@@ -80,7 +80,7 @@
                     <ul class="space-y-2 text-sm" aria-labelledby="tagDropDownDefault">
                         @foreach ($tags as $id=>$value)
                         <li class="flex items-center">
-                            <input id="apple" type="checkbox" value="{{$id}}"
+                            <input id="tagCheckBox" type="checkbox" value="{{$id}}" name="tagCheck[]"
                                 class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
 
                             <label for="apple" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
@@ -96,7 +96,7 @@
     </div>
 </div>
 <main class="page-content" id="allBlogs" data-url="{{route('indexBlog')}}" class=" p-8 bg-white shadow-lg rounded-lg"
-    style="margin: 30px">
+    style="margin: 30px;min-height:80vh">
 
 </main>
 <button id="searchBtn2" type="hidden"></button>
@@ -105,6 +105,7 @@
 @push('scripts')
 <script src="{{asset('assets/js/articles/getAllarticles.js')}}"></script>
 <script src="{{asset('assets/js/articles/search.js')}}"></script>
+<script src="{{asset('assets/js/articles/filter.js')}}"></script>
 @endpush
 
 

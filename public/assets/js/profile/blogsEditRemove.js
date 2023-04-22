@@ -152,7 +152,7 @@ $("#categorySelectEdit").select2({
                document.getElementById('modalEditBlog').click();">Edit</button>
                <button  type="button" data-modal-target="popup-modal" data-modal-toggle="popup-modal"
                class="flex justify-center bg-linear-delete my-2 px-3 text-white py-2 rounded-md"
-               onclick="document.getElementById('modalRemoveBlog').setAttribute('data-blog-id', '${blogs[i].blogId}');
+               onclick="document.getElementById('modalRemoveBlog').setAttribute('data-blog-id', '${blog.blogId}');
                document.getElementById('modalRemoveBlog').click();">delete</button>
               </button>
                </div> </div>`;
@@ -198,9 +198,10 @@ $("#categorySelectEdit").select2({
                 Accept: 'application/json'
             },
             success: function(response){   
-              $('#formDeleteBlog')[0].reset();  
+              $('#formDeleteBlog')[0].reset(); 
               if(response.success){
                 $('#cardBlogs').find(`[data-blog-id="${id}"]`).remove();
+                $('#score').html(response.score);
               } 
             },
             error: function(xhr,status,error){

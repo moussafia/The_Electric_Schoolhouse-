@@ -13,7 +13,7 @@ class UserController extends Controller
     public function __construct(){
     $this->middleware('authJWT');
     }
-    public function updateProfile(Request $request){      
+    public function updateProfile(Request $request){  
    
         $validateData=$request->validate([
         'first_name' => [ 'nullable','string','max:255', 'regex:/^[a-zA-Z]*$/'],
@@ -65,7 +65,7 @@ if ($request->hasFile('photo')) {
 }
 
 if ($request->hasFile('cover')) {
-    $image = $request->file('photo');
+    $image = $request->file('cover');
     $destinationPath = 'assets/image/User/';
     $coverName = date('YmdHis') .  $image->getClientOriginalName();
     $image->move($destinationPath, $coverName);

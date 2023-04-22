@@ -97,13 +97,14 @@
                 <form action="" method="post" id="formDeleteBlog">
                     @csrf
                     @method('DELETE')
-                    <div class="p-6 text-center">
+                    <div class="p-6 text-center flex items-center flex-col">
                         <svg aria-hidden="true" class="mx-auto mb-4 text-gray-400 w-14 h-14 dark:text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                         <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to delete this Blog?</h3>
                         <input type="hidden" id="idBlogRemoved" name="idBlogRemoved">
-                        <input type="password" name="passwordBlog" id='passwordBlog' style="width: 100%"
-                                class="my-2 border-0 border-b-2 border-gray-300 focus:outline-none 
+                        <input type="password" name="passwordBlog" id='passwordBlog' style="width: 300px"
+                                class="block my-2 border-0 border-b-2 border-gray-300 focus:outline-none 
                                 focus:ring-0 peer focus:border-green-500" placeholder="Your password">
+                    <div>
                         <button data-modal-hide="modalDeleteBlogs" data-method="DELETE" 
                         id="delete-blog" type="submit" class="text-white bg-red-700
                          hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300
@@ -117,6 +118,7 @@
                         text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700
                          dark:text-gray-300 dark:border-gray-500 dark:hover:text-white 
                          dark:hover:bg-gray-600 dark:focus:ring-gray-600">No, cancel</button>
+                    </div>
                     </div>
                 </form>
             </div>

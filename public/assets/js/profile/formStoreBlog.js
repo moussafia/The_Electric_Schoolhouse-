@@ -111,12 +111,15 @@ $(function(){
                document.getElementById('modalEditBlog').click();">Edit</button>
                <button  type="button" data-modal-target="popup-modal" data-modal-toggle="popup-modal"
                class="flex justify-center bg-linear-delete my-2 px-3 text-white py-2 rounded-md"
-               onclick="document.getElementById('modalRemoveBlog').setAttribute('data-blog-id', '${blogs[i].blogId}');
+               onclick="document.getElementById('modalRemoveBlog').setAttribute('data-blog-id', '${blog.blogId}');
                document.getElementById('modalRemoveBlog').click();">delete</button>
               </button>
                </div> </div>`;
              $('#cardBlogs').prepend(html);
-      
+             $('#score').html(blog.score);
+             $('#categorySelect').val(null).trigger('change');
+             $("#tagSelect").val(null).trigger('change');
+             leadAllCategoryAndTags()
           },
           error: function(xhr,status,error){
               console.log(xhr.responseText);
@@ -125,3 +128,18 @@ $(function(){
       
   })
 })
+
+function leadAllCategoryAndTags(){
+  $.get("/getAllCategory",function (category) {
+    $('#categorySelect').empty();
+    $.each(category, function (index, category) {
+      $('#categorySelect').append('<option value="' + category.id + '">' + category.type + '</option>');
+    });
+    });
+  $.get("/getAllTags", function (tags) {
+    $('#tagSelect').empty();
+    $.each(tags, function (index, tags) {console.log(tags);
+      $('#tagSelect').append('<option value="' + tags.id + '">' + tags.tag + '</option>');
+    });
+    });
+}

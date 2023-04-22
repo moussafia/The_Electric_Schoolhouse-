@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController\CategoryController;
+use App\Http\Controllers\TagsController\TagsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController\UserController;
 use App\Http\Controllers\ViewController\ViewController;
@@ -59,7 +60,10 @@ Route::get('/showBlogs',[BlogsController::class,'showMyBlogs'])->name('showBlogs
 Route::get('/indexBlog',[BlogsController::class,'index'])->name('indexBlog');
 Route::get('/searchBlogs',[BlogsController::class,'searchBlogs'])->name('searchBlogs');
 Route::get('/barSearchBlogs',[BlogsController::class,'searchBlogs'])->name('barSearchBlogs');
+Route::get('/filterBlog',[BlogsController::class,'filterBlog'])->name('filterBlog');
 
+Route::get('/getAllCategory',[CategoryController::class,'getAllCategory'])->name('getAllCategory');
+Route::get('/getAllTags',[TagsController::class,'getAllTags'])->name('getAllTags');
 
 });
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\ViewController;
 
 use App\Models\Blog;
+use App\Models\Score;
 use App\Models\Tags;
 use App\Models\Category;
 use Illuminate\Http\Request;
