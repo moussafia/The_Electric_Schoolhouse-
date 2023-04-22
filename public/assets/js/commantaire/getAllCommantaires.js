@@ -1,5 +1,3 @@
-const { forEach } = require("lodash");
-
 $(document).ready(function () {
     var baseUrl=window.location.href;
     var id=baseUrl.match(/\/(\d+)(\?.*)?$/);
