@@ -9,8 +9,8 @@ $(document).ready(function () {
             var html='';
             var urlimg=window.location.origin+'/assets/image/user/';
             $.each(response.comments,function(index,comment){
-                html+=`<div class="comment-repondre" 
-                style="border-redius:30px;background-color:#fcf9ed;width:90%;margin:30px;padding:30px">
+                html+=`<div class="comment-repondre rounded-lg" 
+                style="border-redius:30px;background-color:#fcf9ed;width:90%;margin:2px;padding:10px">
                 <div class="border-b-2">
                     <div class="flex items-center gap-4 border-b-2 p-3" style="width: 300px;margin-top:6px">
                         <div style="height: 40px; width:40px; overflow:hidden; border-radius:50%;">
@@ -90,6 +90,7 @@ $(document).ready(function () {
                 $('#CreateRepondre'+comment.id).slideToggle(300);
                 })
             });
+            //repondre POST
             $(document).ready(function () {
                 $('#CreateRepondre'+comment.id).on('submit',function(e){
                     e.preventDefault();
@@ -113,8 +114,24 @@ $(document).ready(function () {
                             Accept: 'application/json'
                         },
                         success: function (response) {
-                            
+                            var rep=response.rep;
+                            var html2=`<div class="repondre border-t-2" style="padding-left:80px;padding-top:20px">
+                                <div class="flex items-center gap-4 border-b-2 p-3" style="width: 300px">
+                                            <div style="height: 35px; width:35px; overflow:hidden; border-radius:50%;">
+                                                <img src="${urlimg}${rep.user.photo}" style="width:100%;">
+                                            </div>
+                                    <span>
+                                    <span class="font-medium ">${rep.user.first_name} ${rep.user.last_name}</span><br>
+                                    <span class="text-end pl-3" style="font-family: cursive;font-size:10px">${rep.created_at.substring(0,10)}</span>
+                                    </span>
+                                </div>
+                                <p class="p-4 indent-4" style="font-family: sans-serif;font-size:15px">${rep.reponse}</p>
+                            </div>
+                            `
+                            $('#rep'+comment.id).prepend(html2);
+                            $('textarea[name=RepndreInp]').val('');
                         }
+
                     });
                 })
             });
