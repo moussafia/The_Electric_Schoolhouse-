@@ -22,9 +22,9 @@ class CommantaireController extends Controller
     }
  
     public function show(Request $request,$id){
-        $comments=Commantaire::where('blog_id',$id)->orderBy('created_at','desc')->get();
+        $comments=Commantaire::with(['user', 'repondre.user'])->where('blog_id',$id)->orderBy('created_at','desc')->get();
         return response()->json([
-            'comments'=>$comments->load('user')
+            'comments'=>$comments
         ]);
     }
 }

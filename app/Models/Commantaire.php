@@ -19,6 +19,6 @@ class Commantaire extends Model
         return $this->belongsTo(Blog::class);
     }
     public function repondre(){
-        return $this->belongsToMany(Repondre::class);
+        return $this->hasMany(Repondre::class)->orderBy('created_at','desc');
     }
 }

@@ -138,18 +138,7 @@ $blogsObject = json_decode(json_encode($blogsArray[0]));
                 </div>
             </div>
             <div class="rep overflow-y-scroll" style="height: 28vh">
-                <div class="repondre border-t-2" style="padding-left:80px;padding-top:20px">
-                    <div class="flex items-center gap-4 border-b-2 p-3" style="width: 300px">
-                        <div style="height: 35px; width:35px; overflow:hidden; border-radius:50%;">
-                            <img src="{{asset('assets/image/user/'.$user->photo)}}" style="width:100%;">
-                        </div>
-                        <span>
-                            <span class="font-medium ">Mohammed moussafia</span><br>
-                            <span class="text-end pl-3" style="font-family: cursive;font-size:10px">2020-02-13</span>
-                        </span>
-                    </div>
-                    <p class="p-4 indent-4" style="font-family: sans-serif;font-size:15px">Lorem ipsum </p>
-                </div>
+                
                 <div class="repondre border-t-2" style="padding-left:80px;padding-top:20px">
                     <div class="flex items-center gap-4 border-b-2 p-3" style="width: 300px">
                         <div style="height: 35px; width:35px; overflow:hidden; border-radius:50%;">

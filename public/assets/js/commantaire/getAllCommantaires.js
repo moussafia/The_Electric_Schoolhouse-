@@ -2,7 +2,6 @@ $(document).ready(function () {
     var baseUrl=window.location.href;
     var id=baseUrl.match(/\/(\d+)(\?.*)?$/);
     var url=$('#commentEnv').data('url')
-    console.log('url='+url);
     $.ajax({
         type: "GET",
         url: url,
@@ -66,9 +65,24 @@ $(document).ready(function () {
                         </div>
                     </div>
                 </div>
-                <div class="rep overflow-y-scroll" style="max-height: 28vh">
-                   
-                </div>
+                <div class="rep overflow-y-scroll" id="rep${comment.id}" style="max-height: 28vh">`
+                $.each(comment.repondre, function (index, rep) { 
+                    html+=`
+                       <div class="repondre border-t-2" style="padding-left:80px;padding-top:20px">
+                       <div class="flex items-center gap-4 border-b-2 p-3" style="width: 300px">
+                                   <div style="height: 35px; width:35px; overflow:hidden; border-radius:50%;">
+                                       <img src="${urlimg}${rep.user.photo}" style="width:100%;">
+                                   </div>
+                           <span>
+                           <span class="font-medium ">${rep.user.first_name} ${rep.user.last_name}</span><br>
+                           <span class="text-end pl-3" style="font-family: cursive;font-size:10px">${rep.created_at.substring(0,10)}</span>
+                           </span>
+                       </div>
+                       <p class="p-4 indent-4" style="font-family: sans-serif;font-size:15px">${rep.reponse}</p>
+                   </div>
+                    `
+               });     
+               html+=` </div>
             </div>`;
             $(document).ready(function () {
                 $('#CreateRepondre'+comment.id).hide();
@@ -81,7 +95,6 @@ $(document).ready(function () {
                     e.preventDefault();
                     var formData=new FormData();
                     formData.append('repondre',$('textarea[name=RepndreInp]').val());
-                    // console.log(object);
                     formData.append('comment_id',$('#commentId'+comment.id).val());
                     var jwt_token=Cookies.get('jwt_token');
                     var csrf_token = $('meta[name="csrf-token"]').attr('content');
@@ -105,16 +118,8 @@ $(document).ready(function () {
                     });
                 })
             });
-            // $.ajax({
-            //     type: "method",
-            //     url: "url",
-            //     data: "data",
-            //     dataType: "dataType",
-            //     success: function (response) {
-                    
-            //     }
-            // });
-            })
+         
+        })
             $('#commentEnv').html(html);
         },
         complete:function(){
