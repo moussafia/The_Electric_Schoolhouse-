@@ -1,11 +1,12 @@
 $(document).ready(function () {
-    $('#formDeleteComment').on('submit',function(e){
+    $("#formDeleteReponse").on('submit',function(e){
         e.preventDefault();
-        const idComment=$('#deleteComment').data('idComment');
+        var  idRep=$('#deleteReponse').data('idreponse');
+        var  idComment=$('#deleteReponse').data('idComment');
         var formData = new FormData();
         var jwt_token=Cookies.get('jwt_token');
         var csrf_token = $('meta[name="csrf-token"]').attr('content');
-        var url='/deleteComment/'+idComment;
+        var url='/deleteRep/'+idRep;
         $(this).attr('action',url);
         $.ajax({
             url: url,
@@ -22,12 +23,10 @@ $(document).ready(function () {
             },
             success: function(response){   
                 if(response.success){
-                $('#commentEnv').find(`[data-id-comment="${idComment}"]`).remove();
+                $('#rep'+idComment).find(`[data-id-rep="${idRep}"]`).remove();
             }
                 } 
             })
             
         })
-        
     })
-   

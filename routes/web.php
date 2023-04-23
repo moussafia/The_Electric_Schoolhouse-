@@ -72,7 +72,7 @@ Route::get('/getAllCommantaires/{id}',[CommantaireController::class,'show'])->na
 Route::post('/deleteComment/{id}',[CommantaireController::class,'delete'])->name('repondre.delete');
 
 Route::post('/createRepondre',[RepondreController::class,'store'])->name('repondre.store');
-
+Route::post('/deleteRep/{id}',[RepondreController::class,'delete'])->name('repondre.delete');
 
 
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\UserAuthController;
 
+use App\Models\Score;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -42,6 +43,10 @@ class UserAuthController extends Controller
         $user->photo='anonymous.jpg';
         $user->cover='coverture_anonyme.png';
         $user->save();
+        $ScoerUser=new Score;
+        $ScoerUser->score=0;
+        $ScoerUser->user_id=$user->id;
+        $ScoerUser->save();
         try{
             $token=JWTAuth::attempt(['email' => $request->email, 'password' => $request->password]);
             $cookie = cookie('jwt_token', $token, config('jwt.ttl'), null, null, false, false);
