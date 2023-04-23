@@ -21,9 +21,14 @@ class RepondreController extends Controller
         return response()->json(["rep"=>$repCreated]);
     }
     public function delete(Request $request,$id){
-        Repondre::where('id',$id)->delete();
-        return response()->json([
-            'success'=>true
-        ]);
+        if(auth()->id()==$request->idUserCreteResponse){
+            Repondre::where('id',$id)->delete();
+            return response()->json([
+                'success'=>true
+            ]);
     }
+    return response()->json([
+        'success'=>false
+    ]);
+}
 }

@@ -114,6 +114,8 @@ $("#categorySelectEdit").select2({
         var csrf_token = $('meta[name="csrf-token"]').attr('content');
         var id=$('#blogId').val();
         var url='/blogupdate/'+id;
+        var baseUrl = window.location.origin;
+        var readArticleRoute = baseUrl + '/readArticle/';
         $(this).attr('action',url);
         $.ajax({
             url: url,
@@ -141,7 +143,8 @@ $("#categorySelectEdit").select2({
                 style="background-image: url('assets/image/Blogs/${blog.image}');
                 background-size: cover; background-position: center;">
                   <div class="content">
-                 <h2 class="title">${blog.title.slice(0,20)}</h2>
+                <a href="${readArticleRoute}${blog.blogId}" class="pointer-cursor hover:underline">
+                 <h2 class="title">${blog.title.slice(0,20)}</h2></a>
                <p class="copy">${blog.paragraphs[0].paragraph.slice(0,100)+'...'}</p>
                <button type="button" class="btn rounded-lg btnEditBlog"
                onclick="document.getElementById('modalEditBlog').setAttribute('data-blog-id', '${blog.blogId}');

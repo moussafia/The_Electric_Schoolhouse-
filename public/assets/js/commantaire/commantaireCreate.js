@@ -22,7 +22,7 @@ $(function(){
                 Accept: 'application/json'
             },
             success: function (response) {
-                var comment=response.comment;
+                var comment=response.comment;console.log(comment);
                 var baseUrl=window.location.origin;
                 var url=baseUrl+'/assets/image/user/'
                 var html=`<div class="comment-repondre rounded-lg" data-id-comment="${comment.id}"

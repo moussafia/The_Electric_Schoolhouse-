@@ -22,16 +22,23 @@ class CommantaireController extends Controller
     }
  
     public function show(Request $request,$id){
+        $userIdAuth=auth()->id();
         $comments=Commantaire::with(['user', 'repondre.user'])->where('blog_id',$id)->orderBy('created_at','desc')->get();
         return response()->json([
-            'comments'=>$comments
+            'comments'=>$comments,
+            'userAuth'=>$userIdAuth
         ]);
     }
     
     public function delete(Request $request,$id){
-        Commantaire::where('id',$id)->delete();
+        if(auth()->id()===$request->idUserCreteComment){
+            Commantaire::where('id',$id)->delete();
+            return response()->json([
+                'success'=>true
+            ]);
+        }
         return response()->json([
-            'success'=>true
-        ]);
+                'success'=>true
+            ]);
     }
 }

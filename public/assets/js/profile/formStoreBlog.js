@@ -92,13 +92,16 @@ $(function(){
               const categoryIds=blog.categories.map(cat=>cat.categoryId).join(',');
               const TagsIds=blog.tags.map(tag=>tag.tagId).join(',');
               const paragraphs=blog.paragraphs.map(para=>para.paragraph).join(',|-split-|,');
-              const para="`"+paragraphs+"`"
+              const para="`"+paragraphs+"`";
+              var baseUrl = window.location.origin;
+              var readArticleRoute = baseUrl + '/readArticle/';
               //update page with data
               html=`<div class="card rounded-md" 
               style="background-image: url('assets/image/Blogs/${blog.image}');
               background-size: cover; background-position: center;">
                 <div class="content">
-               <h2 class="title">${blog.title.slice(0,20)}</h2>
+                <a href="${readArticleRoute}${blog.blogId}" class="pointer-cursor hover:underline">
+               <h2 class="title">${blog.title.slice(0,20)}</h2></a>
              <p class="copy">${blog.paragraphs[0].paragraph.slice(0,100)+'...'}</p>
              <button type="button" class="btn rounded-lg btnEditBlog"
                onclick="document.getElementById('modalEditBlog').setAttribute('data-blog-id', '${blog.blogId}');

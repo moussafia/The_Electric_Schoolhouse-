@@ -4,6 +4,7 @@ $(document).ready(function () {
         var  idRep=$('#deleteReponse').data('idreponse');
         var  idComment=$('#deleteReponse').data('idComment');
         var formData = new FormData();
+        formData.append('idUserCreteResponse',$('#deleteReponse').data('idUser'))
         var jwt_token=Cookies.get('jwt_token');
         var csrf_token = $('meta[name="csrf-token"]').attr('content');
         var url='/deleteRep/'+idRep;

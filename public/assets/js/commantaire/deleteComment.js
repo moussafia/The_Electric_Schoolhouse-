@@ -3,9 +3,10 @@ $(document).ready(function () {
         e.preventDefault();
         const idComment=$('#deleteComment').data('idComment');
         var formData = new FormData();
+        formData.append('idUserCreteComment',$('#deleteComment').data('idUser'))
         var jwt_token=Cookies.get('jwt_token');
         var csrf_token = $('meta[name="csrf-token"]').attr('content');
-        var url='/deleteComment/'+idComment;
+        var url='/deleteComment/'+idComment;console.log(idComment);
         $(this).attr('action',url);
         $.ajax({
             url: url,
