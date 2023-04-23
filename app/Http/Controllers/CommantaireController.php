@@ -22,7 +22,7 @@ class CommantaireController extends Controller
     }
  
     public function show(Request $request,$id){
-        $comments=Commantaire::findOrFail($id)->get();
+        $comments=Commantaire::findOrFail($id)->orderBy('created_at','desc')->get();
         return response()->json([
             'comments'=>$comments->load('user')
         ]);

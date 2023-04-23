@@ -10,7 +10,8 @@ $(document).ready(function () {
             var html='';
             var urlimg=window.location.origin+'/assets/image/user/';
             $.each(response.comments,function(index,comment){
-                html+=`<div class="comment-repondre" style="border-redius:30px;background-color:#fcf9ed;">
+                html+=`<div class="comment-repondre" 
+                style="border-redius:30px;background-color:#fcf9ed;width:90%;margin:30px;padding:30px">
                 <div class="border-b-2">
                     <div class="flex items-center gap-4 border-b-2 p-3" style="width: 300px;margin-top:6px">
                         <div style="height: 40px; width:40px; overflow:hidden; border-radius:50%;">
@@ -36,10 +37,10 @@ $(document).ready(function () {
                             color: #333;
                             text-decoration: none;
                             padding: 0.5rem 1rem;
-                            transition: all 0.3s ease;" id="repondre">
+                            transition: all 0.3s ease;" id="repondre${comment.id}">
                                    <span class="hover:underline">Repondre</span></button>
                         </div>
-                        <div id="repondreComment" class="w-full px-3 py-3">
+                        <div id="repondreComment${comment.id}" class="w-full px-3 py-3">
                             <!---repondre input here -->
                             <form id="CreateRepondre${comment.id}" method="post" action="">
                                 <input type="hidden" name="_token" value='<?php echo csrf_token(); ?>'>
@@ -70,9 +71,17 @@ $(document).ready(function () {
                    
                 </div>
             </div>`;
-
+            $(document).ready(function () {
+                $('#CreateRepondre'+comment.id).hide();
+                $(document).on('click','#repondre'+comment.id,function(){
+                $('#CreateRepondre'+comment.id).slideToggle(300);
+                })
+            });
             })
             $('#commentEnv').html(html);
+        },
+        complete:function(){
+  
         }
     });
 });

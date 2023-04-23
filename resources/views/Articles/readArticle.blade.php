@@ -77,7 +77,8 @@ $blogsObject = json_decode(json_encode($blogsArray[0]));
         </form>
     </div>
     <div id="commentEnv" data-url="{{route('commantaire.show',$blogsObject->blogId)}}"
-    class="comment flex flex-col items-center justify-center overflow-y-scroll m-0 md:m-2" style="height: 60vh;">
+    class="comment flex flex-col items-center justify-center overflow-y-scroll m-0 md:m-2"
+     style="max-width:100%">
         {{-- <div class="comment-repondre" style="border-redius:30px;background-color:#fcf9ed">
             <div class="border-b-2">
                 <div class="flex items-center gap-4 border-b-2 p-3" style="width: 300px;margin-top:40px">
@@ -89,8 +90,7 @@ $blogsObject = json_decode(json_encode($blogsArray[0]));
                         <span class="text-end pl-3" style="font-family: cursive;font-size:10px">2020-02-13</span>
                     </span>
                 </div>
-                <p class="p-4 indent-4" style="font-family: sans-serif;font-size:15px">Lorem ipsum dolor sit amet
-                    consectetur adipisicing elit. Ipsa, reprehenderit.</p>
+                <p class="p-4 indent-4" style="font-family: sans-serif;font-size:15px">Lorem ipsum .</p>
                 <div class="flex flex-col items-end justify-end">
                     <div>
                         <button type="button" class="" style=" font-size: 0.9rem;
@@ -116,7 +116,10 @@ $blogsObject = json_decode(json_encode($blogsArray[0]));
                             <label for="chat" class="sr-only">Your message</label>
                             <div class="flex items-center px-3 py-2 rounded-lg  dark:bg-gray-700">
                                 <textarea rows="1" name="RepndreInp"
-                                    class="block mx-4 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    class="block mx-4 p-2.5 w-full text-sm text-gray-900 bg-white 
+                                    rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500
+                                     dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white
+                                      dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     placeholder="Your reponse..."></textarea>
                                 <button type="submit"
                                     class="inline-flex justify-center p-2 text-green-500 rounded-full cursor-pointer hover:bg-blue-100 dark:text-blue-500 dark:hover:bg-gray-600">
@@ -145,8 +148,7 @@ $blogsObject = json_decode(json_encode($blogsArray[0]));
                             <span class="text-end pl-3" style="font-family: cursive;font-size:10px">2020-02-13</span>
                         </span>
                     </div>
-                    <p class="p-4 indent-4" style="font-family: sans-serif;font-size:15px">Lorem ipsum dolor sit amet
-                        consectetur adipisicing elit. Ipsa, reprehenderit.</p>
+                    <p class="p-4 indent-4" style="font-family: sans-serif;font-size:15px">Lorem ipsum </p>
                 </div>
                 <div class="repondre border-t-2" style="padding-left:80px;padding-top:20px">
                     <div class="flex items-center gap-4 border-b-2 p-3" style="width: 300px">
@@ -158,8 +160,7 @@ $blogsObject = json_decode(json_encode($blogsArray[0]));
                             <span class="text-end pl-3" style="font-family: cursive;font-size:10px">2020-02-13</span>
                         </span>
                     </div>
-                    <p class="p-4 indent-4" style="font-family: sans-serif;font-size:15px">Lorem ipsum dolor sit amet
-                        consectetur adipisicing elit. Ipsa, reprehenderit.</p>
+                    <p class="p-4 indent-4" style="font-family: sans-serif;font-size:15px">Lorem ipsum </p>
                 </div>
             </div>
 
@@ -181,11 +182,6 @@ $blogsObject = json_decode(json_encode($blogsArray[0]));
 }
 
 @media screen(min-width:768px) {
-    .comment-repondre {
-        margin: 20px;
-        padding: 30px;
-        width: 700px;
-    }
 
     .responsible-tags-category {
         display: grid;
