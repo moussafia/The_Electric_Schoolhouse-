@@ -18,4 +18,7 @@ class Commantaire extends Model
     public function blog(){
         return $this->belongsTo(Blog::class);
     }
+    public function repondre(){
+        return $this->belongsToMany(Repondre::class);
+    }
 }

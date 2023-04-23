@@ -44,8 +44,7 @@ $(document).ready(function () {
                             <!---repondre input here -->
                             <form id="CreateRepondre${comment.id}" method="post" action="">
                                 <input type="hidden" name="_token" value='<?php echo csrf_token(); ?>'>
-                                <input type="hidden" name="commentId" value="${comment.id}">
-                                <input type="hidden" name="BlogId" value="${comment.blog_id}">
+                                <input type="hidden" name="commentId" id="commentId${comment.id}" value="${comment.id}">
                                 <label for="chat" class="sr-only">Your message</label>
                                 <div class="flex items-center px-3 py-2 rounded-lg  dark:bg-gray-700">
                                     <textarea rows="1" name="RepndreInp"
@@ -77,6 +76,44 @@ $(document).ready(function () {
                 $('#CreateRepondre'+comment.id).slideToggle(300);
                 })
             });
+            $(document).ready(function () {
+                $('#CreateRepondre'+comment.id).on('submit',function(e){
+                    e.preventDefault();
+                    var formData=new FormData();
+                    formData.append('repondre',$('textarea[name=RepndreInp]').val());
+                    // console.log(object);
+                    formData.append('comment_id',$('#commentId'+comment.id).val());
+                    var jwt_token=Cookies.get('jwt_token');
+                    var csrf_token = $('meta[name="csrf-token"]').attr('content');
+                    $.ajax({
+                        type: "POST",
+                        url: "/createRepondre",
+                        data: formData,
+                        dataType:'json',
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        data: formData,
+                        headers: {
+                            'X-CSRF-TOKEN': csrf_token,
+                            'Authorization': 'Bearer ' + jwt_token,
+                            Accept: 'application/json'
+                        },
+                        success: function (response) {
+                            
+                        }
+                    });
+                })
+            });
+            // $.ajax({
+            //     type: "method",
+            //     url: "url",
+            //     data: "data",
+            //     dataType: "dataType",
+            //     success: function (response) {
+                    
+            //     }
+            // });
             })
             $('#commentEnv').html(html);
         },

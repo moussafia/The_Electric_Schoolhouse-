@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController\CategoryController;
 use App\Http\Controllers\CommantaireController;
+use App\Http\Controllers\RepondreController;
 use App\Http\Controllers\TagsController\TagsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController\UserController;
@@ -68,6 +69,9 @@ Route::get('/getAllTags',[TagsController::class,'getAllTags'])->name('getAllTags
 
 Route::post('/commantaireStore',[CommantaireController::class,'store'])->name('commantaire.store');
 Route::get('/getAllCommantaires/{id}',[CommantaireController::class,'show'])->name('commantaire.show');
+
+Route::post('/createRepondre',[RepondreController::class,'store'])->name('repondre.store');
+
 
 
 
