@@ -25,7 +25,7 @@ $(function(){
                 var comment=response.comment;
                 var baseUrl=window.location.origin;
                 var url=baseUrl+'/assets/image/user/'
-                var html=`<div class="comment-repondre rounded-lg" 
+                var html=`<div class="comment-repondre rounded-lg" data-id-comment="${comment.id}"
                 style="border-redius:30px;background-color:#fcf9ed;width:90%;margin:2px;padding:10px">
                 <div class="border-b-2">
                     <div class="flex items-center gap-4 border-b-2 p-3" style="width: 300px;margin-top:6px">
@@ -46,7 +46,9 @@ $(function(){
                             text-decoration: none;
                             padding: 0.5rem 1rem;
                             transition: all 0.3s ease;">
-                                   <span class="hover:underline">Supprimer</span> </button>
+                                   <span class="hover:underline"
+                                   onclick="$('#deleteRepondre').data('idComment','${comment.id}');
+                                   $('#deleteRepondre').click();">Supprimer</span> </button>
                                <button type="button" style=" font-size: 0.9rem;
                             font-weight: 500;
                             color: #333;

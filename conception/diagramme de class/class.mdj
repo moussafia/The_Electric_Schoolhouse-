@@ -7502,7 +7502,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGHqTyiwJvu748="
 							},
-							"name": "id"
+							"name": "id",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -7510,7 +7511,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGHqTyiwJvu748="
 							},
-							"name": "repondre"
+							"name": "repondre",
+							"type": ""
 						}
 					]
 				}

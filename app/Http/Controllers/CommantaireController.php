@@ -27,4 +27,11 @@ class CommantaireController extends Controller
             'comments'=>$comments
         ]);
     }
+    
+    public function delete(Request $request,$id){
+        Commantaire::where('id',$id)->delete();
+        return response()->json([
+            'success'=>true
+        ]);
+    }
 }

@@ -69,8 +69,10 @@ Route::get('/getAllTags',[TagsController::class,'getAllTags'])->name('getAllTags
 
 Route::post('/commantaireStore',[CommantaireController::class,'store'])->name('commantaire.store');
 Route::get('/getAllCommantaires/{id}',[CommantaireController::class,'show'])->name('commantaire.show');
+Route::post('/deleteComment/{id}',[CommantaireController::class,'delete'])->name('repondre.delete');
 
 Route::post('/createRepondre',[RepondreController::class,'store'])->name('repondre.store');
+
 
 
 
