@@ -45,7 +45,8 @@
         </div>
     </div>
     </div>
-        <div class="relative overflow-x-auto shadow-lg sm:rounded-lg" style="margin: 30px;height:80vh">
+        <div class="relative overflow-x-auto shadow-lg sm:rounded-lg" id="UsersDiv"
+        style="margin: 30px;height:80vh" data-url={{route('indexUsers')}}>
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 relative" >
                 <thead class="text-xs text-gray-700 uppercase
                  bg-gray-50 dark:bg-gray-700 dark:text-gray-400 sticky top-0">
@@ -70,8 +71,8 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody class="overflow-scroll" style="40vh">
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                <tbody class="overflow-scroll" style="40vh" id="tableUsers">
+                    {{-- <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <th scope="row" class="px-6 py-4 font-medium 
                         text-gray-900 whitespace-nowrap dark:text-white">
                             <div class="ml-3 border-2"
@@ -103,16 +104,24 @@
                                   </svg>                                  
                             </a>
                         </td>
-                    </tr>
+                    </tr> --}}
                 </tbody>
             </table>
         </div>
         
 </div>
 
+<button id="btnEditRolesForUsers" data-modal-target='modalEditRoles'
+type="hidden" data-modal-toggle='modalEditRoles'  ></button>
+<button id="btnRemoveUsers" data-modal-target='modalDeleteUsers'
+type="hidden" data-modal-toggle='modalDeleteUsers'></button>
+
+
+@include('Forms.Admins.formEditRolesUser')
+@include('Forms.Admins.formsdeleteUsers')
+
 
 @include('layoutAuth.footer')
-
 @push('styles')
 <style>
 .editUser {
@@ -156,4 +165,11 @@
 }
 </style>
 @endpush
+@push('scripts')
+<script src="{{asset('assets/js/users/getAllusers.js')}}"></script>
+<script src="{{asset('assets/js/users/EditRolesUsers.js')}}"></script>
+<script src="{{asset('assets/js/users/removesUsers.js')}}"></script>
+
+@endpush
+
 @endsection

@@ -7,6 +7,8 @@ use App\Models\Score;
 use App\Models\Tags;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Http\Controllers\Controller;
 use Symfony\Component\HttpFoundation\Cookie;
@@ -89,9 +91,11 @@ public function readArticle(Request $request,$id){
 }
 public function usersView(Request $request){
    $token=$request->cookie('jwt_token');
+   $roles=Role::all();
+   $permissions=Permission::all();
    if($token){
       $user=JWTAuth::setToken($token)->authenticate();
-   return view('users.users',['user' => $user]);
+   return view('users.users',['user' => $user,'roles'=>$roles,'permissions'=>$permissions]);
    }
    return redirect()->route('logIn');
 }

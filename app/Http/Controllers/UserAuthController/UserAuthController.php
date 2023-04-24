@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Mail\ResetPasswordEmail;
 use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Role;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\URL;
@@ -44,9 +45,11 @@ class UserAuthController extends Controller
         $user->cover='coverture_anonyme.png';
         $user->save();
         $ScoerUser=new Score;
-        $ScoerUser->score=0;
+        $ScoerUser->score=1000;
         $ScoerUser->user_id=$user->id;
         $ScoerUser->save();
+        $role=Role::findByName('User');
+        $user->assignRole($role);
         try{
             $token=JWTAuth::attempt(['email' => $request->email, 'password' => $request->password]);
             $cookie = cookie('jwt_token', $token, config('jwt.ttl'), null, null, false, false);

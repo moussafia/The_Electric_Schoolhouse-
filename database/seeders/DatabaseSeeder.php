@@ -6,6 +6,7 @@ namespace Database\Seeders;
 use Database\Seeders\TagSedeer;
 use Illuminate\Database\Seeder;
 use Database\Seeders\CategorySedeer;
+use Database\Seeders\RolesAndPermissionsSeeders;
 
 class DatabaseSeeder extends Seeder
 {
@@ -24,7 +25,8 @@ class DatabaseSeeder extends Seeder
         // ]);
         $this->call([
             TagSedeer::class,
-            CategorySedeer::class
+            CategorySedeer::class,
+            RolesAndPermissionsSeeders::class
         ]);
     }
 }

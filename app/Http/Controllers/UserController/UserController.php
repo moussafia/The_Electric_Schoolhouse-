@@ -88,4 +88,26 @@ public function deleteProfile(Request $request){
 
     }
 }
+
+public function getAllUsers(){
+
+    $users=User::with('score','roles')->get();
+    return response()->json(['users'=>$users]);
+}
+
+public function removeUser(Request $request){
+    $validateData=$request->validate([
+        'passwordAdmin' => 'required|string',
+        'userId'=> 'required'
+   ]);  
+   $user = User::where('id',$request->userId)->first();
+   $userIdAdmin=auth()->id();
+   $admin=User::where('id',$userIdAdmin)->first();
+   if(Hash::check($validateData['passwordAdmin'], $admin->password)){
+      $user->destroy($request->userId);
+       return response()->json(["success"=>true]);
+   }
+
+
+}
 }

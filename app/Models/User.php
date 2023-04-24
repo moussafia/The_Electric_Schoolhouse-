@@ -73,7 +73,7 @@ class User extends Authenticatable implements JWTSubject
         return $this->belongsToMany(Blog::class);
     }
     public function score(){
-        return $this->belongsTo(Score::class);
+        return $this->hasOne(Score::class);
     }
     public function commantaire(){
         return $this->belongsToMany(Commantaire::class);

@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategoryController\CategoryController;
 use App\Http\Controllers\CommantaireController;
 use App\Http\Controllers\RepondreController;
+use App\Http\Controllers\RolesAndPermissionsController\RolesAndPermissionsController;
 use App\Http\Controllers\TagsController\TagsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController\UserController;
@@ -53,6 +54,10 @@ Route::get('/help', [ViewController::class,'helpView'])->name('helpView');
 
 Route::post('/updateUser',[UserController::class,'updateProfile'])->name('user.update');
 Route::post('/deleteUser',[UserController::class,'deleteProfile'])->name('user.delete');
+Route::get('/indexUsers',[UserController::class,'getAllUsers'])->name('indexUsers');
+Route::post('/removeUser',[UserController::class,'removeUser'])->name('removeUser');
+
+
 
 Route::group(['middleware' => 'authJWT'],function(){
 Route::post('/blogStore',[BlogsController::class,'store'])->name('blog.store');
@@ -74,6 +79,7 @@ Route::post('/deleteComment/{id}',[CommantaireController::class,'delete'])->name
 Route::post('/createRepondre',[RepondreController::class,'store'])->name('repondre.store');
 Route::post('/deleteRep/{id}',[RepondreController::class,'delete'])->name('repondre.delete');
 
+Route::post('/updateRolesUser',[RolesAndPermissionsController::class,'updateRolesUser'])->name('RolesUser.update');
 
 
 
