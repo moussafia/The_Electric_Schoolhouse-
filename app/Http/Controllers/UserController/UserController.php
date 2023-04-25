@@ -110,4 +110,25 @@ public function removeUser(Request $request){
 
 
 }
+public function searchUsers(Request $request){
+    $query=$request->input('query');
+    $blog=User::where('last_name','like','%'.$query.'%')
+    ->orWhere('first_name','like','%'.$query.'%')->get();
+    return response()->json(['users' => $blog->load('roles','score')]);
+}
+public function filterUsers(Request $request){
+    $roles=$request->role;
+    $user=User::query();
+    if($roles){
+        foreach($roles as $role){
+            $user->whereHas('roles',function($query) use($role){
+                $query->where('roles.name',$role);
+            });
+        }
+    }  
+    $users=$user->orderBy('created_at','desc')->get();
+    return response()->json([
+        'users'=>$users->load('roles','score')
+    ]);
+}
 }

@@ -3,19 +3,19 @@
 @endpush
 
 <!-- Blog modal -->
-<div id="modalEditRoles" tabindex="-1" aria-hidden="true"
+<div id="modalCreateRoles" tabindex="-1" aria-hidden="true"
     class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div class="relative w-full max-w-2xl h-full max-h-full overflow-y-auto">
         <!-- Modal content -->
         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
             <!-- Modal header -->
             <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
-                <p class=" font-small text-gray-900 dark:text-white" style="font-size: 18px">
-                    Edit Roles for <span class="font-semibold underline" id="nameUser"></span>
+                <p class=" font-medium text-gray-900 dark:text-white" style="font-size: 18px">
+                    Crete New Roles
                 </p>
                 <button type="button"
                     class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                    data-modal-hide="modalEditRoles">
+                    data-modal-hide="modalCreateRoles">
                     <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd"
@@ -27,25 +27,30 @@
             </div>
             <!-- Modal body -->
             <div class="p-6 space-y-6">
-                <form id="formEditRolesUsers" method="POST">
+                <form id="formCreateRoles" method="POST">
                     <input type="hidden" name="_token" value='<?php echo csrf_token(); ?>'>
-                    <input type="hidden" name="idUser" id="userId">
                     <div class="py-2">
                         <label for="small-input"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Roles</label>
-                        <select id="RolesUserSelect" name="RolesUser[]" multiple="multiple"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Role Name</label>
+                        <input type="text" id="newRoleName" name="newRoleName" 
+                            class="border border-gray-300 rounded-lg bg-gray-50" style="width: 100%"/>
+                    </div>
+                    <div class="py-2">
+                        <label for="small-input"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Permissions for this role</label>
+                        <select id="Permissions" name="permissions[]" multiple="multiple"
                             class="border border-gray-300 rounded-lg bg-gray-50" style="width: 100%">
-                          @foreach ($roles as $role)
-                            <option value="{{$role->name}}">{{$role->name}}</option>`
+                          @foreach ($permissions as $per)
+                            <option value="{{$per->name}}">{{$per->name}}</option>`
                           @endforeach
                         </select>
                     </div>
                     <div
                         class="flex items-center justify-between p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
-                        <button data-modal-hide="modalEditRoles" type="button"
+                        <button data-modal-hide="modalCreateRoles" type="button"
                             class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
                             Cancel</button>
-                        <button data-modal-hide="modalEditRoles" type="submit"
+                        <button data-modal-hide="modalCreateRoles" type="submit"
                             class="flex justify-center bg-linear-brand my-2 px-6 w-fit text-white py-1.5 rounded-md"
                             id="update-button">Save</button>
                 </form>
@@ -101,4 +106,3 @@
 }
 </style>
 @endpush
-

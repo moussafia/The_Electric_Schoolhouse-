@@ -23,7 +23,7 @@ $(document).ready(function () {
                 Accept: 'application/json'
             },
             success: function(response){   
-                if(response.success){
+                if(response.success){console.log( $('#rep'+idComment).find(`[data-id-rep="${idRep}"]`));
                 $('#rep'+idComment).find(`[data-id-rep="${idRep}"]`).remove();
             }
                 } 

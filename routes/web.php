@@ -56,8 +56,9 @@ Route::post('/updateUser',[UserController::class,'updateProfile'])->name('user.u
 Route::post('/deleteUser',[UserController::class,'deleteProfile'])->name('user.delete');
 Route::get('/indexUsers',[UserController::class,'getAllUsers'])->name('indexUsers');
 Route::post('/removeUser',[UserController::class,'removeUser'])->name('removeUser');
-
-
+Route::get('/searchUsers',[UserController::class,'searchUsers'])->name('searchUsers');
+Route::get('/barSearchUsers',[UserController::class,'searchUsers'])->name('barSearchUsers');
+Route::get('/filterUsers',[UserController::class,'filterUsers'])->name('filterUsers');
 
 Route::group(['middleware' => 'authJWT'],function(){
 Route::post('/blogStore',[BlogsController::class,'store'])->name('blog.store');
@@ -80,6 +81,8 @@ Route::post('/createRepondre',[RepondreController::class,'store'])->name('repond
 Route::post('/deleteRep/{id}',[RepondreController::class,'delete'])->name('repondre.delete');
 
 Route::post('/updateRolesUser',[RolesAndPermissionsController::class,'updateRolesUser'])->name('RolesUser.update');
+Route::post('/CreateRoles',[RolesAndPermissionsController::class,'CreateRoles'])->name('CreateRoles');
+
 
 
 

@@ -6,14 +6,26 @@
 
 <div>
     <div class="search p-8 m-8 bg-white shadow-lg rounded-lg" style="margin: 30px">
-        <form >   
-          <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
-          <div class="relative">
-              <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                  <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+        <form method="get" action="" id="barSearchUsers">   
+                <label for="default-search"
+                class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+              <div class="relative">
+                  <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                      <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none"
+                          stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                      </svg>
+                  </div>
+                  <input type="hidden" name="idUser" id="idUser">
+                  <input type="search" id="default-search"
+                      class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-green-400 focus:border-green-400 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder="Search Users..." required>
+                  <button type="submit" class="text-white absolute right-2.5 bottom-2 btn rounded-lg">Sear<span
+                          class="hidden md:inline">ch</span></button>
               </div>
-              <input type="search" id="default-search" class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-green-400 focus:border-green-400 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search users..." required>
-              <button type="button" class="text-white absolute right-2.5 bottom-2 btn rounded-lg">Search</button>
+          <div id="searchResults" class="absolute bg-white shadow-md rounded-lg z-50"
+          style=" max-height: 40vh;overflow-y: scroll;">           
           </div>
       </form>
       <div class="flex items-center justify-center p-4">
@@ -30,20 +42,39 @@
         <!-- Dropdown menu -->
         <div id="dropdown" class="z-10 hidden w-56 p-3 bg-white rounded-lg shadow dark:bg-gray-700">
           <h6 class="mb-3 text-sm font-bold text-gray-900 dark:text-white text-center">
-            Category
+            Roles
           </h6>
-          <ul class="space-y-2 text-sm" aria-labelledby="dropdownDefault">
-            <li class="flex items-center">
-              <input id="apple" type="checkbox" value=""
-                class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
-      
-              <label for="apple" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
-                Apple (56)
-              </label>
-            </li>
-          </ul>
+          <div class="overflow-y-scroll" style="height: 12vh">
+            <ul class="space-y-2 text-sm" aria-labelledby="rolesDropDownDefault">
+                @foreach ($roles as $role)
+                <li class="flex items-center">
+                    <input id="rolesCheckBox" type="checkbox" value="{{$role->name}}" name="RolesCheck[]"
+                        class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+
+                    <label for="apple" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+                        {{$role->name}}
+                    </label>
+                </li>
+                @endforeach
+            </ul>
+        </div>
         </div>
     </div>
+    </div>
+    <div class="h-auto bg-white shadow-md border-0 border-b-2 rounded-lg"  style="margin: 30px"> 
+      <div class="flex justify-between items-center px-10 bg-white shadow-sm py-4">
+          <div class="ml-6 font-bold uppercase tracking-wide logo-color" style="font-size:20px;text-align:center"><span>Create Roles</span></div>
+          <div class="btn rounded-lg text-white flex justify-end mr-6" style="width: 90px"
+              data-modal-target="modalCreateRoles" data-modal-toggle="modalCreateRoles">
+              <button class="flex items-center gap-2 w-full"><span class="uppercase hidden md:inline">Create</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-white" fill="currentColor"
+                      viewBox="0 0 512 512">
+                      <path
+                          d="M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z" />
+                  </svg>
+              </button>
+          </div>
+      </div>
     </div>
         <div class="relative overflow-x-auto shadow-lg sm:rounded-lg" id="UsersDiv"
         style="margin: 30px;height:80vh" data-url={{route('indexUsers')}}>
@@ -115,8 +146,9 @@
 type="hidden" data-modal-toggle='modalEditRoles'  ></button>
 <button id="btnRemoveUsers" data-modal-target='modalDeleteUsers'
 type="hidden" data-modal-toggle='modalDeleteUsers'></button>
+<button id="searchBtn2" type="hidden"></button>
 
-
+@include('Forms.Admins.createRoles')
 @include('Forms.Admins.formEditRolesUser')
 @include('Forms.Admins.formsdeleteUsers')
 
@@ -163,12 +195,19 @@ type="hidden" data-modal-toggle='modalDeleteUsers'></button>
   outline: 1px dashed rgb(255, 0, 179);
   outline-offset: 3px;
 }
+#searchResults div:hover {
+    background-color: #e9e9ea
+}
 </style>
+
 @endpush
 @push('scripts')
 <script src="{{asset('assets/js/users/getAllusers.js')}}"></script>
 <script src="{{asset('assets/js/users/EditRolesUsers.js')}}"></script>
 <script src="{{asset('assets/js/users/removesUsers.js')}}"></script>
+<script src="{{asset('assets/js/users/searchUsers.js')}}"></script>
+<script src="{{asset('assets/js/users/filterByRoles.js')}}"></script>
+<script src="{{asset('assets/js/users/CreateRoles.js')}}"></script>
 
 @endpush
 

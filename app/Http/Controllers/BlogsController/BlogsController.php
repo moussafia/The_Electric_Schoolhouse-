@@ -357,7 +357,7 @@ public function filterBlog(Request $request){
         });
     }
   
-    $blogs=$blog->orderBy('created_at','desc')->paginate(4);
+    $blogs=$blog->orderBy('created_at','desc')->get();
     return response()->json([
         'blogs'=>$blogs->load('user','paragraph')
     ]);

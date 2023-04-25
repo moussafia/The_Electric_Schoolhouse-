@@ -1,7 +1,9 @@
 <nav class="bg-white shadow-md w-full h-12 px-2  flex justify-between items-center sticky z-10 top-0">
-    <div style="height: 60px; width:60px; overflow:hidden;">
-        <img src="{{asset('assets/image/esh-logo.png')}}" class="" style="height:100%;width:100%">
-    </div>
+    <a href="{{route('dashboardView')}}">
+        <div style="height: 60px; width:60px; overflow:hidden;">
+            <img src="{{asset('assets/image/esh-logo.png')}}" class="" style="height:100%;width:100%">
+        </div>
+    </a>
     <!--drop down --->
     <div class="rounded-full h-75" style="margin-right:40px;cursor:pointer" id="dropdownInformationButton"
         data-dropdown-toggle="dropdownInformation">

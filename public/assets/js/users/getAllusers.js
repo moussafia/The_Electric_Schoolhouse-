@@ -4,7 +4,6 @@ $(document).ready(function () {
         type: "GET",
         url: url,
         success: function (response) {
-            console.log(response.users);
             var html='';
             var baseUrl=window.location.origin+'/assets/image/user/';
             $.each(response.users, function (index, users) { 
