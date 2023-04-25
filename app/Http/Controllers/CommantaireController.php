@@ -31,14 +31,14 @@ class CommantaireController extends Controller
     }
     
     public function delete(Request $request,$id){
-        if(auth()->id()===$request->idUserCreteComment){
+        if(auth()->id()==$request->idUserCreteComment){
             Commantaire::where('id',$id)->delete();
             return response()->json([
                 'success'=>true
             ]);
         }
         return response()->json([
-                'success'=>true
+                'success'=>false
             ]);
     }
 }

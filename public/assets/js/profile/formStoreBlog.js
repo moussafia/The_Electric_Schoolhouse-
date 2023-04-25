@@ -87,7 +87,6 @@ $(function(){
           },
           success: function(response){
             var blog=response.blog;
-              console.log(blog);
               $('#formBlogs')[0].reset();
               const categoryIds=blog.categories.map(cat=>cat.categoryId).join(',');
               const TagsIds=blog.tags.map(tag=>tag.tagId).join(',');
@@ -133,14 +132,19 @@ $(function(){
 function leadAllCategoryAndTags(){
   $.get("/getAllCategory",function (category) {
     $('#categorySelect').empty();
-    $.each(category, function (index, category) {
+    $('#categorySelectEdit').empty();
+    $.each(category, function (index, category) {console.log(category.type);
       $('#categorySelect').append('<option value="' + category.id + '">' + category.type + '</option>');
+      $('#categorySelectEdit').append('<option value="' + category.id + '">' + category.type + '</option>');
     });
     });
   $.get("/getAllTags", function (tags) {
     $('#tagSelect').empty();
-    $.each(tags, function (index, tags) {console.log(tags);
+    $('#tagSelectEdit').empty();
+    $.each(tags, function (index, tags) {
       $('#tagSelect').append('<option value="' + tags.id + '">' + tags.tag + '</option>');
+      $('#tagSelectEdit').append('<option value="' + tags.id + '">' + tags.tag + '</option>');
+
     });
     });
 }

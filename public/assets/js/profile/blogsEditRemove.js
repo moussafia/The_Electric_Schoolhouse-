@@ -62,6 +62,7 @@ $("#categorySelectEdit").select2({
   
 //remplir form Edit
   function RemplirForm(){
+   
     const btnEdit=$('#modalEditBlog');
     const title=btnEdit.attr('data-title');
     const blogId=btnEdit.attr('data-blog-id');
@@ -70,6 +71,7 @@ $("#categorySelectEdit").select2({
     const paragraphs=btnEdit.attr('data-paragraphs').split(',|-split-|,');
     $('#blogId').val(blogId);
     $('#titleEdit').val(title);
+    console.log(categories);
     $('#categorySelectEdit').val(categories).trigger('change');
     $('#tagSelectEdit').val(tags).trigger('change');
     let textarea=$('#pargraphFormsEdit');
@@ -137,7 +139,8 @@ $("#categorySelectEdit").select2({
                 const categoryIds=blog.categories.map(cat=>cat.categoryId).join(',');
                 const TagsIds=blog.tags.map(tag=>tag.tagId).join(',');
                 const paragraphs=blog.paragraphs.map(para=>para.paragraph).join(',|-split-|,');
-                const para="`"+paragraphs+"`"
+                const para="`"+paragraphs+"`";
+                leadAllCategoryAndTags()
                 //update page with data
                 html=`<div class="card rounded-md" data-blog-id='${id}'
                 style="background-image: url('assets/image/Blogs/${blog.image}');
@@ -159,7 +162,6 @@ $("#categorySelectEdit").select2({
                document.getElementById('modalRemoveBlog').click();">delete</button>
               </button>
                </div> </div>`;
-
                $('#cardBlogs').find(`[data-blog-id="${id}"]`).replaceWith(html);
             },
             error: function(xhr,status,error){

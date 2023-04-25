@@ -140,7 +140,8 @@ $(document).ready(function () {
                         },
                         success: function (response) {
                             var rep=response.rep;
-                            var html2=`<div class="repondre border-t-2" style="padding-left:80px;padding-top:20px">
+                            var html2=`<div class="repondre border-t-2" style="padding-left:80px;padding-top:20px"
+                            data-id-rep="${rep.id}">
                                 <div class="flex items-center gap-4 border-b-2 p-3" style="width: 300px">
                                             <div style="height: 35px; width:35px; overflow:hidden; border-radius:50%;">
                                                 <img src="${urlimg}${rep.user.photo}" style="width:100%;">

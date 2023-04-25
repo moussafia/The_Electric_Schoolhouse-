@@ -362,5 +362,10 @@ public function filterBlog(Request $request){
         'blogs'=>$blogs->load('user','paragraph')
     ]);
 }
-
+public function statisticBlogs(){
+    $nombreBlogs=Blog::count();
+    return response()->json([
+        "nombreBlogs"=>$nombreBlogs
+    ]);
+}
 }

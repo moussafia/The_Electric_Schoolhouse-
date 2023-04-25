@@ -59,6 +59,8 @@ Route::post('/removeUser',[UserController::class,'removeUser'])->name('removeUse
 Route::get('/searchUsers',[UserController::class,'searchUsers'])->name('searchUsers');
 Route::get('/barSearchUsers',[UserController::class,'searchUsers'])->name('barSearchUsers');
 Route::get('/filterUsers',[UserController::class,'filterUsers'])->name('filterUsers');
+Route::get('/statisticUsers',[UserController::class,'statisticUsers'])->name('statisticUsers');
+
 
 Route::group(['middleware' => 'authJWT'],function(){
 Route::post('/blogStore',[BlogsController::class,'store'])->name('blog.store');
@@ -69,6 +71,8 @@ Route::get('/indexBlog',[BlogsController::class,'index'])->name('indexBlog');
 Route::get('/searchBlogs',[BlogsController::class,'searchBlogs'])->name('searchBlogs');
 Route::get('/barSearchBlogs',[BlogsController::class,'searchBlogs'])->name('barSearchBlogs');
 Route::get('/filterBlog',[BlogsController::class,'filterBlog'])->name('filterBlog');
+Route::get('/statisticBlogs',[BlogsController::class,'statisticBlogs'])->name('statisticBlogs');
+
 
 Route::get('/getAllCategory',[CategoryController::class,'getAllCategory'])->name('getAllCategory');
 Route::get('/getAllTags',[TagsController::class,'getAllTags'])->name('getAllTags');

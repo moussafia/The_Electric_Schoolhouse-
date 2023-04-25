@@ -131,4 +131,10 @@ public function filterUsers(Request $request){
         'users'=>$users->load('roles','score')
     ]);
 }
+public function statisticUsers(){
+    $users=User::count();
+    return response()->json([
+       'nombreUsers' =>$users
+    ]);
+}
 }

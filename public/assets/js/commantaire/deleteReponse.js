@@ -22,8 +22,8 @@ $(document).ready(function () {
                 'Authorization': 'Bearer ' + jwt_token,
                 Accept: 'application/json'
             },
-            success: function(response){   
-                if(response.success){console.log( $('#rep'+idComment).find(`[data-id-rep="${idRep}"]`));
+            success: function(response){
+                if(response.success){
                 $('#rep'+idComment).find(`[data-id-rep="${idRep}"]`).remove();
             }
                 } 

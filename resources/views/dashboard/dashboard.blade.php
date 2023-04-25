@@ -18,7 +18,7 @@
     <h1 class="font-bold bg-white shadow-sm py-4 uppercase tracking-wide logo-color" style="padding-left: 30px;
     font-size:28px;text-align:center;marging-buttom:30px">Statistic</h1>
     <div class="flex m-5" style="justify-content: space-around;padding:40px;flex-wrap:wrap" >
-        <div class="containerCards rounded-lg">
+        <div class="containerCards rounded-lg" id="statisticBlogs" data-url="{{route('statisticBlogs')}}">
             <div class="cardsSatistique flex flex-wrap p-3 items-center rounded-lg" 
             style="color: rgb(88, 86, 86)">
                 <div class="flex flex-col justify-center items-center">
@@ -34,7 +34,7 @@
                     font-size:40px;
                     font-weight:bold;
                     right:20px;
-                    top:50px">30</p>
+                    top:50px" id="affichageNombreBlogs"></p>
                     <p class="fixed" style="color: rgb(88, 86, 86);
                     font-size:20px;
                     font-weight:bold;
@@ -45,7 +45,7 @@
         </div>
         <div class="containerCards rounded-lg">
             <div class="cardsSatistique flex flex-wrap p-3 items-center rounded-lg" 
-            style="color: rgb(88, 86, 86)">
+            style="color: rgb(88, 86, 86)" id="statisticUsers" data-url="statisticUsers">
                 <div class="flex flex-col justify-center items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" 
                     class="w-16 h-16">
@@ -59,7 +59,7 @@
                     font-size:40px;
                     font-weight:bold;
                     right:20px;
-                    top:50px">30</p>
+                    top:50px" id="affichageNombreUsers"></p>
                     <p class="fixed" style="color: rgb(88, 86, 86);
                     font-size:20px;
                     font-weight:bold;
@@ -87,45 +87,10 @@
 .containerCards{
    transform: rotate(5deg);
    background:linear-gradient(to right,#02a1dbda,#a8cf45ce) !important;
-   animation: gradientAnimation 3s ease-in-out infinite;
-   transition: all 1s ease;
    margin: 20px
 
 }
-@-webkit-keyframes gradientAnimation {
-  0% {
-   background:linear-gradient(to right,#02a1dbda,#a8cf45ce) !important;
-  }
-  25% {
-   background:linear-gradient(to bottom,#02a1dbda,#a8cf45ce) !important;
-  }
-  50% {
-   background:linear-gradient(to left,#02a1dbda,#a8cf45ce) !important;
-  }
-  75% {
-   background:linear-gradient(to top,#02a1dbda,#a8cf45ce) !important;
-  }
-  100% {
-   background:linear-gradient(to right,#02a1dbda,#a8cf45ce) !important;
-  }
-}
-@keyframes gradientAnimation {
-  0% {
-   background:linear-gradient(to right,#02a1dbda,#a8cf45ce) !important;
-  }
-  25% {
-   background:linear-gradient(to bottom,#02a1dbda,#a8cf45ce) !important;
-  }
-  50% {
-   background:linear-gradient(to left,#02a1dbda,#a8cf45ce) !important;
-  }
-  75% {
-   background:linear-gradient(to top,#02a1dbda,#a8cf45ce) !important;
-  }
-  100% {
-   background:linear-gradient(to right,#02a1dbda,#a8cf45ce) !important;
-  }
-}
+
 .cardsSatistique{
     transform: rotate(-5deg);
     background-color: #f3e9e9ee;
@@ -139,8 +104,9 @@
 .cardsSatistique::after {
     content: '';
 }
-
-
 </style>
+@endpush
+@push('scripts')
+<script src="{{asset('assets/js/statistic/statistic.js')}}"></script>
 @endpush
 @endsection
