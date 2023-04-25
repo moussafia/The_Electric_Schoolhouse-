@@ -4,8 +4,10 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Blog;
+use App\Models\Quizz;
 use App\Models\Score;
 use App\Models\Commantaire;
+use App\Models\PassageQuizz;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Tymon\JWTAuth\Contracts\JWTSubject;
@@ -77,5 +79,11 @@ class User extends Authenticatable implements JWTSubject
     }
     public function commantaire(){
         return $this->belongsToMany(Commantaire::class);
+    }
+    public function quizz(){
+        return $this->hasMany(Quizz::class);
+    }
+    public function passageQuizz(){
+        return $this->belongsToMany(PassageQuizz::class);
     }
 }

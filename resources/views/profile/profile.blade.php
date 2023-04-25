@@ -1,5 +1,5 @@
 @extends('layout.layout')
-@section('title','Dashboard')
+@section('title','profile')
 @section('content')
 @include('layoutAuth.sidebar')
 @include('layoutAuth.navbar')

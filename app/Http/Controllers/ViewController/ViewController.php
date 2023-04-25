@@ -107,12 +107,12 @@ public function helpView(Request $request){
    }
    return redirect()->route('logIn');
 }
-// public function documentationView(Request $request){
-//    $token=$request->cookie('jwt_token');
-//    if($token){
-//       $user=JWTAuth::setToken($token)->authenticate();
-//    return view('Documentation.doc',['user' => $user]);
-//    }
-//    return redirect()->route('logIn');
-// }
+public function QuizzView(Request $request){
+   $token=$request->cookie('jwt_token');
+   if($token){
+      $user=JWTAuth::setToken($token)->authenticate();
+   return view('Quizz.Quizz',['user' => $user]);
+   }
+   return redirect()->route('logIn');
+}
 }

@@ -51,6 +51,8 @@ Route::get('/articles', [ViewController::class,'ArticlesView'])->name('ArticlesV
 Route::get('/readArticle/{id}', [ViewController::class,'readArticle'])->name('readArticle');
 Route::get('/users', [ViewController::class,'usersView'])->name('users.view');
 Route::get('/help', [ViewController::class,'helpView'])->name('helpView');
+Route::get('/Quizz', [ViewController::class,'QuizzView'])->name('Quizz.view');
+
 
 Route::post('/updateUser',[UserController::class,'updateProfile'])->name('user.update');
 Route::post('/deleteUser',[UserController::class,'deleteProfile'])->name('user.delete');
