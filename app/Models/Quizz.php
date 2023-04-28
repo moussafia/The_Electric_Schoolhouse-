@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\PassageQuizz;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Quizz extends Model
 {
@@ -19,5 +20,8 @@ class Quizz extends Model
     }
     public function passage(){
         return $this->belongsToMany(PassageQuizz::class);
+    }
+    public function question(){
+        return $this->hasMany(Question::class);
     }
 }

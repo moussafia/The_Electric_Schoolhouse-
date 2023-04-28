@@ -64,7 +64,8 @@
     <div class="flex justify-between items-center px-10 mb-7 bg-white shadow-sm py-4">
         <div class="ml-6 font-bold uppercase tracking-wide logo-color" style="font-size:20px;text-align:center"><span>My
                 QUIZZ</span></div>
-        <div class="btn rounded-lg text-white flex justify-end mr-6" style="width: 90px">
+        <div class="btn rounded-lg text-white flex justify-end mr-6" style="width: 90px"
+        data-modal-target="modalCreateQuizz" data-modal-toggle="modalCreateQuizz">
             <button class="flex items-center gap-2 w-full"><span class="uppercase hidden md:inline">Add</span>
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-white" fill="currentColor"
                     viewBox="0 0 512 512">
@@ -119,12 +120,16 @@
 type="hidden" data-modal-toggle='modalEditDeleteBlogs' onclick="RemplirForm()"></button>
 <button id="modalRemoveBlog" data-modal-target='modalDeleteBlogs'
 type="hidden" data-modal-toggle='modalDeleteBlogs' onclick="remplirFormEdit()"></button>
+
 @include('Forms.blogs.blogsForm')
 
 @include('Forms.blogs.blogsEditRemove')
 
 
 @include('Forms.user.formUpdateDelete')
+
+@include('Forms.quizz.Createquizz')
+
 
 
 @include('layoutAuth.footer')

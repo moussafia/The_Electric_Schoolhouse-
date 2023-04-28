@@ -3,14 +3,15 @@
 namespace App\Http\Controllers\ViewController;
 
 use App\Models\Blog;
-use App\Models\Score;
 use App\Models\Tags;
+use App\Models\Quizz;
+use App\Models\Score;
 use App\Models\Category;
 use Illuminate\Http\Request;
-use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Http\Controllers\Controller;
+use Spatie\Permission\Models\Permission;
 use Symfony\Component\HttpFoundation\Cookie;
 
 class ViewController extends Controller
@@ -112,6 +113,15 @@ public function QuizzView(Request $request){
    if($token){
       $user=JWTAuth::setToken($token)->authenticate();
    return view('Quizz.Quizz',['user' => $user]);
+   }
+   return redirect()->route('logIn');
+}
+public function passageQuizz(Request $request,$id){
+   $token=$request->cookie('jwt_token');
+   if($token){
+      $user=JWTAuth::setToken($token)->authenticate();
+      $quizz=Quizz::where('id',$id)->with('user','question.answer')->get();
+   return view('Quizz.passageQuizz',['user' => $user, 'quizz' =>$quizz]);
    }
    return redirect()->route('logIn');
 }

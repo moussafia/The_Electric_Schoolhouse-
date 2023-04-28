@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\CategoryController\CategoryController;
 use App\Http\Controllers\CommantaireController;
+use App\Http\Controllers\PassageQuizzController;
+use App\Http\Controllers\QuizzController;
 use App\Http\Controllers\RepondreController;
 use App\Http\Controllers\RolesAndPermissionsController\RolesAndPermissionsController;
 use App\Http\Controllers\TagsController\TagsController;
@@ -52,6 +54,7 @@ Route::get('/readArticle/{id}', [ViewController::class,'readArticle'])->name('re
 Route::get('/users', [ViewController::class,'usersView'])->name('users.view');
 Route::get('/help', [ViewController::class,'helpView'])->name('helpView');
 Route::get('/Quizz', [ViewController::class,'QuizzView'])->name('Quizz.view');
+Route::get('/passageQuizz/{id}', [ViewController::class,'passageQuizz'])->name('passageQuizz');
 
 
 Route::post('/updateUser',[UserController::class,'updateProfile'])->name('user.update');
@@ -90,7 +93,10 @@ Route::post('/updateRolesUser',[RolesAndPermissionsController::class,'updateRole
 Route::post('/CreateRoles',[RolesAndPermissionsController::class,'CreateRoles'])->name('CreateRoles');
 
 
+Route::post('/InsertQuizz',[QuizzController::class,'InsertQuizz'])->name('InsertQuizz');
+Route::get('/index',[QuizzController::class,'index'])->name('quizz.index');
 
+Route::post('/sendreponseUser',[PassageQuizzController::class,'sendreponseUser'])->name('sendreponseUser');
 
 });
 
