@@ -61,9 +61,11 @@ class PassageQuizzController extends Controller
         $passageQuizze->resultat=$score;
         $passageQuizze->user_id=auth()->id();
         $passageQuizze->quizz_id=$quizzId;
+        // $passageQuizze->save();
         return response()->json([
             'score'=>$score
         ]);
     }
+    
    
 }

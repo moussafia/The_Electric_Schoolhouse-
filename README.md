@@ -23,7 +23,7 @@ Super Admins:
 
 * Tant que admin je me peux me connecter
 * Tant que admin je peux visualiser le tableau de bord qui contient les statistiques des articles aussi que l'affichage du nom de profil connecté (session).
-* Tant qu'administrateur je peux gérer (odifier/supprimer) des profils.
+* Tant qu'administrateur je peux gérer (modifier/supprimer) des profils.
 * Tant qu'administrateur je peux modifier mes données (modification profil)
 
 > Users:

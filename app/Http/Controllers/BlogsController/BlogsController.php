@@ -67,7 +67,6 @@ public function store(Request $request)
         'paragraph.*' => 'required|string|max:2000',
     ];
     $validateData=$request->validate($rules);
-    
     $paragraphs = $validateData['paragraph'];
     $category = $validateData['categories'];
     $tag = $validateData['tag'];

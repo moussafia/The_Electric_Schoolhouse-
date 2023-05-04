@@ -89,7 +89,7 @@
                             Cancel</button>
                         <button data-modal-hide="modalAddArticles" type="submit"
                             class="flex justify-center bg-linear-brand my-2 px-6 w-fit text-white py-1.5 rounded-md"
-                            id="update-button">ADD</button>
+                            >ADD</button>
                 </form>
             </div>
         </div>

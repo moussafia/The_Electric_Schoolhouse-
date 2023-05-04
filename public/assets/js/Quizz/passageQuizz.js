@@ -3,7 +3,9 @@ const audio = document.getElementById('audio');
 const rules=document.getElementById('rules');
 const passageQuizz=document.getElementById('passageQuizzDiv')
 const countoerDown=document.getElementById('countoerDown')
-console.log(rules);
+const BtnnextQuestion=document.getElementById('nextQuestion');
+const resultatAnswerUser=document.getElementById('pageResult');
+
 let count = 2;
 let interval = 1000;
 function startQuizz(){
@@ -43,7 +45,7 @@ function startQuizz(){
   setTimeout(startCountdown, 1000);
 }
 const data = $('#QuizzData').data('quizz');
-console.log(data);
+
 let answerUser = [];
 answerUser.push({idQuizz:data[0].id})
 answerUser.push({idQuestion:[],idAnswers:[]})
@@ -69,7 +71,9 @@ $('.checkBox').on('change', function() {
   const answerId = $(this).data('answerid');
   const isChecked = $(this).prop('checked');
   const questionId=question[0].id
+
   const userAnswerIndex=answerUser.findIndex(answer=>answer.idQuestion===questionId)
+
   if(isChecked){
     if(userAnswerIndex!==-1){
       answerUser[userAnswerIndex].idAnswers.push(answerId);
@@ -77,13 +81,24 @@ $('.checkBox').on('change', function() {
       answerUser.push({idQuestion:questionId,idAnswers:[answerId]})
     }
   }else{
-    answerUser = answerUser[userAnswerIndex].idAnswers.filter(answerid => answerid !== answerId);
+    const answerIndex = answerUser[userAnswerIndex].idAnswers.findIndex(id => id === answerId);
+    if (answerIndex !== -1) {
+      answerUser[userAnswerIndex].idAnswers.splice(answerIndex, 1);
+    }
   }
-  answerUser.splice(1,1)
+console.log(answerUser);
+  const hasAnswer = answerUser.some(answer => answer.idQuestion === questionId  && answer.idAnswers.length > 0 );
+  
+  if (hasAnswer) {
+    BtnnextQuestion.classList.remove('hidden');
+  } else {
+    BtnnextQuestion.classList.add('hidden');
+  }
 })
 let index = 0;
 
 function nextQuestion() {
+  BtnnextQuestion.classList.add('hidden');
   index++;
   if (index < question.length) {
     questionArea.innerHTML = question[index].question;
@@ -105,7 +120,9 @@ function nextQuestion() {
       const answerId = $(this).data('answerid');
       const isChecked = $(this).prop('checked');
       const questionId=question[index].id
+    
       const userAnswerIndex=answerUser.findIndex(answer=>answer.idQuestion===questionId)
+    
       if(isChecked){
         if(userAnswerIndex!==-1){
           answerUser[userAnswerIndex].idAnswers.push(answerId);
@@ -113,12 +130,24 @@ function nextQuestion() {
           answerUser.push({idQuestion:questionId,idAnswers:[answerId]})
         }
       }else{
-        answerUser = answerUser[userAnswerIndex].idAnswers.filter(answerid => answerid !== answerId);
+        const answerIndex = answerUser[userAnswerIndex].idAnswers.findIndex(id => id === answerId);
+        if (answerIndex !== -1) {
+          answerUser[userAnswerIndex].idAnswers.splice(answerIndex, 1);
+        }
       }
-      answerUser
-})
+    console.log(answerUser);
+      const hasAnswer = answerUser.some(answer => answer.idQuestion === questionId  && answer.idAnswers.length > 0 );
+      
+      if (hasAnswer) {
+        BtnnextQuestion.classList.remove('hidden');
+      } else {
+        BtnnextQuestion.classList.add('hidden');
+      }
+    })
   }else{
-    sendData()
+    sendData();
+    resultatAnswerUser.classList.remove('hidden');
+    passageQuizz.classList.add('hidden');
   }
 
 }
@@ -137,7 +166,7 @@ $.ajax({
     'X-CSRF-TOKEN': csrf_token
   },
   success: function (response) {
-    console.log(response.score);
+    $('#scoreUser').text(`${response.score}/${answerUser.length-2}`);
   }
 });
 

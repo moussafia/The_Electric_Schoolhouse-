@@ -59,6 +59,7 @@ aria-label="Sidebar">
                 <span class="flex-1 ml-3 whitespace-nowrap">Articles</span>
             </a>
         </li>
+        {{-- @can('updateUsers') --}}
         <li class="{{request()->is('users')? 'navigation-decore' : ''}}">
             <a href="{{route('users.view')}}"
                 class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white dark:hover:bg-gray-700">
@@ -71,6 +72,8 @@ aria-label="Sidebar">
                 <span class="flex-1 ml-3 whitespace-nowrap">Users</span>
             </a>
         </li>
+        {{-- @endcan --}}
+        {{-- @can('VoirAllQuizz') --}}
         <li class="{{request()->is('Quizz')? 'navigation-decore' : ''}}">
             <a href="{{route('Quizz.view')}}"
                 class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white dark:hover:bg-gray-700">

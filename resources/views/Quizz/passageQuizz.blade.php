@@ -11,21 +11,20 @@
         <div id="rules" class="flex flex-col items-center justify-center">
             <div class="rulesText rounded-lg shadow-lg flex flex-col justify-center items-center" style="padding: 30px;
             height:100%;width:100%">
-            <p class="text-white uppercase underline"
-            style="font-size: 26px;font-weight:600">Some Rules HERE:</p><br>
+                <p class="text-white uppercase underline" style="font-size: 26px;font-weight:600">Some Rules HERE:</p>
+                <br>
                 <ul class="numbered-list">
-                    <li class="text-white" 
-                    style="font-size: 20px;font-weight:500">Vous n'avez qu'une seule chance pour passer ce quizz.</li>
-                    <li class="text-white" 
-                    style="font-size: 20px;font-weight:500">Une fois que vous avez quitté la partie, vous n'avez pas le droit de repasser.</li>
-                    <li class="text-white" 
-                    style="font-size: 20px;font-weight:500">Bonne chance !</li>
+                    <li class="text-white" style="font-size: 20px;font-weight:500">Vous n'avez qu'une seule chance pour
+                        passer ce quizz.</li>
+                    <li class="text-white" style="font-size: 20px;font-weight:500">Une fois que vous avez quitté la
+                        partie, vous n'avez pas le droit de repasser.</li>
+                    <li class="text-white" style="font-size: 20px;font-weight:500">Bonne chance !</li>
                 </ul>
             </div>
             <div class="flex justify-center">
                 <button class="w-96 h-12 px-10 btn text-white border-primary md:border-2 hover:bg-primary 
-                hover:text-blue-400 transition ease-out duration-500 uppercase rounded-lg"
-                onclick="startQuizz()">Get started</button>
+                hover:text-blue-400 transition ease-out duration-500 uppercase rounded-lg" onclick="startQuizz()">Get
+                    started</button>
             </div>
         </div>
         <p class="timer" id="timer"></p>
@@ -33,29 +32,42 @@
     </div>
     <div class="hidden" id="passageQuizzDiv">
         <div class=" pageQuizz flex flex-col justify-center items-center">
-            <div class="question flex justify-center items-center shadow-lg rounded-lg tetx-center" style="margin-top:20px">
+            <div class="question flex justify-center items-center shadow-lg rounded-lg tetx-center"
+                style="margin-top:20px">
                 <p id="questionArea" class="text-white text-center indent-4" style="font-size: 17px;
             font-weight:500;
             font-family:Arial, Helvetica, sans-serif;"></p>
             </div>
             <div id="answers" class="answers">
-                
-               
-                
-               
+
+
+
+
             </div>
-            <div class="fixed bottom-0 justify-end px-10 " style="margin-top: 10px;right:20px">
-                <button class="absolute bottom-0 right-0 inline-flex items-center justify-center p-0.5 mb-2 mr-2 
+            <div id="nextQuestion" class="hidden fixed bottom-0 justify-end px-10 " style="margin-top: 10px;right:20px">
+                <button class="absolute  bottom-0 right-0 inline-flex items-center justify-center p-0.5 mb-2 mr-2 
                 overflow-hidden text-sm font-medium text-slate-400 rounded-lg group bg-gradient-to-br 
                 from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600
-                 hover:text-white" id="nextQuestion" onclick="nextQuestion()"> 
+                 hover:text-white" id="nextQuestion" onclick="nextQuestion()">
                     <span
                         class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-primary dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                         Next</span></button>
             </div>
         </div>
-        <div id="resultat">
-            
+    </div>
+    <div id="pageResult" class="hidden">
+        <div id="resultat" class="flex justify-center items-center bg-white rounded-lg shadow-lg"
+        style="min-width: 700px;height:500px;">
+            <div class="flex flex-col items-center justify-center"
+            style="padding: 30px;color: rgb(88, 86, 86)">
+                <div class="relative top-0"><p class="underline"
+                    style="font-size: 40px;font-weight:600"> Votre Resultat est:</p>
+                </div>
+                    <div>
+                        <p id="scoreUser" class="text-center"
+                        style="font-size: 50px;font-weight:700"></p>
+                    </div>                 
+            </div>
         </div>
     </div>
 </div>
@@ -86,13 +98,15 @@
     background-color: #462c69;
     padding: 30px;
 }
+
 #answers {
     row-gap: 30px;
-    column-gap:60px;
+    column-gap: 60px;
     margin-top: 30px;
     display: grid;
-    grid-template-columns: repeat(12,1fr);
-} 
+    grid-template-columns: repeat(12, 1fr);
+}
+
 .answer {
     background-color: #462c69;
     padding: 30px;
@@ -111,7 +125,8 @@
     outline: 2px solid #462c69;
     outline-offset: 2px;
 }
-.rulesText{
+
+.rulesText {
     background-color: #462c69;
     display: flex;
     justify-content: center;
@@ -125,16 +140,18 @@
     font-weight: 600;
     color: white;
 }
-  /* Define a counter for the list items */
-  .numbered-list {
-    counter-reset: my-counter;
-  }
 
-  /* Style the list items with numbered bullets */
-  .numbered-list li::before {
+/* Define a counter for the list items */
+.numbered-list {
+    counter-reset: my-counter;
+}
+
+/* Style the list items with numbered bullets */
+.numbered-list li::before {
     counter-increment: my-counter;
     content: counter(my-counter) ". ";
-  }
+}
+
 .start-effect {
     background: -webkit-linear-gradient(#02a1db9e, #a8cf45a8);
     -webkit-background-clip: text;

@@ -49,7 +49,6 @@ function add_parag(){
        </button></u>
       <textarea name="paragraph[]" class="paragraphs w-full block rounded-lg h-56 overflow-x-hidden
        overflow-y-auto order border-gray-300 bg-gray-50"></textarea>`
-console.log($lastInput.val());
   $lastInput.after($sectionParagraph)
 }
 
@@ -58,8 +57,9 @@ function delete_parag(idPragraph){
 }
 // submit form add blog
 $(function(){
-  $('#formBlogs').submit(function(event){      
+  $('#formBlogs').on('submit',function(event){      
       event.preventDefault();
+     
       var formData = new FormData();
       formData.append('title', $('#title').val());
   formData.append("image", document.getElementById("image").files[0]);

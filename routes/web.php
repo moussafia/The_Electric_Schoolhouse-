@@ -53,9 +53,9 @@ Route::get('/articles', [ViewController::class,'ArticlesView'])->name('ArticlesV
 Route::get('/readArticle/{id}', [ViewController::class,'readArticle'])->name('readArticle');
 Route::get('/users', [ViewController::class,'usersView'])->name('users.view');
 Route::get('/help', [ViewController::class,'helpView'])->name('helpView');
+
 Route::get('/Quizz', [ViewController::class,'QuizzView'])->name('Quizz.view');
 Route::get('/passageQuizz/{id}', [ViewController::class,'passageQuizz'])->name('passageQuizz');
-
 
 Route::post('/updateUser',[UserController::class,'updateProfile'])->name('user.update');
 Route::post('/deleteUser',[UserController::class,'deleteProfile'])->name('user.delete');
@@ -68,9 +68,11 @@ Route::get('/statisticUsers',[UserController::class,'statisticUsers'])->name('st
 
 
 Route::group(['middleware' => 'authJWT'],function(){
+
 Route::post('/blogStore',[BlogsController::class,'store'])->name('blog.store');
 Route::post('/blogupdate/{id}',[BlogsController::class,'updateBlog'])->name('blog.update');
 Route::post('/blogDelete/{id}',[BlogsController::class,'deleteBlog'])->name('blog.delete');
+ 
 Route::get('/showBlogs',[BlogsController::class,'showMyBlogs'])->name('showBlogs');
 Route::get('/indexBlog',[BlogsController::class,'index'])->name('indexBlog');
 Route::get('/searchBlogs',[BlogsController::class,'searchBlogs'])->name('searchBlogs');
@@ -92,9 +94,9 @@ Route::post('/deleteRep/{id}',[RepondreController::class,'delete'])->name('repon
 Route::post('/updateRolesUser',[RolesAndPermissionsController::class,'updateRolesUser'])->name('RolesUser.update');
 Route::post('/CreateRoles',[RolesAndPermissionsController::class,'CreateRoles'])->name('CreateRoles');
 
-
 Route::post('/InsertQuizz',[QuizzController::class,'InsertQuizz'])->name('InsertQuizz');
 Route::get('/index',[QuizzController::class,'index'])->name('quizz.index');
+Route::get('/getMyQuizz',[QuizzController::class,'getMyQuizz'])->name('getMyQuizz');
 
 Route::post('/sendreponseUser',[PassageQuizzController::class,'sendreponseUser'])->name('sendreponseUser');
 

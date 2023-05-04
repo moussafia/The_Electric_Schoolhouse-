@@ -13,7 +13,6 @@ $(document).ready(function () {
             });
             Quizz.push({ question: question, answers: answers });
         });
-        console.log(Quizz); 
         var csrf_token = $('meta[name="csrf-token"]').attr('content');
         $.ajax({
             url: "/InsertQuizz",
@@ -23,7 +22,19 @@ $(document).ready(function () {
                 'X-CSRF-TOKEN': csrf_token
             },
             success: function(response) {
-              console.log(response);
+              let quizz=response.quizz;       
+                let   html=`
+                   <div class="card rounded-md"
+                      style="background-image: url('assets/image/Quizz/${quizz.image}');
+                      background-size: cover; background-position: center;"">
+                      <div class="content">
+                          <h2 class="title">${quizz.name.slice(0,22)+'...'}</h2>
+                          <p class="copy">${quizz.created_at}<br>
+                          ${quizz.user.first_name} ${quizz.user.last_name}</p>
+                      </div>
+                  </div>`
+              $('#myQuizzCreted').prepend(html);
+              $('#score').html(response.score)
             },
             error: function(xhr) {
               console.log(xhr.responseText);

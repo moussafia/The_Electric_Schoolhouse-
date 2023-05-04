@@ -22,6 +22,11 @@ class RolesAndPermissionsSeeders extends Seeder
           Permission::create(['name' => 'deleteAdmins']);
           Permission::create(['name' => 'CUDBlogs']);
           Permission::create(['name' => 'CUDQuizz']);
+          Permission::create(['name' => 'passerQuizz']);
+          Permission::create(['name' => 'VoirAllQuizz']);
+
+
+
   
           // Create the roles
           $superAdminRole = Role::create(['name' => 'SuperAdmin']);
@@ -29,8 +34,8 @@ class RolesAndPermissionsSeeders extends Seeder
           $usersRole = Role::create(['name' => 'User']);
 
           $superAdminRole->syncPermissions(['updateUsers','deleteUsers','deleteAdmins']);
-          $adminRole->syncPermissions(['updateUsers','deleteUsers']);
-          $usersRole->syncPermissions(['CUDBlogs','CUDQuizz']);
+          $adminRole->syncPermissions(['updateUsers','deleteUsers',]);
+          $usersRole->syncPermissions(['CUDBlogs','CUDQuizz','passerQuizz','VoirAllQuizz']);
 
     }
 }

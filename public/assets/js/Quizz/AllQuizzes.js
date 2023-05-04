@@ -12,7 +12,8 @@ $(document).ready(function(){
         $.each(quizz, function (index, quizz) { 
              html+=`
              <div class="card rounded-md"
-                style="background-image: url('assets/image/Quizz/${quizz.image}'">
+                style="background-image: url('assets/image/Quizz/${quizz.image}');
+                background-size: cover; background-position: center;"">
                 <div class="content">
                     <h2 class="title">${quizz.name.slice(0,22)+'...'}</h2>
                     <p class="copy">${quizz.created_at}<br>

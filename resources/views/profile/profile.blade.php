@@ -75,40 +75,8 @@
             </button>
         </div>
     </div>
-    <main class="page-content" >
-        <div class="card rounded-md"
-            style="background-image: url(https://images.unsplash.com/photo-1517021897933-0e0319cfbc28?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ);">
-            <div class="content">
-                <h2 class="title"></h2>
-                <p class="copy">Check out all of these gorgeous mountain trips with beautiful views of, you guessed
-                    it, the mountains</p>
-                <button class="btn">View Trips</button>
-            </div>
-        </div>
-        <div class="card rounded-md"
-            style="background-image: url(https://images.unsplash.com/photo-1533903345306-15d1c30952de?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ);">
-            <div class="content">
-                <h2 class="title">To The Beach</h2>
-                <p class="copy">Plan your next beach trip with these fabulous destinations</p>
-                <button class="btn">View Trips</button>
-            </div>
-        </div>
-        <div class="card rounded-md"
-            style="background-image: url(https://images.unsplash.com/photo-1545243424-0ce743321e11?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ);">
-            <div class="content">
-                <h2 class="title">Desert Destinations</h2>
-                <p class="copy">It's the desert you've always dreamed of</p>
-                <button class="btn">Book Now</button>
-            </div>
-        </div>
-        <div class="card rounded-md"
-            style="background-image: url(https://images.unsplash.com/photo-1531306728370-e2ebd9d7bb99?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ);">
-            <div class="content">
-                <h2 class="title">Explore The Galaxy</h2>
-                <p class="copy">Seriously, straight up, just blast off into outer space today</p>
-                <button class="btn">Book Now</button>
-            </div>
-        </div>
+    <main class="page-content" id="myQuizzCreted" data-url="getMyQuizz">
+
     </main>
 </div>
 @if(session('success'))
@@ -137,7 +105,7 @@ type="hidden" data-modal-toggle='modalDeleteBlogs' onclick="remplirFormEdit()"><
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.0/dist/js.cookie.min.js"></script>
 <script src="{{asset('assets/js/profile/profile.js')}}"></script>
-
+<script src="{{asset('assets/js/quizz/getMyQuizz.js')}}"></script>
 @endpush
 
 @endsection
